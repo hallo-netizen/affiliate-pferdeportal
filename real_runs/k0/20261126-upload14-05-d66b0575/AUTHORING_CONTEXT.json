@@ -1,0 +1,212 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Bietet die HUK eine Pferdekrankenversicherung?",
+    "target_keyword": "pferdekrankenversicherung huk",
+    "category": "pferdekrankenversicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "d66b05751a01df3763f77806a5cae170c4ca1881ff18b7d680ca75cda53fc2b1"
+  },
+  "content_profile": {
+    "search_intent": "Prüfen, ob die HUK Pferdekrankenversicherungen anbietet"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+          "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia"
+        }
+      ],
+      "claims": [
+        "HUK ist beim vermittelten Barmenia-Pferde-OP-Produkt nicht selbst Vertragspartei.",
+        "Die Barmenia ist laut HUK Produktgeberin und trägt das versicherte Risiko.",
+        "HUK nennt für den Online-Abschluss der Barmenia-Pferde-OP-Versicherung eine Mindestvertragslaufzeit von drei Jahren.",
+        "Der Barmenia-Premiumtarif nennt laut Vertriebspartner HUK bis zu 14 Tage stationäre Nachbehandlung.",
+        "HUK gibt an, dass der Barmenia-OP-Schutz auch vereinbarte Vor- und Nachuntersuchungen umfassen kann.",
+        "HUK nennt für den Barmenia-Premiumtarif eine Kostenübernahme bis zum zweifachen GOT-Satz."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung huk",
+      "topic": "Bietet die HUK eine Pferdekrankenversicherung?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Bietet die HUK eine Pferdekrankenversicherung?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia",
+        "evidence_text": "Die HUK-COBURG stellt lediglich den Zugang zu diesem Angebot bereit und ist nicht Vertragspartei.",
+        "evidence_text_sha256": "789a4d58949a65d7069d5159bb80abbfe067e4ece618e39919c335e8f97e794e",
+        "statement": "HUK ist beim vermittelten Barmenia-Pferde-OP-Produkt nicht selbst Vertragspartei.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia",
+        "evidence_text": "Die Barmenia ist Risikoträgerin und Produktgeberin.",
+        "evidence_text_sha256": "845b178a3e18b5b211b6c2a765309d17cb8bc078d4210ed05cc301cce201cafb",
+        "statement": "Die Barmenia ist laut HUK Produktgeberin und trägt das versicherte Risiko.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia",
+        "evidence_text": "Mit nur wenigen Klicks können Sie die Pferde-OP-Versicherung unseres Partners Barmenia Allgemeine Versicherungs-AG online berechnen und mit einer Mindestvertragslaufzeit von drei Jahren abschließen.",
+        "evidence_text_sha256": "71ad0d5a73963ca0b9f882b1fe66eb7448378ca596c699063e881977fcec8e92",
+        "statement": "HUK nennt für den Online-Abschluss der Barmenia-Pferde-OP-Versicherung eine Mindestvertragslaufzeit von drei Jahren.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia",
+        "evidence_text": "Bis zu 14 Tage stationäre Nachbehandlungszeit",
+        "evidence_text_sha256": "ba0de5fcada26e98c4a545d7d6e47c934cefc0e865230203e85b45b07d1584ad",
+        "statement": "Der Barmenia-Premiumtarif nennt laut Vertriebspartner HUK bis zu 14 Tage stationäre Nachbehandlung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia",
+        "evidence_text": "Absicherung der OP-Kosten inkl. Vor- & Nachuntersuchungen",
+        "evidence_text_sha256": "a201dc49688ee9eb75fa39e7979c5b73ff2a1e8a5465238b9d7bb04f7f3802c8",
+        "statement": "HUK gibt an, dass der Barmenia-OP-Schutz auch vereinbarte Vor- und Nachuntersuchungen umfassen kann.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia",
+        "evidence_text": "Kostenübernahme zum 2-fachen GOT-Satz",
+        "evidence_text_sha256": "e05c3aaed0e90c67c582e4fc170a683a56f6a2fadf476e64ae8a91b44e3dff1f",
+        "statement": "HUK nennt für den Barmenia-Premiumtarif eine Kostenübernahme bis zum zweifachen GOT-Satz.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Versicherung",
+      "Pferde",
+      "Krankenschutz",
+      "OP",
+      "Kosten",
+      "Beitrag",
+      "Behandlung",
+      "Leistungen",
+      "Fragen",
+      "Vertrag",
+      "Erstattung",
+      "Tarif",
+      "Vergleich",
+      "Allianz",
+      "Uelzener",
+      "Barmenia",
+      "HUK",
+      "Agria",
+      "Check24",
+      "Erfahrungen",
+      "Schutz",
+      "Pferdekrankenversicherung",
+      "Pferdeversicherung",
+      "Fristen",
+      "Alter",
+      "Wartezeit",
+      "Bedingungen",
+      "Auswahl",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Frage wird präziser anhand belegter Bedingungen im Fließtext beantwortet; eine Tabelle würde hier keinen zusätzlichen belastbaren Mehrwert bieten."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
