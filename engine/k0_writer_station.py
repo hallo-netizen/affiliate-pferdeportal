@@ -264,7 +264,8 @@ def research_owner_decision(context, identity, run_instance_id):
                 if url not in original_cache:
                     original_cache[url]=_k0_original_normalize(_k0_fetch_original_source_text(url))
                 original_text=original_cache[url]
-            except Exception:
+            except Exception as exc:
+                print('K0_ORIGINAL_SOURCE_FETCH_DIAGNOSTIC', type(exc).__name__, str(exc)[:180], file=sys.stderr)
                 problems.append({'fact_id':fact_id,'reason':'ORIGINAL_SOURCE_NOT_RETRIEVABLE'})
                 continue
             if not _k0_original_normalize(excerpt) in original_text:
