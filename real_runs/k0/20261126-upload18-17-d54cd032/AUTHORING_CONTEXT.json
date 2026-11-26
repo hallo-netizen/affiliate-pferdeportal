@@ -16,16 +16,20 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-          "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026"
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
         }
       ],
       "claims": [
-        "Allianz nennt für Pferde-OP-Versicherung eine wählbare Selbstbeteiligung einschließlich null und zehn Prozent.",
-        "Allianz führt Kolikoperationen als Beispiele für kostenintensive tierärztliche Eingriffe auf.",
-        "Im offiziellen Allianz-Produktsteckbrief werden Jahreshöchstleistungen als Tarifunterschied dokumentiert.",
-        "Die Allianz beschreibt im Produktsteckbrief sofortigen Versicherungsschutz bei Unfällen.",
-        "Die Allianz bietet eigenen OP-Schutz zur Absicherung medizinisch notwendiger Pferdeoperationen an."
+        "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
+        "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
+        "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht."
       ]
     },
     "production_plan_item": {
@@ -52,55 +56,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
-        "evidence_text": "Die Selbstbeteiligung ist frei wählbar: 0%, 10%",
-        "evidence_text_sha256": "8f712ea891866b995cdf655888873abd5aad13f808130c86a8527c9f7f75ae16",
-        "statement": "Allianz nennt für Pferde-OP-Versicherung eine wählbare Selbstbeteiligung einschließlich null und zehn Prozent.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "ab 46,09 €/Monat*",
+        "evidence_text_sha256": "503d5cfc3f3ff736f9e86fd73f53b774067950d135c5a41821f6cebe533815f2",
+        "statement": "Auf der offiziellen Uelzener-Seite wird der Pferde-OP-Versicherungstarif ab 46,09 Euro pro Monat beworben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
-        "evidence_text": "Kolikoperation",
-        "evidence_text_sha256": "afc1c8679db5aafa54ccb5c0c7aee80a4240c07b07d391b00e60012af1b5f9c3",
-        "statement": "Allianz führt Kolikoperationen als Beispiele für kostenintensive tierärztliche Eingriffe auf.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "neun Tarife von drei Anbietern haben wir unter die Lupe genommen.",
+        "evidence_text_sha256": "dcd68417c6f07e61141ca347ca369f8db14f1986e68216e798b1235f0334be96",
+        "statement": "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
-        "evidence_text": "Jahreshöchstleistung",
-        "evidence_text_sha256": "aec74c711238d0308123c3b882961dfee4b4727182d239d7e454ee96323092f9",
-        "statement": "Im offiziellen Allianz-Produktsteckbrief werden Jahreshöchstleistungen als Tarifunterschied dokumentiert.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Oft sind bestimmte Erkrankungen und Operationen ausgeschlossen.",
+        "evidence_text_sha256": "03c8a8e001751d6bef26e4dfecf6f7ae7bd5c6099e1b0029916dd1fcc80bf28b",
+        "statement": "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
-        "evidence_text": "Wartezeit: Sofortiger Versicherungsschutz bei Unfällen.",
-        "evidence_text_sha256": "d924839ad0767fe305688abac741910114dab3e1f2309a38b21eef5687c05758",
-        "statement": "Die Allianz beschreibt im Produktsteckbrief sofortigen Versicherungsschutz bei Unfällen.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
+        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
+        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://goa-eportale.allianz.de/MMS/--2/MMS--2339Z0.pdf.download.pdf",
-        "source_title": "Allianz Versicherungs-AG – Tierkrankenversicherung für Pferde, Produktsteckbrief Februar 2026",
-        "evidence_text": "Unser OP-Schutz deckt die Kosten für medizinisch",
-        "evidence_text_sha256": "f83b7f5379c0fecc9289d9d80a508457e9dfec057d08d76c4b6ba5ffc6205f13",
-        "statement": "Die Allianz bietet eigenen OP-Schutz zur Absicherung medizinisch notwendiger Pferdeoperationen an.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "19.01.2016",
+        "evidence_text_sha256": "4385e57870cb4aa53ab5ff5edeb8293d6a86b6cf104dd647b01d5a4903016c08",
+        "statement": "Der Pferdeversicherungstest von Stiftung Warentest wurde am 19. Januar 2016 veröffentlicht.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
