@@ -1,0 +1,240 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Allianz und Uelzener Pferde OP Versicherung im Vergleich",
+    "target_keyword": "pferde-op versicherung allianz oder uelzener",
+    "category": "pferde-op-versicherung-beratung",
+    "article_type": "Vergleich",
+    "plan_slot": "920cb9780252a8fca7d415b590956e28f24575d22a6b9cc0433b2b495810e89a"
+  },
+  "content_profile": {
+    "search_intent": "Welche Unterschiede zwischen Pferde OP Versicherungen der Allianz und der Uelzener für eine Auswahl relevant sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+          "source_title": "Allianz – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
+        }
+      ],
+      "claims": [
+        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "Allianz nennt für Pferdeoperationen infolge von Krankheiten eine Wartezeit von drei Monaten.",
+        "Allianz nennt für Kolik eine Wartezeit von fünf Tagen.",
+        "Uelzener nennt für Pferdeoperationen wegen Kolik und Unfall eine Wartezeit von fünf Tagen.",
+        "Uelzener nennt für Pferdeoperationen wegen Krankheiten eine Wartezeit von zwei Monaten.",
+        "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
+        "Uelzener schließt die Behandlung von Hufabzessen und Hufgeschwüren aus dem Pferde-OP-Versicherungsschutz aus."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Vergleich",
+      "target_keyword": "pferde-op versicherung allianz oder uelzener",
+      "topic": "Allianz und Uelzener Pferde OP Versicherung im Vergleich",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "comparison_targets": [
+        "Allianz",
+        "Uelzener"
+      ],
+      "comparison_criteria": [
+        "Wartezeiten",
+        "Operationen",
+        "Ausschlüsse"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
+        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
+        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Für Krankheiten gilt eine Wartezeit von drei Monaten.",
+        "evidence_text_sha256": "8fcc2ca36441c70a49a19b521c4c51819d28db00f688227fac91de6ba8e9bc79",
+        "statement": "Allianz nennt für Pferdeoperationen infolge von Krankheiten eine Wartezeit von drei Monaten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Für Kolik gilt eine Wartezeit von 5 Tagen.",
+        "evidence_text_sha256": "10abf03ab6b6f0e228e2741bdb5ad4ce3b082a8b2112e9edc8b0a71382e892b4",
+        "statement": "Allianz nennt für Kolik eine Wartezeit von fünf Tagen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Die Wartezeit für Operationen aufgrund von Koliken und Unfällen beträgt 5 Tage ab Versicherungsbeginn.",
+        "evidence_text_sha256": "e4f983dc2b97fd09de83a8d5e14a06e6c95f94f21e58673cc282f50adbb2ff15",
+        "statement": "Uelzener nennt für Pferdeoperationen wegen Kolik und Unfall eine Wartezeit von fünf Tagen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F5": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Die Wartezeit für Operationen aufgrund von Krankheiten beträgt 2 Monate ab Versicherungsbeginn, diese gilt auch für den Kastrationskostenzuschuss, den KV-Baustein und Reha-Baustein (sofern vertraglich vereinbart).",
+        "evidence_text_sha256": "5375382518ce7535aa1d5b987031074be1606d8c748adac91e485d7da57148a2",
+        "statement": "Uelzener nennt für Pferdeoperationen wegen Krankheiten eine Wartezeit von zwei Monaten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F6": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Auch Operationen unter Sedierung oder Lokalanästhesie sind mitversichert.",
+        "evidence_text_sha256": "827300a36a06d2a3ff8065b99199feed2709be96c89a07a62ba95a388596df4a",
+        "statement": "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F7": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Vom Versicherungsschutz ausgeschlossen sind die Behandlungen von Hufabzessen und Hufgeschwüren.",
+        "evidence_text_sha256": "c2285e6cfd13ffabf039b73405e145c03ca40a08fe9f26559f8df3a48fd5a19d",
+        "statement": "Uelzener schließt die Behandlung von Hufabzessen und Hufgeschwüren aus dem Pferde-OP-Versicherungsschutz aus.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-beratung/",
+        "anchor": "Pferdeversicherung im Vergleich",
+        "block": "options"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-beratung/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Allianz",
+      "Uelzener",
+      "Versicherungen",
+      "Vergleich",
+      "Operationen",
+      "Wartezeit",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [
+      {
+        "source_label": "Allianz",
+        "nearest_option_heading": "Allianz"
+      },
+      {
+        "source_label": "Uelzener",
+        "nearest_option_heading": "Uelzener"
+      }
+    ],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Anbieter unterscheiden sich in eigenständigen Leistungs- und Wartezeitkriterien. Eine präzise Tabelle erleichtert den direkten Vergleich nach den eigentlichen Nutzerfragen.",
+      "reader_question": "pferde-op versicherung allianz oder uelzener",
+      "reader_benefit": "Leistung und Wartezeit der konkreten Anbieter lassen sich ohne wiederholtes Querlesen nach dem gleichen Kriterium abgleichen.",
+      "why_not_prose": "Der direkte Vergleich unterschiedlicher Anbieter und ihrer Bedingungen ist im Fließtext weniger übersichtlich und erschwert die Auswahl.",
+      "comparison_axes": [
+        "Wartezeiten bei Krankheit",
+        "Schutz bei Kolik und Unfall",
+        "Operationen und Ausschlüsse"
+      ],
+      "source_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5"
+      ]
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
