@@ -1,0 +1,203 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Erfahrungen mit Pferde OP Versicherungen",
+    "target_keyword": "pferde op-versicherung erfahrungen",
+    "category": "pferde-op-versicherung-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "bb5c4ec8f142547f1baaf9153ba62d41572e9aedfb111959ea25d886fecd5526"
+  },
+  "content_profile": {
+    "search_intent": "Welche Erfahrungen und typischen Leistungsfragen bei Pferde OP Versicherungen vor Vertragsabschluss wichtig sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+          "source_title": "Allianz – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
+        }
+      ],
+      "claims": [
+        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "Nichtoperative Behandlungen wie Therapien chronischer Leiden sind im Allianz-OP-Schutz nicht abgedeckt.",
+        "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
+        "Uelzener schließt die Behandlung von Hufabzessen und Hufgeschwüren aus dem Pferde-OP-Versicherungsschutz aus.",
+        "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferde op-versicherung erfahrungen",
+      "topic": "Erfahrungen mit Pferde OP Versicherungen",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Erfahrungen mit Pferde-OP-Versicherungen an tatsächlichen Bedingungen und Leistungen messen.",
+      "decision_criteria": [
+        "Leistungsausschlüsse",
+        "Wartezeiten",
+        "Erstattungsbegrenzungen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
+        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
+        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Im OP-Schutz sind keine Behandlungen ohne eine Operation beispielsweise Therapien für chronische Leiden wie Arthrose abgesichert.",
+        "evidence_text_sha256": "9071038a75b8fd215ee665cb1e24e90cd4d020a7e7c860bdc3a1afbe26c87306",
+        "statement": "Nichtoperative Behandlungen wie Therapien chronischer Leiden sind im Allianz-OP-Schutz nicht abgedeckt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Auch Operationen unter Sedierung oder Lokalanästhesie sind mitversichert.",
+        "evidence_text_sha256": "827300a36a06d2a3ff8065b99199feed2709be96c89a07a62ba95a388596df4a",
+        "statement": "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Vom Versicherungsschutz ausgeschlossen sind die Behandlungen von Hufabzessen und Hufgeschwüren.",
+        "evidence_text_sha256": "c2285e6cfd13ffabf039b73405e145c03ca40a08fe9f26559f8df3a48fd5a19d",
+        "statement": "Uelzener schließt die Behandlung von Hufabzessen und Hufgeschwüren aus dem Pferde-OP-Versicherungsschutz aus.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Oft sind bestimmte Erkrankungen und Operationen ausgeschlossen.",
+        "evidence_text_sha256": "03c8a8e001751d6bef26e4dfecf6f7ae7bd5c6099e1b0029916dd1fcc80bf28b",
+        "statement": "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
+        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
+        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-beratung/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-beratung/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Erfahrungen",
+      "Pferde",
+      "OP",
+      "Versicherung",
+      "Leistungen",
+      "Erstattung",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Entscheidung hängt von Bedingungen ab, die im Fließtext und in der Checkliste präziser erklärt werden; eine Tabelle böte keinen zusätzlichen belastbaren Vergleichsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
