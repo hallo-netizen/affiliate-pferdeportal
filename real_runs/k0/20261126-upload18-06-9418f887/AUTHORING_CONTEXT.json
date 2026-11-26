@@ -134,8 +134,8 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-versicherungen-und-recht/pferdekrankenversicherung/",
-        "anchor": "Pferdekrankenversicherung",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
         "block": "further_information"
       }
     ],
@@ -145,7 +145,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-versicherungen-und-recht/pferdekrankenversicherung/",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
         "active": true
       }
     ],
@@ -169,7 +169,9 @@
       "Tierarten",
       "Agria",
       "Entscheidung",
-      "Beratung"
+      "Beratung",
+      "Versicherungen",
+      "Recht"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
