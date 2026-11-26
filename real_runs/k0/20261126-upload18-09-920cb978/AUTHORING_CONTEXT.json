@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-          "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026"
+          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
         },
         {
           "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
@@ -25,9 +25,9 @@
         }
       ],
       "claims": [
-        "Allianz hat seit Februar 2026 vier OP-Schutztarife für Pferde in den Produktlinien Basis, Smart, Komfort und Premium.",
-        "Allianz gibt für ihre überarbeiteten Tierkrankenversicherungen nach Unfällen einen Leistungsbeginn ohne Wartezeit an.",
-        "Allianz nennt bei zehn Prozent Selbstbehalt für Pferde eine Begrenzung auf 1.500 Euro je Rechnung.",
+        "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
+        "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
+        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
         "Uelzener nennt für Pferdeoperationen wegen Kolik und Unfall eine Wartezeit von fünf Tagen.",
         "Uelzener nennt für Pferdeoperationen wegen Krankheiten eine Wartezeit von zwei Monaten.",
         "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
@@ -61,33 +61,33 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
-        "evidence_text": "Ab dem 4.2.2026 gibt es für jede dieser drei Tierfamilien vier OP-Schutztarife und vier Krankenvolltarife jeweils in den vier Produktlinien Basis, Smart, Komfort und Premium.",
-        "evidence_text_sha256": "47de358641e95848c449381c741336a1052a0564bad1834ceeaa24254f759870",
-        "statement": "Allianz hat seit Februar 2026 vier OP-Schutztarife für Pferde in den Produktlinien Basis, Smart, Komfort und Premium.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "neun Tarife von drei Anbietern haben wir unter die Lupe genommen.",
+        "evidence_text_sha256": "dcd68417c6f07e61141ca347ca369f8db14f1986e68216e798b1235f0334be96",
+        "statement": "Stiftung Warentest untersuchte 2016 neun Pferde-OP-Versicherungstarife von drei Anbietern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
-        "evidence_text": "Nach einem Unfall werden Behandlungskosten ohne Wartezeit übernommen, die Leistung erfolgt schnell und direkt.",
-        "evidence_text_sha256": "8b527506402e10cb9e8bf3cd815f56c0a208a7fe92e52718880994e670b26c24",
-        "statement": "Allianz gibt für ihre überarbeiteten Tierkrankenversicherungen nach Unfällen einen Leistungsbeginn ohne Wartezeit an.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Oft sind bestimmte Erkrankungen und Operationen ausgeschlossen.",
+        "evidence_text_sha256": "03c8a8e001751d6bef26e4dfecf6f7ae7bd5c6099e1b0029916dd1fcc80bf28b",
+        "statement": "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
-        "source_title": "Allianz Versicherungs-AG – Pressemitteilung zur Tierkrankenversicherung 10. Februar 2026",
-        "evidence_text": "Zum Beispiel zahlen Pferdebesitzerinnen und -besitzer bei einem Selbstbehalt von 10% maximal 1.500 Euro je Rechnung dazu – auch wenn die Rechnung 30.000 Euro beträgt.",
-        "evidence_text_sha256": "90871fb1d07cb987411b4ede1887a1ee52aef2450827fc888fbdb2b79fdf2f32",
-        "statement": "Allianz nennt bei zehn Prozent Selbstbehalt für Pferde eine Begrenzung auf 1.500 Euro je Rechnung.",
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
+        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
+        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
+        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
+        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
@@ -204,7 +204,7 @@
       {
         "source_label": "Allianz",
         "nearest_option_heading": "Allianz",
-        "source_url": "https://www.allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/"
+        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/"
       },
       {
         "source_label": "Uelzener",
