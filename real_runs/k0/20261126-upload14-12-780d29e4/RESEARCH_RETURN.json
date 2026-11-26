@@ -13,7 +13,19 @@
   "return_to": "AUTHORING_CONTEXT.json",
   "issues": [
     {
-      "fact_id": "F5",
+      "fact_id": "F1",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F2",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F3",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    },
+    {
+      "fact_id": "F4",
       "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
     }
   ],
