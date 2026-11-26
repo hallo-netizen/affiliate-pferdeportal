@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
-          "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)"
+          "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
+          "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026"
         }
       ],
       "claims": [
-        "Finanztest verglich 2016 Pferde-OP-Tarife, darunter Allianz-Angebote, von drei Anbietern.",
-        "In der historischen Untersuchung der Pferdeversicherungen unterschieden sich die Leistungen deutlich.",
-        "Im untersuchten Allianz-Tarif waren Klinik-Unterbringungskosten Bestandteil der Erstattungsbetrachtung.",
-        "Der damalige Allianz-Basistarif besaß eigene Grenzen und Bedingungen zur Kostenübernahme.",
-        "Die Untersuchung stammt aus Finanztest 2/2016 und belegt keine aktuellen Kundenerfahrungen."
+        "Die Allianz erläutert für ihre digitale Schadensbearbeitung, wie Rechnungen von Kunden oder Vermittlern hochgeladen werden.",
+        "Bei unklaren Abrechnungen nennt die Allianz eine Weiterleitung an menschliche Fachkräfte.",
+        "Für das gesamte deutsche Tierkrankenversicherungsportfolio meldet Allianz 49,7 Prozent vollständig automatisierte Schadensbearbeitung im Jahr 2025, nicht speziell für Pferde.",
+        "Allianz berichtet bei einfachen Tierkrankenversicherungsfällen von Auszahlungen innerhalb weniger Stunden.",
+        "Allianz betont, dass auch bei digitalen Versicherungsprozessen menschliche Ansprechpartner erreichbar bleiben."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
-        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
-        "evidence_text": "Neun Tarife von drei Anbietern",
-        "evidence_text_sha256": "3b58cf16ba8c2a9b23c187f03cbc290a97e94a26ff10bd86b295efe34b2e6c00",
-        "statement": "Finanztest verglich 2016 Pferde-OP-Tarife, darunter Allianz-Angebote, von drei Anbietern.",
+        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
+        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
+        "evidence_text": "Kundinnen und Kunden (oder ihre Vermittler) laden Dokumente wie Rechnungen hoch.",
+        "evidence_text_sha256": "fdaffa432c8141b7741cabc51398532b44f5ee4809f85f7fc6c41343612eca2f",
+        "statement": "Die Allianz erläutert für ihre digitale Schadensbearbeitung, wie Rechnungen von Kunden oder Vermittlern hochgeladen werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
-        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
-        "evidence_text": "Auch die Leistungen variieren erheblich.",
-        "evidence_text_sha256": "73450facd4cbc386efd1089f22791ca203a3d9fb594842ccbece396015c84ab0",
-        "statement": "In der historischen Untersuchung der Pferdeversicherungen unterschieden sich die Leistungen deutlich.",
+        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
+        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
+        "evidence_text": "Bei Unsicherheiten werden Fälle an menschliche Expertinnen und Experten weitergeleitet.",
+        "evidence_text_sha256": "3d330ed1fe652179415c570d6d90d6fff685b6bd405852c6d60139c83d9b408e",
+        "statement": "Bei unklaren Abrechnungen nennt die Allianz eine Weiterleitung an menschliche Fachkräfte.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
-        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
-        "evidence_text": "Auch bei der Allianz werden die Unterbringungskosten",
-        "evidence_text_sha256": "a67b670ae75259966b2d9f03a6ae52868d25c255a468c64852743e912adfa74b",
-        "statement": "Im untersuchten Allianz-Tarif waren Klinik-Unterbringungskosten Bestandteil der Erstattungsbetrachtung.",
+        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
+        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
+        "evidence_text": "Die Allianz in Deutschland hat Jahr 2025 49,7 % der Schadenfälle in der deutschen Tierkrankenversicherung vollständig automatisiert bearbeitet.",
+        "evidence_text_sha256": "5ae1761b6a530435d8c420562065936742707cb2979faec10b7d289806f814f7",
+        "statement": "Für das gesamte deutsche Tierkrankenversicherungsportfolio meldet Allianz 49,7 Prozent vollständig automatisierte Schadensbearbeitung im Jahr 2025, nicht speziell für Pferde.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
-        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
-        "evidence_text": "Die Allianz deckt die Kosten im Basistarif",
-        "evidence_text_sha256": "c4577546941d029a66a8baef5e4b9fae625a664c784cc62faed10ad759f8109e",
-        "statement": "Der damalige Allianz-Basistarif besaß eigene Grenzen und Bedingungen zur Kostenübernahme.",
+        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
+        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
+        "evidence_text": "In einfachen Fällen bedeutet das: Kunden erhalten ihr Geld nur wenige Stunden nach der Schadenmeldung.",
+        "evidence_text_sha256": "55b9bfebc2c55a486da4689722b96819c14bf133c1a06b2a47c984fc4cb01fed",
+        "statement": "Allianz berichtet bei einfachen Tierkrankenversicherungsfällen von Auszahlungen innerhalb weniger Stunden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://uelzener.de/filemanager/downloadFile/blogFiles/48cbf6c2-7282-4849-b90e-72c47bce7ec6.pdf/Tierkrankenversicherung_Endartikel.pdf",
-        "source_title": "Finanztest 2/2016 – Privatpatient Pferd (Original-Nachdruck bei Uelzener)",
-        "evidence_text": "Finanztest 2/2016",
-        "evidence_text_sha256": "6f424395182f96cea70e93b544387d50e09c3ce7cca6beac223006a0920eaef3",
-        "statement": "Die Untersuchung stammt aus Finanztest 2/2016 und belegt keine aktuellen Kundenerfahrungen.",
+        "source_url": "https://www.allianz.com/de/mediencenter/news/artikel/260318-verantwortungsvoller-ki-einsatz-bei-der-allianz.html",
+        "source_title": "Allianz SE – Verantwortungsvoller KI-Einsatz und Tierkrankenversicherungs-Schadenbearbeitung, März 2026",
+        "evidence_text": "Kundinnen und Kunden haben jederzeit Zugang zu einem menschlichen Ansprechpartner",
+        "evidence_text_sha256": "9bb539d60f8230d75b08b3f70a9f4032aab6a039cb63ef415fffa40bf362d204",
+        "statement": "Allianz betont, dass auch bei digitalen Versicherungsprozessen menschliche Ansprechpartner erreichbar bleiben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
