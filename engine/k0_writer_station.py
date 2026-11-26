@@ -40,6 +40,7 @@ K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'bauportal.nrw',          # Official North Rhine-Westphalia building portal
     'bundesfinanzhof.de',     # Official German Federal Fiscal Court
     'gesetze-im-internet.de', # Official German federal law text portal
+    'huk.de',                # HUK-COBURG verified original first-party page of its Barmenia partnership (2026-11-26)
     'agila.de',                # Verified AGILA official animal insurer, dogs and cats only (2026-11-26)
     'allianz.de',              # Verified Allianz official equine insurance producer (2026-11-26)
     'allianz.com',             # Allianz SE original corporate publisher; verified imprint and 2026 statements (2026-11-26)
