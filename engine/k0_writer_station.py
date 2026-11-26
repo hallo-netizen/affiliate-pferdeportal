@@ -46,6 +46,7 @@ K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'allianz.com',             # Allianz SE original corporate publisher; verified imprint and 2026 statements (2026-11-26)
     'uelzener.de',             # Verified Uelzener official equine insurance producer (2026-11-26)
     'agriatierversicherung.de',# Verified Agria official equine insurance producer (2026-11-26)
+    'hagel.at',                # Verified Österreichische Hagelversicherung official original equine insurer (2026-11-26)
     'test.de',                 # Verified official Stiftung Warentest original publisher (2026-11-26)
     'check24.de',              # Verified first-party CHECK24 horse-OP comparison and animal insurance 2026-11-26
 })
