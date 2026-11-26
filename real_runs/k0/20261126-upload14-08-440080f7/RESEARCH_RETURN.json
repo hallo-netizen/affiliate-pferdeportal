@@ -1,0 +1,23 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Günstige Pferde OP Versicherungen im Vergleich",
+    "target_keyword": "günstige pferde-op-versicherung",
+    "category": "pferde-op-versicherung-tarife-und-kosten",
+    "article_type": "Vergleich",
+    "plan_slot": "440080f7c566ed3dff1d6a05f2b4a747331852aa36e5fb277ff46f3fb45f601c"
+  },
+  "run_instance_id": "run:00a0318c8b969673fc6732a3",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F2",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.check24.de/pferde-op-versicherung/"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
