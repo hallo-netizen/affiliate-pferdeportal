@@ -1,0 +1,23 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Leistungen der Barmenia Pferde OP Versicherung",
+    "target_keyword": "barmenia pferde-op-versicherung leistungen",
+    "category": "pferde-op-versicherung-leistungen",
+    "article_type": "Beratung",
+    "plan_slot": "bf88007ea0267807ea9651ac4428eb1fb52a0521360e19ee83df13aac5e3a44c"
+  },
+  "run_instance_id": "run:500605d8f7b62418dba3b586",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F1",
+      "reason": "RESEARCH_SOURCE_NOT_APPROVED_OFFICIAL",
+      "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
