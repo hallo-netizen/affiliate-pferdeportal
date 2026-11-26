@@ -24,22 +24,18 @@
           "source_title": "Agria – Pferdeversicherung"
         },
         {
-          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
-        },
-        {
-          "source_url": "https://www.check24.de/pferde-op-versicherung/",
-          "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich"
+          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+          "source_title": "Allianz – Pferde-OP-Versicherung"
         }
       ],
       "claims": [
         "Uelzener bietet eine Pferde-OP-Versicherung für Leistungen im Zusammenhang mit versicherten Operationen.",
+        "Bei einer Aufstockung des Uelzener-Pferde-OP-Tarifs ist eine erneute Gesundheitsprüfung erforderlich.",
         "Die Uelzener-Pferdekrankenversicherung umfasst den OP-Schutz und darüber hinaus notwendige ambulante und stationäre Behandlungen.",
         "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
         "Agria verspricht sofortigen Schutz bei Unfällen und Koliken und nach 20 Tagen bei Erkrankungen.",
-        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
-        "CHECK24 erläutert, dass eine Selbstbeteiligung den vom Halter selbst getragenen Kostenanteil bezeichnet.",
-        "CHECK24 unterscheidet bei OP-Tarifen die Erstattungsgrenze pro Versicherungsjahr und pro Operation."
+        "Allianz bewirbt einen Pferde-OP-Tarif mit einem Ab-Preis von 15,23 Euro im Monat, abhängig von den Beispielannahmen.",
+        "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten."
       ]
     },
     "production_plan_item": {
@@ -58,14 +54,14 @@
     "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
     "type_meta": {
       "comparison_targets": [
+        "Allianz",
         "Uelzener",
-        "Agria",
-        "Andere Kranken- und OP-Tarife"
+        "Agria"
       ],
       "comparison_criteria": [
-        "Erstattungsumfang",
-        "Wartezeiten",
-        "Selbstbeteiligung"
+        "Kosten",
+        "Leistungsumfang",
+        "Wartezeiten"
       ]
     },
     "research_claims": {
@@ -83,6 +79,17 @@
       "F2": {
         "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
         "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Wenn du deinen Tarif aufstocken möchtest erfolgt eine erneute Gesundheitsprüfung.",
+        "evidence_text_sha256": "94bc6c9aca5aa6ead76e272247cf0b55ec8af2d5a9354bb4103fe0c1431c7df7",
+        "statement": "Bei einer Aufstockung des Uelzener-Pferde-OP-Tarifs ist eine erneute Gesundheitsprüfung erforderlich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
         "evidence_text": "Demgegenüber steht die Krankenversicherung, die sämtliche Leistungen der OP-Versicherung umfasst und zusätzlich alle anderen notwendigen medizinischen Behandlungen (ambulant und stationär) abdeckt.",
         "evidence_text_sha256": "b31892e67b2f9b878b37cd7a4b143881ef00f0fe83cfafb4fc3abc77fa56d6be",
         "statement": "Die Uelzener-Pferdekrankenversicherung umfasst den OP-Schutz und darüber hinaus notwendige ambulante und stationäre Behandlungen.",
@@ -91,7 +98,7 @@
           "Vergleich"
         ]
       },
-      "F3": {
+      "F4": {
         "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
         "source_title": "Agria – Pferdeversicherung",
         "evidence_text": "Erstattung der Tierarztkosten bei Krankheit oder Verletzung deines Pferdes.",
@@ -102,7 +109,7 @@
           "Vergleich"
         ]
       },
-      "F4": {
+      "F5": {
         "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
         "source_title": "Agria – Pferdeversicherung",
         "evidence_text": "Schützt dich sofort nach Abschluss bei Unfällen und Koliken sowie nach 20 Tagen bei Erkrankungen.",
@@ -113,34 +120,23 @@
           "Vergleich"
         ]
       },
-      "F5": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
-        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
-        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
-        "claim_status": "FULLY_SUPPORTED",
-        "article_types": [
-          "Vergleich"
-        ]
-      },
       "F6": {
-        "source_url": "https://www.check24.de/pferde-op-versicherung/",
-        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
-        "evidence_text": "Die Selbstbeteiligung definiert, zu welchem Anteil Sie sich an den Behandlungskosten Ihres Pferdes beteiligen.",
-        "evidence_text_sha256": "0b98718205fe4d22b69bfdc1cad53ed905aff132bbd76bf87f87beab6467d3f5",
-        "statement": "CHECK24 erläutert, dass eine Selbstbeteiligung den vom Halter selbst getragenen Kostenanteil bezeichnet.",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Bei der Allianz gibt es die OP-Versicherung für Pferde ab 15,23 Euro pro Monat.",
+        "evidence_text_sha256": "6dbd8edd3ac8abd6bb8b91be4ea639b4c71c8e44b15669e5bfdd3b84c70def21",
+        "statement": "Allianz bewirbt einen Pferde-OP-Tarif mit einem Ab-Preis von 15,23 Euro im Monat, abhängig von den Beispielannahmen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
         ]
       },
       "F7": {
-        "source_url": "https://www.check24.de/pferde-op-versicherung/",
-        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
-        "evidence_text": "Bei der Pferde-OP-Versicherung ist es wichtig, den Unterschied zwischen der jährlichen Höchstleistungsgrenze und der Höchstleistungsgrenze pro Operation zu kennen.",
-        "evidence_text_sha256": "6357af73dd932af0175d193c00b597f5d0ca0741623bbc4c0e5e0a29f38057de",
-        "statement": "CHECK24 unterscheidet bei OP-Tarifen die Erstattungsgrenze pro Versicherungsjahr und pro Operation.",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Im OP-Schutz sind keine Behandlungen ohne eine Operation beispielsweise Therapien für chronische Leiden wie Arthrose abgesichert.",
+        "evidence_text_sha256": "9071038a75b8fd215ee665cb1e24e90cd4d020a7e7c860bdc3a1afbe26c87306",
+        "statement": "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Vergleich"
@@ -241,9 +237,9 @@
       "reader_benefit": "Der Leser sieht Unterschiede bei Beitrag, Erstattung und Eigenanteil auf einen Blick.",
       "why_not_prose": "Gegenüberstellung mehrerer Tarife und Kriterien ist im Fließtext nicht zuverlässig direkt vergleichbar.",
       "comparison_axes": [
-        "Erstattungsumfang",
-        "Wartezeiten",
-        "Selbstbeteiligung"
+        "Kosten",
+        "Leistungsumfang",
+        "Wartezeiten"
       ],
       "source_fact_ids": [
         "F1",
