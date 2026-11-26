@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Wann ist eine Pferdekrankenversicherung sinnvoll?",
+      "target_keyword": "pferdekrankenversicherung sinnvoll",
+      "category": "pferdekrankenversicherung-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "cd03b5b842f152c926bba60a7b3fba597c37b615932f63db5df8d7acaecedcdc"
+    }
+  ],
+  "batch_sha256": "dad48cd8eeb4af5a641ed63195939c6635a4619adc07e28e019940b6eb5e6fb4"
+}

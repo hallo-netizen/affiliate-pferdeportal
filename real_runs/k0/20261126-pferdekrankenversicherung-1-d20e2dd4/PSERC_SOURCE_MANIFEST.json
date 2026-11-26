@@ -1,0 +1,95 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 4,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Gibt es eine Pferdekrankenversicherung ohne Wartezeit?",
+        "target_keyword": "pferdekrankenversicherung ohne wartezeit",
+        "category": "pferdekrankenversicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "d20e2dd4a8540518a301be0dad7a44989ad95b3faf2aed782b19d0072fe107df"
+      },
+      {
+        "title": "Pferdekrankenversicherung Leistungen und Schutz im Überblick",
+        "target_keyword": "pferdekrankenversicherung",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "bc791b8f7214ec9516c7da6c6ce9c80f361f8abbda7f4779cb4f837cec684152"
+      },
+      {
+        "title": "Wann ist eine Pferdekrankenversicherung sinnvoll?",
+        "target_keyword": "pferdekrankenversicherung sinnvoll",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "cd03b5b842f152c926bba60a7b3fba597c37b615932f63db5df8d7acaecedcdc"
+      },
+      {
+        "title": "Welche Pferdekrankenversicherung gibt es in Österreich?",
+        "target_keyword": "pferdekrankenversicherung österreich",
+        "category": "pferdekrankenversicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "076808c67af7f8b1a460d4ff87dae1ad2385c7d640be0a644d4408b19b17bd3f"
+      }
+    ],
+    "batch_sha256": "d83ca4c05a8728952bc2ff7b54ac907b8578250ae56ffacc9c0671daa2c220dd"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Gibt es eine Pferdekrankenversicherung ohne Wartezeit?",
+        "target_keyword": "pferdekrankenversicherung ohne wartezeit",
+        "category": "pferdekrankenversicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "d20e2dd4a8540518a301be0dad7a44989ad95b3faf2aed782b19d0072fe107df"
+      },
+      "order_id": "TXE-3bfd399db8a5d1c0942dfa44aa2bdd33",
+      "article_id": "article:67a983ef2e9abb5847185232",
+      "search_intent": "Ob Pferdekrankenversicherungen ohne Wartezeit erhältlich sind, welche Schutzfristen und Ausnahmen gelten."
+    },
+    {
+      "metadata_binding": {
+        "title": "Pferdekrankenversicherung Leistungen und Schutz im Überblick",
+        "target_keyword": "pferdekrankenversicherung",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "bc791b8f7214ec9516c7da6c6ce9c80f361f8abbda7f4779cb4f837cec684152"
+      },
+      "order_id": "TXE-e603110bea47970f343da4ca379a4ec6",
+      "article_id": "article:a1879b29e9eb53d2300b8215",
+      "search_intent": "Grundlagen des Krankenversicherungsschutzes für Pferde, Leistungsumfang und wesentliche Vertragsgrenzen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Wann ist eine Pferdekrankenversicherung sinnvoll?",
+        "target_keyword": "pferdekrankenversicherung sinnvoll",
+        "category": "pferdekrankenversicherung-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "cd03b5b842f152c926bba60a7b3fba597c37b615932f63db5df8d7acaecedcdc"
+      },
+      "order_id": "TXE-30cc05bf5668cf1912c54e7c65d24441",
+      "article_id": "article:82d2de300a4e87d6bb89adda",
+      "search_intent": "Ob sich eine Pferdekrankenversicherung wirtschaftlich lohnt und wann sie sinnvoll ist."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Pferdekrankenversicherung gibt es in Österreich?",
+        "target_keyword": "pferdekrankenversicherung österreich",
+        "category": "pferdekrankenversicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "076808c67af7f8b1a460d4ff87dae1ad2385c7d640be0a644d4408b19b17bd3f"
+      },
+      "order_id": "TXE-9a658b5c370825e5285d1b987557e135",
+      "article_id": "article:7f31538f320ecbb8eb8dedb1",
+      "search_intent": "Besonderheiten einer Pferdekrankenversicherung in Österreich und worauf beim Vertragsabschluss zu achten ist."
+    }
+  ],
+  "manifest_sha256": "a7f6315dc6f17b07bb522e24ceafa8313d3500c9f1a0a1ed873863a484aaeb2d"
+}

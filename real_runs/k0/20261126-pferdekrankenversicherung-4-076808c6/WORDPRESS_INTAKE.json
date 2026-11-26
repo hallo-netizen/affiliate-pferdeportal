@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Pferdekrankenversicherung gibt es in Österreich?",
+      "target_keyword": "pferdekrankenversicherung österreich",
+      "category": "pferdekrankenversicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "076808c67af7f8b1a460d4ff87dae1ad2385c7d640be0a644d4408b19b17bd3f"
+    }
+  ],
+  "batch_sha256": "d1698c03842cc449f0814289977b7fd707c580a684f4071a0dae2abe3a3739e9"
+}

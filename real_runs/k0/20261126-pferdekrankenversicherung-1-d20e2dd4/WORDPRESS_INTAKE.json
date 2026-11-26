@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Gibt es eine Pferdekrankenversicherung ohne Wartezeit?",
+      "target_keyword": "pferdekrankenversicherung ohne wartezeit",
+      "category": "pferdekrankenversicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "d20e2dd4a8540518a301be0dad7a44989ad95b3faf2aed782b19d0072fe107df"
+    }
+  ],
+  "batch_sha256": "5905be0ec07fe45034b8aba01fc4d5aa6906bc17387bceae629c44f5ca148b92"
+}
