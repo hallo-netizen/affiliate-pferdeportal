@@ -22,17 +22,13 @@
         {
           "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
           "source_title": "Agria Pferdekrankenversicherung"
-        },
-        {
-          "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
-          "source_title": "Allianz Pferdekrankenversicherung"
         }
       ],
       "claims": [
         "Die Agria Pferdekrankenversicherung hat eine Wartezeit von 20 Tagen und für Fohlen von acht Tagen.",
         "Agria sieht Ausnahmen von der Wartezeit vor, beispielsweise bei bestimmten akuten Ereignissen.",
         "Bei einem lückenlosen Wechsel mit vergleichbarem Schutz kann die Wartezeit bei Agria entfallen.",
-        "Die Allianz unterscheidet Wartezeiten nach der Art der Behandlung und Ursache."
+        "Bei Agria bleiben vor Versicherungsbeginn entstandene Krankheiten und Verletzungen grundsätzlich ausgeschlossen."
       ],
       "fresh_research_reference_date": "2026-11-26"
     },
@@ -88,11 +84,11 @@
         ]
       },
       "F4": {
-        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
-        "source_title": "Allianz Pferdekrankenversicherung",
-        "evidence_text": "Wartezeit bei Krankheit und Fehlentwicklung",
-        "evidence_text_sha256": "0c76dc5fba8117830dbfa1e7932ed12cdb1d55c5d008da6f3a309aca9c0f4f3c",
-        "statement": "Die Allianz unterscheidet Wartezeiten nach der Art der Behandlung und Ursache.",
+        "source_url": "https://www.agriatierversicherung.de/versicherung/versicherungsalphabet/wartezeit-bei-tierversicherungen/",
+        "source_title": "Agria Wartezeiten für Tierversicherungen",
+        "evidence_text": "Die Versicherung gilt grundsätzlich nicht für Krankheiten, Verletzungen oder andere Schadensereignisse, die schon vor Abschluss deiner Versicherung aufgetreten sind oder sich entwickelt haben.",
+        "evidence_text_sha256": "eabe97e838b57c2ada455ed81ec7b9e57a391108df33dc3aff7ac6af6770b0ea",
+        "statement": "Bei Agria bleiben vor Versicherungsbeginn entstandene Krankheiten und Verletzungen grundsätzlich ausgeschlossen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
