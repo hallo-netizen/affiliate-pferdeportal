@@ -1,0 +1,194 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Wie beantragt man die Uelzener Pferde OP Versicherung?",
+    "target_keyword": "uelzener pferde op versicherung antrag",
+    "category": "pferde-op-versicherung-beratung",
+    "article_type": "Anleitung",
+    "plan_slot": "d38cd138eeb433675ece6af90c2af0102230667d7360aca4b0f403daef23f224"
+  },
+  "content_profile": {
+    "search_intent": "Wie der Antrag für eine Pferde OP Versicherung bei der Uelzener abläuft und welche Unterlagen erforderlich sein können."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener – Pferde-OP-Versicherung"
+        }
+      ],
+      "claims": [
+        "Uelzener verlangt vor der Operation keine gesonderte vorherige OP-Anmeldung.",
+        "Nach einer Pferdeoperation können Uelzener-Kunden die Rechnung unter Angabe der Versicherungsscheinnummer einreichen.",
+        "Die Uelzener-Pferde-OP-Versicherung nennt keine feste Altersgrenze für den Abschluss.",
+        "Uelzener fordert bei einer späteren Aufstockung des Pferde-OP-Tarifs eine erneute Gesundheitsprüfung.",
+        "Der Uelzener-OP-Schutz erstattet Leistungen im Zusammenhang mit einer versicherten Pferdeoperation."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Anleitung",
+      "target_keyword": "uelzener pferde op versicherung antrag",
+      "topic": "Wie beantragt man die Uelzener Pferde OP Versicherung?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "procedure_goal": "Den Uelzener-Antrag zur Pferde-OP-Versicherung prüfen und über den offiziellen Tarifweg abschließen.",
+      "preparation_items": [
+        "Pferdealter bereithalten",
+        "Tarifschutz und Wartezeit prüfen"
+      ],
+      "procedure_steps": [
+        "Passenden OP-Tarif auswählen",
+        "Gesundheitsangaben wahrheitsgemäß prüfen",
+        "Vertragsunterlagen kontrollieren"
+      ],
+      "safety_controls": [
+        "Wartezeit und Leistungsausschlüsse vor Abschluss beachten"
+      ],
+      "common_errors": [
+        "Antrag mit einer OP-Voranmeldung verwechseln"
+      ],
+      "result_checks": [
+        "Versicherungsschein und Leistungsumfang nach Abschluss prüfen"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Nein, es ist keine vorherige Anmeldung der Operation nötig.",
+        "evidence_text_sha256": "9172b6aa2bc53c9a3853c708fa8521b21a65d33e0e11282224642b7066a401dd",
+        "statement": "Uelzener verlangt vor der Operation keine gesonderte vorherige OP-Anmeldung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Du kannst dein Pferd operieren lassen und im Nachgang die Rechnung mit Nennung deiner Versicherungsschein-Nummer (und ggf. einem Erstattungskonto) bei uns einreichen.",
+        "evidence_text_sha256": "e8b5a34d598d47a0ea424ffa9517d683dd6b333293ab59adf9e04d43eba34018",
+        "statement": "Nach einer Pferdeoperation können Uelzener-Kunden die Rechnung unter Angabe der Versicherungsscheinnummer einreichen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Nein, jedes Pferd – egal welches Alter – kann versichert werden.",
+        "evidence_text_sha256": "ce76d79f495acbc3033ff63aead6bb954b82cd5cf132cb2c8896d849ecddbe3c",
+        "statement": "Die Uelzener-Pferde-OP-Versicherung nennt keine feste Altersgrenze für den Abschluss.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Wenn du deinen Tarif aufstocken möchtest erfolgt eine erneute Gesundheitsprüfung.",
+        "evidence_text_sha256": "94bc6c9aca5aa6ead76e272247cf0b55ec8af2d5a9354bb4103fe0c1431c7df7",
+        "statement": "Uelzener fordert bei einer späteren Aufstockung des Pferde-OP-Tarifs eine erneute Gesundheitsprüfung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "In der OP-Versicherung werden Leistungen erstattet, die mit einer versicherten OP zusammenhängen.",
+        "evidence_text_sha256": "50915182ef604e8fe073ef2c5d9bf04539ecc3b548be3c307cd2eedea2c6dd85",
+        "statement": "Der Uelzener-OP-Schutz erstattet Leistungen im Zusammenhang mit einer versicherten Pferdeoperation.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Anleitung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-beratung/",
+        "anchor": "Pferdeversicherung Anleitungen",
+        "block": "steps"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-beratung/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Uelzener",
+      "Antrag",
+      "Versicherung",
+      "Pferde",
+      "Tarif",
+      "Wartezeit",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Entscheidung hängt von Bedingungen ab, die im Fließtext und in der Checkliste präziser erklärt werden; eine Tabelle böte keinen zusätzlichen belastbaren Vergleichsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
