@@ -16,29 +16,17 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
-          "source_title": "Allianz – Pferdekrankenversicherung"
-        },
-        {
-          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
-          "source_title": "Uelzener – Pferdekrankenversicherung"
-        },
-        {
-          "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-          "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016"
-        },
-        {
-          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
-          "source_title": "Agria – Pferdeversicherung"
+          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+          "source_title": "Allianz – Pferde-OP-Versicherung"
         }
       ],
       "claims": [
-        "Allianz nennt für ihre Pferdekrankenversicherung einen möglichen Abschluss ab acht Wochen und lebenslange Fortführung.",
-        "Allianz beschreibt eine Wechseloption, mit der sich der Schutz einmalig ohne erneute Gesundheitsprüfung verbessern lässt.",
-        "Allianz gibt für ihre Pferdekrankenversicherung Leistungen bei bildgebenden und Laboruntersuchungen an.",
-        "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
-        "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
-        "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen."
+        "Allianz nennt für ihre Pferdekrankenversicherung den Abschluss ab acht Wochen und die Fortführung über die Lebenszeit des Pferdes.",
+        "Allianz nennt für Unfälle einen sofortigen Beginn des OP-Versicherungsschutzes.",
+        "Für krankheitsbedingte Operationen nennt Allianz drei Monate Wartezeit.",
+        "Allianz nennt für Koliken fünf Tage Wartezeit.",
+        "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
+        "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten."
       ]
     },
     "production_plan_item": {
@@ -60,66 +48,66 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
-        "source_title": "Allianz – Pferdekrankenversicherung",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
         "evidence_text": "Die Pferdekrankenversicherung kann ab einem Alter von acht Wochen abgeschlossen werden und bleibt während der gesamten Lebensdauer Ihres Pferds bestehen.",
         "evidence_text_sha256": "3d0a59cebdda8b8d0e2afaa107b9ab641198014e16fe36b60040e31b7e2e2e11",
-        "statement": "Allianz nennt für ihre Pferdekrankenversicherung einen möglichen Abschluss ab acht Wochen und lebenslange Fortführung.",
+        "statement": "Allianz nennt für ihre Pferdekrankenversicherung den Abschluss ab acht Wochen und die Fortführung über die Lebenszeit des Pferdes.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
-        "source_title": "Allianz – Pferdekrankenversicherung",
-        "evidence_text": "Der Zusatzbaustein \"Wechseloption\" bietet Ihnen bei einem Erstabschluss der Pferdekrankenversicherung die Möglichkeit, den Versicherungsschutz einmalig ohne erneute Gesundheitsprüfung zu verbessern.",
-        "evidence_text_sha256": "b001cdb024985b7a3f38b53c6530550a61adb422ec4f71f38dba41ac927cc78b",
-        "statement": "Allianz beschreibt eine Wechseloption, mit der sich der Schutz einmalig ohne erneute Gesundheitsprüfung verbessern lässt.",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Bei Unfällen gibt es keine Wartezeit, der Versicherungsschutz beginnt sofort.",
+        "evidence_text_sha256": "349427fd2558b0469054999982ff732b9337c15be2e00cbef856ff9f5954e500",
+        "statement": "Allianz nennt für Unfälle einen sofortigen Beginn des OP-Versicherungsschutzes.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
-        "source_title": "Allianz – Pferdekrankenversicherung",
-        "evidence_text": "Die Pferdekrankenversicherung übernimmt hierfür die Kosten für moderne bildgebende Verfahren wie Röntgen, Ultraschall und MRT (Kernspintomografie) sowie umfassende Laboruntersuchungen.",
-        "evidence_text_sha256": "b058d98c7195fd4600e5bd91bd1627136d2de3feaebefcfe90b6ff7adac38618",
-        "statement": "Allianz gibt für ihre Pferdekrankenversicherung Leistungen bei bildgebenden und Laboruntersuchungen an.",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Für Krankheiten gilt eine Wartezeit von drei Monaten.",
+        "evidence_text_sha256": "8fcc2ca36441c70a49a19b521c4c51819d28db00f688227fac91de6ba8e9bc79",
+        "statement": "Für krankheitsbedingte Operationen nennt Allianz drei Monate Wartezeit.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
-        "source_title": "Uelzener – Pferdekrankenversicherung",
-        "evidence_text": "Sie übernimmt die Kosten für ambulante und stationäre Behandlungen sowie für alle chirurgischen Eingriffe bis hin zur Unterbringung in einer Tierklinik.",
-        "evidence_text_sha256": "021c04aa6eb53330f9b29b148599c250aa4b63cb3781acfbcd20cc21b9300055",
-        "statement": "Die Uelzener-Pferdekrankenversicherung umfasst ambulante und stationäre Behandlungen, Operationen und Klinikunterbringung.",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Für Kolik gilt eine Wartezeit von 5 Tagen.",
+        "evidence_text_sha256": "10abf03ab6b6f0e228e2741bdb5ad4ce3b082a8b2112e9edc8b0a71382e892b4",
+        "statement": "Allianz nennt für Koliken fünf Tage Wartezeit.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F5": {
-        "source_url": "https://www.test.de/Pferdekrankenversicherung-Nur-eine-OP-Police-schuetzt-umfassend-4964832-0/",
-        "source_title": "Stiftung Warentest – Pferdekrankenversicherung Test 2016",
-        "evidence_text": "Einige Versicherer begrenzen zudem die Summen, die sie für eine Operation bezahlen.",
-        "evidence_text_sha256": "e5cbb83fb99a6e4f90a55ab044c711ea0f84ceec8ffbe9ff6eca6e8ea8240b00",
-        "statement": "Stiftung Warentest wies darauf hin, dass manche Pferde-OP-Versicherer Erstattungsgrenzen für Operationen setzen.",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
+        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
+        "statement": "Allianz stellt klar, dass der Pferde-OP-Schutz medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung umfasst.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F6": {
-        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
-        "source_title": "Agria – Pferdeversicherung",
-        "evidence_text": "Die Kosten einer Pferde-Krankenversicherung hängen von mehreren Faktoren ab:",
-        "evidence_text_sha256": "e4a41acc875cc2d69e75e8496cf2f0be24e7524189c73bb0b8c3f83db976468c",
-        "statement": "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen.",
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz – Pferde-OP-Versicherung",
+        "evidence_text": "Im OP-Schutz sind keine Behandlungen ohne eine Operation beispielsweise Therapien für chronische Leiden wie Arthrose abgesichert.",
+        "evidence_text_sha256": "9071038a75b8fd215ee665cb1e24e90cd4d020a7e7c860bdc3a1afbe26c87306",
+        "statement": "Allianz grenzt die reine OP-Versicherung von der Vollkrankenversicherung ab: Behandlungen ohne Operation sind im OP-Schutz nicht enthalten.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
