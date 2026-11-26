@@ -16,16 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://vertretung.allianz.de/ute.neumeister/",
-          "source_title": "Allianz Versicherungsagentur Ute Neumeister – Pferdekrankenversicherung"
+          "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+          "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026"
         }
       ],
       "claims": [
-        "Die Allianz Agentur stellt OP-Schutz als Versicherung medizinisch notwendiger Operationen einschließlich bestimmter Nachbehandlungen dar.",
-        "Die Allianz Agentur unterscheidet Vollschutz mit zusätzlichen ambulanten und stationären Behandlungen vom reinen OP-Schutz.",
-        "Laut Allianz Agentur bestehen die Produktlinien Basis, Smart, Komfort und Premium mit Optionen zur Selbstbeteiligung.",
-        "Die Allianz Agentur nennt eine freie Wahl von Tierarzt oder Tierklinik.",
-        "Die Allianz Agentur nennt im Unfallfall einen sofortigen Versicherungsbeginn ohne Wartezeit."
+        "Allianz bietet seit Februar 2026 für Pferde sowohl OP-Schutztarife als auch Krankenvolltarife in vier Produktlinien.",
+        "Allianz beschreibt bei einfachen Schadenfällen eine digitale Rechnungserstattung innerhalb weniger Stunden, ohne dies speziell als Quote für Pferde zu belegen.",
+        "Allianz bietet nach eigenen Angaben auch die direkte Abrechnung mit Tierkliniken und Praxen an.",
+        "Allianz nennt wählbare Selbstbehalte von zehn oder zwanzig Prozent mit Kostenbegrenzungen.",
+        "Allianz beschreibt in Tariflinien ab Smart Zuschüsse zu bestimmten Vorsorgemaßnahmen ohne Wartezeit oder Selbstbeteiligung."
       ]
     },
     "production_plan_item": {
@@ -52,55 +52,55 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://vertretung.allianz.de/ute.neumeister/",
-        "source_title": "Allianz Versicherungsagentur Ute Neumeister – Pferdekrankenversicherung",
-        "evidence_text": "OP-Schutz: Deckt die Kosten für medizinisch notwendige Operationen aufgrund von Unfall, Krankheit oder Fehlentwicklung sowie Nachbehandlungen von bis zu 15 Tagen.",
-        "evidence_text_sha256": "5f86a6eea8d16fd401d0a531c682f4ce2c665d68e36ec176190f31f07d839d9c",
-        "statement": "Die Allianz Agentur stellt OP-Schutz als Versicherung medizinisch notwendiger Operationen einschließlich bestimmter Nachbehandlungen dar.",
+        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
+        "evidence_text": "Ab dem 4.2.2026 gibt es für jede dieser drei Tierfamilien vier OP-Schutztarife und vier Krankenvolltarife jeweils in den vier Produktlinien Basis, Smart, Komfort und Premium.",
+        "evidence_text_sha256": "47de358641e95848c449381c741336a1052a0564bad1834ceeaa24254f759870",
+        "statement": "Allianz bietet seit Februar 2026 für Pferde sowohl OP-Schutztarife als auch Krankenvolltarife in vier Produktlinien.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://vertretung.allianz.de/ute.neumeister/",
-        "source_title": "Allianz Versicherungsagentur Ute Neumeister – Pferdekrankenversicherung",
-        "evidence_text": "Vollschutz: Umfasst zusätzlich ambulante und stationäre Behandlungen ohne Operation, inklusive alternativer Heilmethoden wie Homöopathie.",
-        "evidence_text_sha256": "2f125607f4aca842a14b2dea793129de5a64be648d2e0f3757f9ed6b25b15ce8",
-        "statement": "Die Allianz Agentur unterscheidet Vollschutz mit zusätzlichen ambulanten und stationären Behandlungen vom reinen OP-Schutz.",
+        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
+        "evidence_text": "Die Allianz reguliert in der Tierkrankenversicherung einfache Schadenfälle sehr schnell: Dank des Einsatzes von KI können mehr als 40% aller digitalen Rechnungen innerhalb von weniger als vier Stunden bearbeitet und ausgezahlt werden.",
+        "evidence_text_sha256": "72a7c27bedff885d92c2ad47e37e2efa566ff390fa515d713958fe2f692b6127",
+        "statement": "Allianz beschreibt bei einfachen Schadenfällen eine digitale Rechnungserstattung innerhalb weniger Stunden, ohne dies speziell als Quote für Pferde zu belegen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://vertretung.allianz.de/ute.neumeister/",
-        "source_title": "Allianz Versicherungsagentur Ute Neumeister – Pferdekrankenversicherung",
-        "evidence_text": "Beide Produkte sind in vier Tarifen (Basis, Smart, Komfort, Premium) erhältlich und können mit oder ohne Selbstbeteiligung abgeschlossen werden.",
-        "evidence_text_sha256": "4138b8287dec3c023a182bef0a6074e642b7378d070c20e2e2bf6c5dee571dd4",
-        "statement": "Laut Allianz Agentur bestehen die Produktlinien Basis, Smart, Komfort und Premium mit Optionen zur Selbstbeteiligung.",
+        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
+        "evidence_text": "Außerdem kann die Allianz auch direkt mit der Tierklinik oder Tierarztpraxis abrechnen, ohne dass man selbst in Vorleistung gehen muss.",
+        "evidence_text_sha256": "25113d5eeb58f69056444343e7a4ca0e4f2dd8d5765c6b5b204dc75f4f7f4351",
+        "statement": "Allianz bietet nach eigenen Angaben auch die direkte Abrechnung mit Tierkliniken und Praxen an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F4": {
-        "source_url": "https://vertretung.allianz.de/ute.neumeister/",
-        "source_title": "Allianz Versicherungsagentur Ute Neumeister – Pferdekrankenversicherung",
-        "evidence_text": "Freie Tierarztwahl: Sie können den Tierarzt oder die Tierklinik frei wählen.",
-        "evidence_text_sha256": "014cddc5e7d7bff60c107a592b343275b729da41c89fcd809e6e3a9cac2ab6c3",
-        "statement": "Die Allianz Agentur nennt eine freie Wahl von Tierarzt oder Tierklinik.",
+        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
+        "evidence_text": "Dank der neuen Deckelungen in den gewählten Selbstbehalten von 10% oder 20% haben die Halterinnen und Halter zusätzliche finanzielle Sicherheit im Schadenfall.",
+        "evidence_text_sha256": "1fc542e96c1134f16ab021c34436e122b0e7fadd22ddf396525d05260615cb80",
+        "statement": "Allianz nennt wählbare Selbstbehalte von zehn oder zwanzig Prozent mit Kostenbegrenzungen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F5": {
-        "source_url": "https://vertretung.allianz.de/ute.neumeister/",
-        "source_title": "Allianz Versicherungsagentur Ute Neumeister – Pferdekrankenversicherung",
-        "evidence_text": "Keine Wartezeit bei Unfällen: Nach einem Unfall übernimmt die Versicherung sofort die Kosten der Behandlung.",
-        "evidence_text_sha256": "e807473e294920fdd3d6a5711e3e9e74c21c04ca8bef32edc696fce6c55fd88c",
-        "statement": "Die Allianz Agentur nennt im Unfallfall einen sofortigen Versicherungsbeginn ohne Wartezeit.",
+        "source_url": "https://allianz.de/presse/mitteilungen/gesundheit-fuer-die-ganze-tier-familie/",
+        "source_title": "Allianz Versicherungs-AG – Pressemitteilung 10. Februar 2026",
+        "evidence_text": "Das heißt, dass ab sofort in allen OP- und Vollschutztarifen ab der Linie Smart wichtige Basis-Vorsorgeleistungen wie Impfungen oder Wurmkuren bezuschusst werden, und zwar ohne Wartezeiten oder Selbstbeteiligung.",
+        "evidence_text_sha256": "b4eb7940496ea478d86d374db76d92590a6add49a9d6d831982f4be4367f1987",
+        "statement": "Allianz beschreibt in Tariflinien ab Smart Zuschüsse zu bestimmten Vorsorgemaßnahmen ohne Wartezeit oder Selbstbeteiligung.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
