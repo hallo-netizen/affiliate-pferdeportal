@@ -1,0 +1,397 @@
+{
+    "contract": "WP_K0_UPLOAD_PACKAGE_V1",
+    "publish_allowed": false,
+    "k0_intake": {
+        "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+        "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+        "item_count": 14,
+        "publish_allowed": false,
+        "content_or_format_payload_present": false,
+        "items": [
+            {
+                "title": "Uelzener Pferde OP Versicherung kündigen und Fristen beachten",
+                "target_keyword": "uelzener pferde op versicherung kündigen",
+                "category": "pferde-op-versicherung-faq",
+                "article_type": "Anleitung",
+                "plan_slot": "afbeb7c4b5431e13d264b04eb139f241ff06c91a8974345032da7791d09c1e6b"
+            },
+            {
+                "title": "Was kostet eine Pferdekrankenversicherung im Monat?",
+                "target_keyword": "Was kostet eine pferdekrankenversicherung im monat?",
+                "category": "pferdekrankenversicherung-kosten",
+                "article_type": "FAQ",
+                "plan_slot": "0f54cfde56df7b14994f9cab4ad1e62ecf30eeee2d224b0fac197c8db02b5cd4"
+            },
+            {
+                "title": "Leistungen der Barmenia Pferde OP Versicherung",
+                "target_keyword": "barmenia pferde-op-versicherung leistungen",
+                "category": "pferde-op-versicherung-leistungen",
+                "article_type": "Beratung",
+                "plan_slot": "bf88007ea0267807ea9651ac4428eb1fb52a0521360e19ee83df13aac5e3a44c"
+            },
+            {
+                "title": "Erfahrungen mit der Barmenia Pferde OP Versicherung",
+                "target_keyword": "barmenia pferde-op versicherung erfahrungen",
+                "category": "pferde-op-versicherung-beratung",
+                "article_type": "Beratung",
+                "plan_slot": "440581fba973acdb3199609ddbbdf0fda1fc45ac3db843d934549255a791f494"
+            },
+            {
+                "title": "Bietet die HUK eine Pferdekrankenversicherung?",
+                "target_keyword": "pferdekrankenversicherung huk",
+                "category": "pferdekrankenversicherung-faq",
+                "article_type": "FAQ",
+                "plan_slot": "d66b05751a01df3763f77806a5cae170c4ca1881ff18b7d680ca75cda53fc2b1"
+            },
+            {
+                "title": "Erfahrungen mit Pferdekrankenversicherungen einordnen",
+                "target_keyword": "pferdekrankenversicherung erfahrungen",
+                "category": "pferdekrankenversicherung-beratung",
+                "article_type": "Beratung",
+                "plan_slot": "dcbf1aeb7851a6c0b85b196db7c9e359ebd6a34bf968ecfabe9d7e8c3d58e914"
+            },
+            {
+                "title": "Pferdekrankenversicherung für ältere Pferde und Altersgrenzen",
+                "target_keyword": "pferdekrankenversicherung für ältere pferde",
+                "category": "pferdekrankenversicherung-beratung",
+                "article_type": "Beratung",
+                "plan_slot": "7309acc4327f53dbefcf7cdcd2fbb89aac297537c07a8c0c92e4c13db94ab700"
+            },
+            {
+                "title": "Günstige Pferde OP Versicherungen im Vergleich",
+                "target_keyword": "günstige pferde-op-versicherung",
+                "category": "pferde-op-versicherung-tarife-und-kosten",
+                "article_type": "Vergleich",
+                "plan_slot": "440080f7c566ed3dff1d6a05f2b4a747331852aa36e5fb277ff46f3fb45f601c"
+            },
+            {
+                "title": "Bietet die Allianz eine Pferdekrankenversicherung?",
+                "target_keyword": "pferdekrankenversicherung allianz",
+                "category": "pferdekrankenversicherung-faq",
+                "article_type": "FAQ",
+                "plan_slot": "f36fc242aae6127129149607ab2a9d030198422a1372cea8aa80948a572a1f84"
+            },
+            {
+                "title": "Pferdekrankenversicherungen im Preisvergleich",
+                "target_keyword": "pferdekrankenversicherung preisvergleich",
+                "category": "pferdekrankenversicherung-vergleich",
+                "article_type": "Vergleich",
+                "plan_slot": "7dfa067b48ba527ebce00ce5938e1b276601f355f4c7ec45d8f2459891200018"
+            },
+            {
+                "title": "Kann man eine Pferdekrankenversicherung ohne separate OP Versicherung abschließen?",
+                "target_keyword": "pferdekrankenversicherung ohne op versicherung",
+                "category": "pferdekrankenversicherung-leistungen",
+                "article_type": "FAQ",
+                "plan_slot": "30eeb47bd334d0252c6504b660e4fa7c2d41db58646a1f21435509790e74821c"
+            },
+            {
+                "title": "Kann man Pferdekrankenversicherungen über Check24 vergleichen?",
+                "target_keyword": "pferdekrankenversicherung check24",
+                "category": "pferdekrankenversicherung-faq",
+                "article_type": "FAQ",
+                "plan_slot": "780d29e444847f6dee7e4b2624c5d498512c7ae8129a86a1f80c21c1747c3f35"
+            },
+            {
+                "title": "Uelzener Pferde OP Versicherung Premium im Überblick",
+                "target_keyword": "uelzener pferde op versicherung premium",
+                "category": "pferde-op-versicherung-tarife-und-kosten",
+                "article_type": "Beratung",
+                "plan_slot": "ca3b4c489b03347497dce8893c0de612312f0b5d754e9999363beeb2cde7ebe3"
+            },
+            {
+                "title": "Erfahrungen mit der Agria Pferdekrankenversicherung und ihre Aussagekraft",
+                "target_keyword": "agria pferdekrankenversicherung erfahrungen",
+                "category": "pferdekrankenversicherung-beratung",
+                "article_type": "Beratung",
+                "plan_slot": "0382013021fdf35123823c819a7ad115c912e3bac8acf8360af9743ff36363d5"
+            }
+        ],
+        "batch_sha256": "ade40055abeaa4361b6e8a3a08058b0492134c5bd99e79c9282c16cfd7463e74"
+    },
+    "word_press_order_receipt": {
+        "contract": "WP_K0_SOURCE_RECEIPT_V1",
+        "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+        "site_host": "pferde-atelier.de",
+        "publish_allowed": false,
+        "next_textmachine_metadata_batch": {
+            "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+            "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+            "item_count": 14,
+            "publish_allowed": false,
+            "content_or_format_payload_present": false,
+            "items": [
+                {
+                    "title": "Uelzener Pferde OP Versicherung kündigen und Fristen beachten",
+                    "target_keyword": "uelzener pferde op versicherung kündigen",
+                    "category": "pferde-op-versicherung-faq",
+                    "article_type": "Anleitung",
+                    "plan_slot": "afbeb7c4b5431e13d264b04eb139f241ff06c91a8974345032da7791d09c1e6b"
+                },
+                {
+                    "title": "Was kostet eine Pferdekrankenversicherung im Monat?",
+                    "target_keyword": "Was kostet eine pferdekrankenversicherung im monat?",
+                    "category": "pferdekrankenversicherung-kosten",
+                    "article_type": "FAQ",
+                    "plan_slot": "0f54cfde56df7b14994f9cab4ad1e62ecf30eeee2d224b0fac197c8db02b5cd4"
+                },
+                {
+                    "title": "Leistungen der Barmenia Pferde OP Versicherung",
+                    "target_keyword": "barmenia pferde-op-versicherung leistungen",
+                    "category": "pferde-op-versicherung-leistungen",
+                    "article_type": "Beratung",
+                    "plan_slot": "bf88007ea0267807ea9651ac4428eb1fb52a0521360e19ee83df13aac5e3a44c"
+                },
+                {
+                    "title": "Erfahrungen mit der Barmenia Pferde OP Versicherung",
+                    "target_keyword": "barmenia pferde-op versicherung erfahrungen",
+                    "category": "pferde-op-versicherung-beratung",
+                    "article_type": "Beratung",
+                    "plan_slot": "440581fba973acdb3199609ddbbdf0fda1fc45ac3db843d934549255a791f494"
+                },
+                {
+                    "title": "Bietet die HUK eine Pferdekrankenversicherung?",
+                    "target_keyword": "pferdekrankenversicherung huk",
+                    "category": "pferdekrankenversicherung-faq",
+                    "article_type": "FAQ",
+                    "plan_slot": "d66b05751a01df3763f77806a5cae170c4ca1881ff18b7d680ca75cda53fc2b1"
+                },
+                {
+                    "title": "Erfahrungen mit Pferdekrankenversicherungen einordnen",
+                    "target_keyword": "pferdekrankenversicherung erfahrungen",
+                    "category": "pferdekrankenversicherung-beratung",
+                    "article_type": "Beratung",
+                    "plan_slot": "dcbf1aeb7851a6c0b85b196db7c9e359ebd6a34bf968ecfabe9d7e8c3d58e914"
+                },
+                {
+                    "title": "Pferdekrankenversicherung für ältere Pferde und Altersgrenzen",
+                    "target_keyword": "pferdekrankenversicherung für ältere pferde",
+                    "category": "pferdekrankenversicherung-beratung",
+                    "article_type": "Beratung",
+                    "plan_slot": "7309acc4327f53dbefcf7cdcd2fbb89aac297537c07a8c0c92e4c13db94ab700"
+                },
+                {
+                    "title": "Günstige Pferde OP Versicherungen im Vergleich",
+                    "target_keyword": "günstige pferde-op-versicherung",
+                    "category": "pferde-op-versicherung-tarife-und-kosten",
+                    "article_type": "Vergleich",
+                    "plan_slot": "440080f7c566ed3dff1d6a05f2b4a747331852aa36e5fb277ff46f3fb45f601c"
+                },
+                {
+                    "title": "Bietet die Allianz eine Pferdekrankenversicherung?",
+                    "target_keyword": "pferdekrankenversicherung allianz",
+                    "category": "pferdekrankenversicherung-faq",
+                    "article_type": "FAQ",
+                    "plan_slot": "f36fc242aae6127129149607ab2a9d030198422a1372cea8aa80948a572a1f84"
+                },
+                {
+                    "title": "Pferdekrankenversicherungen im Preisvergleich",
+                    "target_keyword": "pferdekrankenversicherung preisvergleich",
+                    "category": "pferdekrankenversicherung-vergleich",
+                    "article_type": "Vergleich",
+                    "plan_slot": "7dfa067b48ba527ebce00ce5938e1b276601f355f4c7ec45d8f2459891200018"
+                },
+                {
+                    "title": "Kann man eine Pferdekrankenversicherung ohne separate OP Versicherung abschließen?",
+                    "target_keyword": "pferdekrankenversicherung ohne op versicherung",
+                    "category": "pferdekrankenversicherung-leistungen",
+                    "article_type": "FAQ",
+                    "plan_slot": "30eeb47bd334d0252c6504b660e4fa7c2d41db58646a1f21435509790e74821c"
+                },
+                {
+                    "title": "Kann man Pferdekrankenversicherungen über Check24 vergleichen?",
+                    "target_keyword": "pferdekrankenversicherung check24",
+                    "category": "pferdekrankenversicherung-faq",
+                    "article_type": "FAQ",
+                    "plan_slot": "780d29e444847f6dee7e4b2624c5d498512c7ae8129a86a1f80c21c1747c3f35"
+                },
+                {
+                    "title": "Uelzener Pferde OP Versicherung Premium im Überblick",
+                    "target_keyword": "uelzener pferde op versicherung premium",
+                    "category": "pferde-op-versicherung-tarife-und-kosten",
+                    "article_type": "Beratung",
+                    "plan_slot": "ca3b4c489b03347497dce8893c0de612312f0b5d754e9999363beeb2cde7ebe3"
+                },
+                {
+                    "title": "Erfahrungen mit der Agria Pferdekrankenversicherung und ihre Aussagekraft",
+                    "target_keyword": "agria pferdekrankenversicherung erfahrungen",
+                    "category": "pferdekrankenversicherung-beratung",
+                    "article_type": "Beratung",
+                    "plan_slot": "0382013021fdf35123823c819a7ad115c912e3bac8acf8360af9743ff36363d5"
+                }
+            ],
+            "batch_sha256": "ade40055abeaa4361b6e8a3a08058b0492134c5bd99e79c9282c16cfd7463e74"
+        },
+        "items": [
+            {
+                "metadata_binding": {
+                    "title": "Uelzener Pferde OP Versicherung kündigen und Fristen beachten",
+                    "target_keyword": "uelzener pferde op versicherung kündigen",
+                    "category": "pferde-op-versicherung-faq",
+                    "article_type": "Anleitung",
+                    "plan_slot": "afbeb7c4b5431e13d264b04eb139f241ff06c91a8974345032da7791d09c1e6b"
+                },
+                "order_id": "TXE-8a15b9359f95e689b76b98cda6a21f37",
+                "article_id": "article:db57f10b1b55984bd2932f10",
+                "search_intent": "Kündigung einer bestehenden Uelzener Pferde OP Versicherung, Fristen und Ablauf"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Was kostet eine Pferdekrankenversicherung im Monat?",
+                    "target_keyword": "Was kostet eine pferdekrankenversicherung im monat?",
+                    "category": "pferdekrankenversicherung-kosten",
+                    "article_type": "FAQ",
+                    "plan_slot": "0f54cfde56df7b14994f9cab4ad1e62ecf30eeee2d224b0fac197c8db02b5cd4"
+                },
+                "order_id": "TXE-7a1fc58bc1effff9c82814af68db2517",
+                "article_id": "article:3753813e1f99c42ee138006f",
+                "search_intent": "Monatlicher Beitrag einer Pferdekrankenversicherung und Einflussfaktoren"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Leistungen der Barmenia Pferde OP Versicherung",
+                    "target_keyword": "barmenia pferde-op-versicherung leistungen",
+                    "category": "pferde-op-versicherung-leistungen",
+                    "article_type": "Beratung",
+                    "plan_slot": "bf88007ea0267807ea9651ac4428eb1fb52a0521360e19ee83df13aac5e3a44c"
+                },
+                "order_id": "TXE-4c0b2af042b95e1a0d8f3a3cd906ad73",
+                "article_id": "article:8d6dc1bfa7fb5305eaba8dec",
+                "search_intent": "Versicherungsleistungen der Barmenia Pferde OP Versicherung"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Erfahrungen mit der Barmenia Pferde OP Versicherung",
+                    "target_keyword": "barmenia pferde-op versicherung erfahrungen",
+                    "category": "pferde-op-versicherung-beratung",
+                    "article_type": "Beratung",
+                    "plan_slot": "440581fba973acdb3199609ddbbdf0fda1fc45ac3db843d934549255a791f494"
+                },
+                "order_id": "TXE-27fdb3ed555476181ccaa61be940271f",
+                "article_id": "article:44bc5d8df6f5f6d7130e386c",
+                "search_intent": "Erfahrungsberichte zur Barmenia Pferde OP Versicherung und ihre Einordnung"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Bietet die HUK eine Pferdekrankenversicherung?",
+                    "target_keyword": "pferdekrankenversicherung huk",
+                    "category": "pferdekrankenversicherung-faq",
+                    "article_type": "FAQ",
+                    "plan_slot": "d66b05751a01df3763f77806a5cae170c4ca1881ff18b7d680ca75cda53fc2b1"
+                },
+                "order_id": "TXE-0559a8e269d1153782f2b7f3361169e6",
+                "article_id": "article:34cc0e04313396c26d3029f3",
+                "search_intent": "Prüfen, ob die HUK Pferdekrankenversicherungen anbietet"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Erfahrungen mit Pferdekrankenversicherungen einordnen",
+                    "target_keyword": "pferdekrankenversicherung erfahrungen",
+                    "category": "pferdekrankenversicherung-beratung",
+                    "article_type": "Beratung",
+                    "plan_slot": "dcbf1aeb7851a6c0b85b196db7c9e359ebd6a34bf968ecfabe9d7e8c3d58e914"
+                },
+                "order_id": "TXE-7003ecc8397250aa3543f47790f82eb2",
+                "article_id": "article:9af6b417ea0ece4c9dd17279",
+                "search_intent": "Allgemeine Erfahrungen mit Pferdekrankenversicherungen und deren Aussagekraft"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Pferdekrankenversicherung für ältere Pferde und Altersgrenzen",
+                    "target_keyword": "pferdekrankenversicherung für ältere pferde",
+                    "category": "pferdekrankenversicherung-beratung",
+                    "article_type": "Beratung",
+                    "plan_slot": "7309acc4327f53dbefcf7cdcd2fbb89aac297537c07a8c0c92e4c13db94ab700"
+                },
+                "order_id": "TXE-d0c69933f20325f6020737a7e073424e",
+                "article_id": "article:dc1cef16b36e323aa84629e2",
+                "search_intent": "Aufnahmebedingungen und Krankenversicherungsschutz für ältere Pferde"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Günstige Pferde OP Versicherungen im Vergleich",
+                    "target_keyword": "günstige pferde-op-versicherung",
+                    "category": "pferde-op-versicherung-tarife-und-kosten",
+                    "article_type": "Vergleich",
+                    "plan_slot": "440080f7c566ed3dff1d6a05f2b4a747331852aa36e5fb277ff46f3fb45f601c"
+                },
+                "order_id": "TXE-ccd0bdf80c0aebd87a7c7abfb994f102",
+                "article_id": "article:c878dfc8f9ad995ed18d4ae9",
+                "search_intent": "Preisbewusste Auswahl günstiger Pferde OP Versicherungen"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Bietet die Allianz eine Pferdekrankenversicherung?",
+                    "target_keyword": "pferdekrankenversicherung allianz",
+                    "category": "pferdekrankenversicherung-faq",
+                    "article_type": "FAQ",
+                    "plan_slot": "f36fc242aae6127129149607ab2a9d030198422a1372cea8aa80948a572a1f84"
+                },
+                "order_id": "TXE-cee82e6c287224c9c2a3a293d966da6c",
+                "article_id": "article:fc70ab72b28a4c56e2a402bf",
+                "search_intent": "Prüfen, welche Pferdekrankenversicherung die Allianz anbietet"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Pferdekrankenversicherungen im Preisvergleich",
+                    "target_keyword": "pferdekrankenversicherung preisvergleich",
+                    "category": "pferdekrankenversicherung-vergleich",
+                    "article_type": "Vergleich",
+                    "plan_slot": "7dfa067b48ba527ebce00ce5938e1b276601f355f4c7ec45d8f2459891200018"
+                },
+                "order_id": "TXE-b43e1688da6d62882b2e82b1ee3e7ca4",
+                "article_id": "article:bc794f89600cd0eb6c0330c2",
+                "search_intent": "Beiträge verschiedener Pferdekrankenversicherungen im Preisvergleich"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Kann man eine Pferdekrankenversicherung ohne separate OP Versicherung abschließen?",
+                    "target_keyword": "pferdekrankenversicherung ohne op versicherung",
+                    "category": "pferdekrankenversicherung-leistungen",
+                    "article_type": "FAQ",
+                    "plan_slot": "30eeb47bd334d0252c6504b660e4fa7c2d41db58646a1f21435509790e74821c"
+                },
+                "order_id": "TXE-b6073bf5fa0cc9e4e4b1d1c08f3b1e8f",
+                "article_id": "article:5758200ec4844cfac59ba656",
+                "search_intent": "Pferdekrankenversicherung ohne eigenständige zusätzliche OP Versicherung"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Kann man Pferdekrankenversicherungen über Check24 vergleichen?",
+                    "target_keyword": "pferdekrankenversicherung check24",
+                    "category": "pferdekrankenversicherung-faq",
+                    "article_type": "FAQ",
+                    "plan_slot": "780d29e444847f6dee7e4b2624c5d498512c7ae8129a86a1f80c21c1747c3f35"
+                },
+                "order_id": "TXE-548083935c1f8efea8fa05bdc251fdac",
+                "article_id": "article:7f1fb29b8e929a0c45c3cd3b",
+                "search_intent": "Prüfen, ob sich Pferdekrankenversicherungen über Check24 vergleichen lassen"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Uelzener Pferde OP Versicherung Premium im Überblick",
+                    "target_keyword": "uelzener pferde op versicherung premium",
+                    "category": "pferde-op-versicherung-tarife-und-kosten",
+                    "article_type": "Beratung",
+                    "plan_slot": "ca3b4c489b03347497dce8893c0de612312f0b5d754e9999363beeb2cde7ebe3"
+                },
+                "order_id": "TXE-072f9ee45675605955907e1d26ff2270",
+                "article_id": "article:89cf368ee67a6def42253b03",
+                "search_intent": "Leistungs- und Tarifprofil der Premium Variante der Uelzener Pferde OP Versicherung"
+            },
+            {
+                "metadata_binding": {
+                    "title": "Erfahrungen mit der Agria Pferdekrankenversicherung und ihre Aussagekraft",
+                    "target_keyword": "agria pferdekrankenversicherung erfahrungen",
+                    "category": "pferdekrankenversicherung-beratung",
+                    "article_type": "Beratung",
+                    "plan_slot": "0382013021fdf35123823c819a7ad115c912e3bac8acf8360af9743ff36363d5"
+                },
+                "order_id": "TXE-20edab1001013effd150138aa0c36633",
+                "article_id": "article:59eef29c43a8d977b1e36fef",
+                "search_intent": "Erfahrungen mit der Agria Pferdekrankenversicherung, getrennt von der allgemeinen Produktübersicht"
+            }
+        ],
+        "manifest_sha256": "d46ecb4da80b1891a94279fcf450592e270214c271e871e57b9633a55bac21a7"
+    }
+}
