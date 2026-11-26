@@ -16,10 +16,6 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-          "source_title": "Allianz – Pferde-OP-Versicherung"
-        },
-        {
           "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
           "source_title": "Uelzener – Pferde-OP-Versicherung"
         },
@@ -29,8 +25,8 @@
         }
       ],
       "claims": [
-        "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
-        "Nichtoperative Behandlungen wie Therapien chronischer Leiden sind im Allianz-OP-Schutz nicht abgedeckt.",
+        "Uelzener gibt für den Abschluss der Pferde-OP-Versicherung keine feste Altersgrenze an.",
+        "Eine spätere Aufstockung des Uelzener-OP-Tarifs kann eine erneute Gesundheitsprüfung erfordern.",
         "Uelzener versichert auch Pferdeoperationen unter Sedierung oder Lokalanästhesie.",
         "Uelzener schließt die Behandlung von Hufabzessen und Hufgeschwüren aus dem Pferde-OP-Versicherungsschutz aus.",
         "Stiftung Warentest stellte in ihrem älteren Pferde-OP-Versicherungstest Leistungsausschlüsse bei bestimmten Krankheiten und Operationen fest.",
@@ -61,22 +57,22 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Die OP-Versicherung deckt medizinisch notwendige Operationen infolge von Unfall, Krankheit oder Fehlentwicklung ab.",
-        "evidence_text_sha256": "535799d78572ce2f917ab4a82128a0a45e759a9ecbb5564b17cf791d4d6847ef",
-        "statement": "Die Allianz versichert medizinisch notwendige Pferdeoperationen wegen Unfall, Krankheit oder Fehlentwicklung.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Nein, jedes Pferd – egal welches Alter – kann versichert werden.",
+        "evidence_text_sha256": "ce76d79f495acbc3033ff63aead6bb954b82cd5cf132cb2c8896d849ecddbe3c",
+        "statement": "Uelzener gibt für den Abschluss der Pferde-OP-Versicherung keine feste Altersgrenze an.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
-        "source_title": "Allianz – Pferde-OP-Versicherung",
-        "evidence_text": "Im OP-Schutz sind keine Behandlungen ohne eine Operation beispielsweise Therapien für chronische Leiden wie Arthrose abgesichert.",
-        "evidence_text_sha256": "9071038a75b8fd215ee665cb1e24e90cd4d020a7e7c860bdc3a1afbe26c87306",
-        "statement": "Nichtoperative Behandlungen wie Therapien chronischer Leiden sind im Allianz-OP-Schutz nicht abgedeckt.",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener – Pferde-OP-Versicherung",
+        "evidence_text": "Wenn du deinen Tarif aufstocken möchtest erfolgt eine erneute Gesundheitsprüfung.",
+        "evidence_text_sha256": "94bc6c9aca5aa6ead76e272247cf0b55ec8af2d5a9354bb4103fe0c1431c7df7",
+        "statement": "Eine spätere Aufstockung des Uelzener-OP-Tarifs kann eine erneute Gesundheitsprüfung erfordern.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
