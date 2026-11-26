@@ -1,0 +1,181 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Die Agria Pferdekrankenversicherung",
+    "target_keyword": "agria pferdekrankenversicherung",
+    "category": "pferdekrankenversicherung-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "7e6bcfc4a4df85ffb69ec752ea3b97b7a8beabdb3e5c5234bd62bd0937b85198"
+  },
+  "content_profile": {
+    "search_intent": "Was die Agria Pferdekrankenversicherung auszeichnet und welche Bedingungen für eine Kaufentscheidung wichtig sind."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+          "source_title": "Agria – Pferdeversicherung"
+        }
+      ],
+      "claims": [
+        "Agria bietet Pferdeversicherung gegen unerwartete Tierarztkosten bei Krankheit, Verletzung und Unfall.",
+        "Agria bietet tierärztliche Beratung über die App von 07 bis 24 Uhr.",
+        "Agria verspricht sofortigen Schutz bei Unfällen und Koliken und nach 20 Tagen bei Erkrankungen.",
+        "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
+        "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "agria pferdekrankenversicherung",
+      "topic": "Die Agria Pferdekrankenversicherung",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Agria Pferdekrankenversicherung nach Leistungen, Wartezeit und Kostenfaktoren beurteilen.",
+      "decision_criteria": [
+        "Erstattungsumfang",
+        "Wartezeiten",
+        "Beratung und Beitrag"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Mit der richtigen Versicherung erhältst du Unterstützung und Schutz vor unerwarteten Tierarztkosten im Falle von Krankheit, Verletzung oder Unfall.",
+        "evidence_text_sha256": "b38e5026b19ac04d0747f24c583345e6ff33183f95daeee5892ec02213375abd",
+        "statement": "Agria bietet Pferdeversicherung gegen unerwartete Tierarztkosten bei Krankheit, Verletzung und Unfall.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Tierärztliche Beratung per Agria-App von 07-24 Uhr.",
+        "evidence_text_sha256": "9a59afc50ef81701a0e7e011b9c8ddc2af1c0bbe9a22dfe822d3dae7a6689d00",
+        "statement": "Agria bietet tierärztliche Beratung über die App von 07 bis 24 Uhr.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Schützt dich sofort nach Abschluss bei Unfällen und Koliken sowie nach 20 Tagen bei Erkrankungen.",
+        "evidence_text_sha256": "08650130d50d690d3eb5fb0642928bb9964b58f847daa2af5c2036fa0d9c68aa",
+        "statement": "Agria verspricht sofortigen Schutz bei Unfällen und Koliken und nach 20 Tagen bei Erkrankungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Erstattung der Tierarztkosten bei Krankheit oder Verletzung deines Pferdes.",
+        "evidence_text_sha256": "66d91434f863876ca983d24f26ca4ced6c2bb61b7f43a243a668c0201124485e",
+        "statement": "Agria nennt Pferdekrankenversicherung mit Erstattung von Tierarztkosten bei Krankheit oder Verletzung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/",
+        "source_title": "Agria – Pferdeversicherung",
+        "evidence_text": "Die Kosten einer Pferde-Krankenversicherung hängen von mehreren Faktoren ab:",
+        "evidence_text_sha256": "e4a41acc875cc2d69e75e8496cf2f0be24e7524189c73bb0b8c3f83db976468c",
+        "statement": "Agria erklärt, dass die Kosten einer Pferdekrankenversicherung von mehreren Faktoren abhängen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-beratung/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Agria",
+      "Pferdekrankenversicherung",
+      "Versicherung",
+      "Leistungen",
+      "Kosten",
+      "Wartezeit",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Entscheidung hängt von Bedingungen ab, die im Fließtext und in der Checkliste präziser erklärt werden; eine Tabelle böte keinen zusätzlichen belastbaren Vergleichsnutzen."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
