@@ -1,0 +1,230 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Kann man Pferdekrankenversicherungen über Check24 vergleichen?",
+    "target_keyword": "pferdekrankenversicherung check24",
+    "category": "pferdekrankenversicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "780d29e444847f6dee7e4b2624c5d498512c7ae8129a86a1f80c21c1747c3f35"
+  },
+  "content_profile": {
+    "search_intent": "Prüfen, ob sich Pferdekrankenversicherungen über Check24 vergleichen lassen"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.check24.de/pferde-op-versicherung/",
+          "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich"
+        },
+        {
+          "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+          "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia"
+        }
+      ],
+      "claims": [
+        "CHECK24 erläutert, dass eine Selbstbeteiligung den vom Halter selbst getragenen Kostenanteil bezeichnet.",
+        "CHECK24 unterscheidet bei OP-Tarifen die Erstattungsgrenze pro Versicherungsjahr und pro Operation.",
+        "CHECK24 verweist für vollständige Leistungsausschlüsse auf die Unterlagen der jeweiligen Versicherer.",
+        "CHECK24 zeigt im Vergleich eine Beispielspanne für Pferde-OP-Tarife; sie gilt nicht pauschal für Kranken-Vollversicherung.",
+        "CHECK24 ordnet zum Leistungsumfang eines Pferde-OP-Tarifs mehrere Vergleichskriterien.",
+        "CHECK24 weist darauf hin, dass bei bestimmten Notfällen verkürzte Wartezeiten vorgesehen sein können.",
+        "HUK ist beim vermittelten Barmenia-Pferde-OP-Produkt nicht selbst Vertragspartei."
+      ]
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung check24",
+      "topic": "Kann man Pferdekrankenversicherungen über Check24 vergleichen?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Kann man Pferdekrankenversicherungen über Check24 vergleichen?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Die Selbstbeteiligung definiert, zu welchem Anteil Sie sich an den Behandlungskosten Ihres Pferdes beteiligen.",
+        "evidence_text_sha256": "0b98718205fe4d22b69bfdc1cad53ed905aff132bbd76bf87f87beab6467d3f5",
+        "statement": "CHECK24 erläutert, dass eine Selbstbeteiligung den vom Halter selbst getragenen Kostenanteil bezeichnet.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Bei der Pferde-OP-Versicherung ist es wichtig, den Unterschied zwischen der jährlichen Höchstleistungsgrenze und der Höchstleistungsgrenze pro Operation zu kennen.",
+        "evidence_text_sha256": "6357af73dd932af0175d193c00b597f5d0ca0741623bbc4c0e5e0a29f38057de",
+        "statement": "CHECK24 unterscheidet bei OP-Tarifen die Erstattungsgrenze pro Versicherungsjahr und pro Operation.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Die vollständigen Bedingungen und alle Ausschlüsse sind in den Unterlagen des jeweiligen Versicherers festgehalten.",
+        "evidence_text_sha256": "64be965b7f9a84c7885dc02f0acac32d960efd91b157c8fe55af1cced566c696",
+        "statement": "CHECK24 verweist für vollständige Leistungsausschlüsse auf die Unterlagen der jeweiligen Versicherer.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Eine Pferde-OP-Versicherung über CHECK24 kostet zwischen 21,71 € und 140,70 € monatlich beziehungsweise 260,47 € und 1688,41 € jährlich.",
+        "evidence_text_sha256": "02a7a6339c936832aad9990610c6ab11b67e67d9459d6a572df4718c36458ab4",
+        "statement": "CHECK24 zeigt im Vergleich eine Beispielspanne für Pferde-OP-Tarife; sie gilt nicht pauschal für Kranken-Vollversicherung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Das Leistungsspektrum oder auch der Versicherungsumfang setzt sich aus allen Kriterien eines Pferde-OP-Tarifs zusammen",
+        "evidence_text_sha256": "2831d780facc7df0a20f5b48ccb5ed5f5db3cd933f812ac746154e802559f9b3",
+        "statement": "CHECK24 ordnet zum Leistungsumfang eines Pferde-OP-Tarifs mehrere Vergleichskriterien.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F6": {
+        "source_url": "https://www.check24.de/pferde-op-versicherung/",
+        "source_title": "CHECK24 – Pferde-OP-Versicherung Vergleich",
+        "evidence_text": "Einige Versicherer machen Ausnahmen bei akuten Notfällen, zum Beispiel bei einer Kolik.",
+        "evidence_text_sha256": "a33881beb7471d2d485d739c04575b733f093ffe925d891eb83ef0f8cf2b62fc",
+        "statement": "CHECK24 weist darauf hin, dass bei bestimmten Notfällen verkürzte Wartezeiten vorgesehen sein können.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F7": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK-COBURG – Pferde-OP-Versicherung Barmenia",
+        "evidence_text": "Die HUK-COBURG stellt lediglich den Zugang zu diesem Angebot bereit und ist nicht Vertragspartei.",
+        "evidence_text_sha256": "789a4d58949a65d7069d5159bb80abbfe067e4ece618e39919c335e8f97e794e",
+        "statement": "HUK ist beim vermittelten Barmenia-Pferde-OP-Produkt nicht selbst Vertragspartei.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "anchor": "Pferdeversicherung Beratung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Versicherung",
+      "Pferde",
+      "Krankenschutz",
+      "OP",
+      "Kosten",
+      "Beitrag",
+      "Behandlung",
+      "Leistungen",
+      "Fragen",
+      "Vertrag",
+      "Erstattung",
+      "Tarif",
+      "Vergleich",
+      "Allianz",
+      "Uelzener",
+      "Barmenia",
+      "HUK",
+      "Agria",
+      "Check24",
+      "Erfahrungen",
+      "Schutz",
+      "Pferdekrankenversicherung",
+      "Pferdeversicherung",
+      "Fristen",
+      "Alter",
+      "Wartezeit",
+      "Bedingungen",
+      "Auswahl",
+      "Versicherungen",
+      "Recht"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die konkrete Frage wird präziser anhand belegter Bedingungen im Fließtext beantwortet; eine Tabelle würde hier keinen zusätzlichen belastbaren Mehrwert bieten."
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
