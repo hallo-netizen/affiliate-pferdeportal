@@ -1,0 +1,67 @@
+name: HAB single article 0193 isolated build and audit
+on:
+  push:
+    branches: [hab-design-article-layout-20261127]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build full original design candidate and PHP checks
+        run: python3 protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/DESIGN/BUILD_ARTICLE_LAYOUT_0193.py
+      - name: Browser regression at phone tablet desktop
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+          python - <<'PY'
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          css=Path('hab-design-article-candidate/article-design.css').read_text()
+          def table(n):
+              return '<div class="hb-article-table-scroll"><table><thead><tr>'+''.join('<th>Spalte '+str(i)+'</th>' for i in range(n))+'</tr></thead><tbody><tr>'+''.join('<td>Normale Inhalte</td>' for i in range(n))+'</tr></tbody></table></div>'
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              for w in [320,375,390,600,768,900,1200]:
+                  page=browser.new_page(viewport={'width':w,'height':900})
+                  page.set_content('<style>body{margin:0}.hb-article-reading{width:calc(100% - 32px);margin:auto!important}'+css+'</style><body class="hbdp-body"><div class="hb-article-reading">'+table(3)+table(8)+'<div class="hb-merksatz"><p><strong>Merksatz</strong></p><p>Originaltext</p></div></div></body>')
+                  widths=page.locator('.hb-article-table-scroll').first.evaluate('(e)=>({outer:e.clientWidth,inner:e.firstElementChild.getBoundingClientRect().width})')
+                  assert widths['inner']>=widths['outer']-2,(w,widths)
+                  assert page.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),w
+                  assert page.locator('.hb-merksatz').evaluate('(e)=>getComputedStyle(e).backgroundColor')=='rgb(247, 236, 230)'
+                  if w<=390:
+                      assert page.locator('.hb-article-table-scroll').nth(1).evaluate('(e)=>e.scrollWidth>e.clientWidth'),w
+                  print(w,widths,'PASS')
+                  page.close()
+              browser.close()
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: hab-design-0193-tested-candidate
+          path: hab-design-article-candidate/
+  affiliate-readonly-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect official affiliate original and exact product category
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile
+          import hashlib,re
+          path=Path('protocol/PROJECT_MEMORY/PROJEKTE/EIGENTUMSSCHUTZ/PLUGINS/ISOLIERTE_PLUGINS/HAB-004-AFFILIATE/CURRENT.zip')
+          data=path.read_bytes()
+          print('official affiliate original',hashlib.sha256(data).hexdigest())
+          with ZipFile(path) as z:
+              for name in z.namelist():
+                  if not name.endswith('.php'): continue
+                  s=z.read(name).decode(errors='replace')
+                  for fn in ['hab_bw_article_slot','hb_amazon_article_topic','product_family','article_products']:
+                      m=re.search(r'function\s+'+fn+r'\s*\(',s)
+                      if m:
+                          start=m.start(); end=re.search(r'\n    (?:public |private |protected )?(?:static )?function\s+',s[m.end():])
+                          print(name,fn,s[start:m.end()+end.start() if end else start+6000][:12000])
+          print('Actual target: post 990608; category term 1422 Gegensprechanlage: Auswahl & Beratung; parent 425. No live provider data in GitHub.')
+          PY
