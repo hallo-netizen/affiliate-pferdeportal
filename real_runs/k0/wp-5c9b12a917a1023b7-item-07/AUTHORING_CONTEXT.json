@@ -116,8 +116,8 @@
       },
       {
         "role": "further_information",
-        "href": "/category/pferdekrankenversicherung-leistungen/",
-        "anchor": "Leistungen Pferdekrankenversicherung",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
         "block": "further_information"
       }
     ],
@@ -127,7 +127,7 @@
         "active": true
       },
       {
-        "href": "/category/pferdekrankenversicherung-leistungen/",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
         "active": true
       }
     ],
