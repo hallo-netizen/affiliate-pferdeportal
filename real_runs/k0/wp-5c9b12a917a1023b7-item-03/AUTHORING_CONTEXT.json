@@ -1,0 +1,245 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Krankenversicherung und Operationsversicherung für Pferde im Vergleich",
+    "target_keyword": "pferdekrankenversicherung op versicherung",
+    "category": "pferdekrankenversicherung-vergleich",
+    "article_type": "Vergleich",
+    "plan_slot": "5e1fdcc00d3dc18fa36376eafd6dc495af556994829506d190165ddab52fa3ae"
+  },
+  "content_profile": {
+    "search_intent": "Unterschiede zwischen einer Pferdekrankenversicherung und einer eigenständigen Operationsversicherung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+          "source_title": "Uelzener Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+          "source_title": "Uelzener Pferde-Krankenversicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/versicherungen-preise/",
+          "source_title": "Uelzener Preisübersicht"
+        }
+      ],
+      "claims": [
+        "Die Uelzener nennt für ihren OP-Schutz drei Tage Vor- und 17 Kalendertage Nachbehandlung.",
+        "Die Uelzener nennt eine hundertprozentige Erstattung unabhängig vom GOT-Satz im Rahmen der vereinbarten Leistungen.",
+        "Der Krankenschutz der Uelzener umfasst neben Operationen auch medizinisch notwendige Behandlungen.",
+        "Der Krankenschutz umfasst ambulante und stationäre notwendige Behandlungen.",
+        "Die Uelzener nennt für OP-Schutz einen monatlichen Einstiegspreis von 46,09 Euro.",
+        "Der beworbene Einstiegspreis für den Krankenschutz beträgt monatlich 288,21 Euro.",
+        "Im genannten Krankenschutz bezuschusst die Uelzener Vorsorge mit 500 Euro pro Versicherungsjahr."
+      ],
+      "fresh_research_reference_date": "2026-11-27"
+    },
+    "production_plan_item": {
+      "article_type": "Vergleich",
+      "target_keyword": "pferdekrankenversicherung op versicherung",
+      "topic": "Krankenversicherung und Operationsversicherung für Pferde im Vergleich",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-vergleich",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "comparison_targets": [
+        "Operationsversicherung",
+        "Krankenversicherung"
+      ],
+      "comparison_criteria": [
+        "Behandlungsumfang",
+        "Vor- und Nachbehandlung",
+        "Vorsorge",
+        "Beitrag"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener Pferde-OP-Versicherung",
+        "evidence_text": "3 Tage Vor- und 17 Kalendertage Nachbehandlung",
+        "evidence_text_sha256": "224346299c82c116c7ea8037c4ce0ff311ed67fdd05c27f9e6b2df3497d90ccc",
+        "statement": "Die Uelzener nennt für ihren OP-Schutz drei Tage Vor- und 17 Kalendertage Nachbehandlung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/",
+        "source_title": "Uelzener Pferde-OP-Versicherung",
+        "evidence_text": "100% Erstattung unabhängig vom GOT-Satz",
+        "evidence_text_sha256": "1a250de841fe2249c3c86a17649f6ecd76a8f4610e601f77eea7ebe5a1540c40",
+        "statement": "Die Uelzener nennt eine hundertprozentige Erstattung unabhängig vom GOT-Satz im Rahmen der vereinbarten Leistungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "Alle medizinisch notwendigen Operationen und Behandlungen",
+        "evidence_text_sha256": "c020c1ea6d2080cdf929b597f33e20e27bd205c85afd9890ec31817d92082ea8",
+        "statement": "Der Krankenschutz der Uelzener umfasst neben Operationen auch medizinisch notwendige Behandlungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "Abgedeckt sind alle notwendigen Behandlungen, sowohl ambulant als auch stationär.",
+        "evidence_text_sha256": "2cedc2c4fd1bf44c3008b294e7c039b1f3231ccea9c60307bdad4e590be7962c",
+        "statement": "Der Krankenschutz umfasst ambulante und stationäre notwendige Behandlungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F5": {
+        "source_url": "https://uelzener.de/versicherungen-preise/",
+        "source_title": "Uelzener Preisübersicht",
+        "evidence_text": "Pferde-OP-Versicherung ab 46,09 €/Monat",
+        "evidence_text_sha256": "fb3a2bf8820edd9743227dca551cfffdc7f943a834fb973afae6e5ba4d2fb7da",
+        "statement": "Die Uelzener nennt für OP-Schutz einen monatlichen Einstiegspreis von 46,09 Euro.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F6": {
+        "source_url": "https://uelzener.de/versicherungen-preise/",
+        "source_title": "Uelzener Preisübersicht",
+        "evidence_text": "Pferde-Krankenversicherung ab 288,21 €/Monat",
+        "evidence_text_sha256": "917926cb63bed36341c1af36a99d40986048745b179db43c6e36b8a09cc6904d",
+        "statement": "Der beworbene Einstiegspreis für den Krankenschutz beträgt monatlich 288,21 Euro.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      },
+      "F7": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "Vorsorge bezuschussen wir mit 500 € pro Versicherungsjahr",
+        "evidence_text_sha256": "a2cafb6cf26047827c709177e16ad9be0033f780b1b3c5212f0e66988252f7c3",
+        "statement": "Im genannten Krankenschutz bezuschusst die Uelzener Vorsorge mit 500 Euro pro Versicherungsjahr.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Vergleich"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5",
+      "F6",
+      "F7"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-vergleich/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "options"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-vergleich/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-vergleich",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "pferdekrankenversicherung",
+      "versicherung"
+    ],
+    "comparison_source_bindings": [
+      {
+        "source_label": "Operationsversicherung",
+        "nearest_option_heading": "Operationsversicherung",
+        "source_url": "https://uelzener.de/pferd/pferde-op-versicherung/"
+      },
+      {
+        "source_label": "Krankenversicherung",
+        "nearest_option_heading": "Krankenversicherung",
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/"
+      }
+    ],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "INCLUDE_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die zwei Schutzarten unterscheiden sich in Umfang, Nachbehandlung, Vorsorge und Beitrag; die Tabelle ermöglicht einen direkten Vergleich.",
+      "reader_question": "pferdekrankenversicherung op versicherung",
+      "reader_benefit": "Die Leser erkennen die Leistungs- und Preisunterschiede der beiden Versicherungsarten auf einen Blick.",
+      "why_not_prose": "Die Gegenüberstellung gleicher Kriterien macht die Abgrenzung unmittelbar nachvollziehbar.",
+      "comparison_axes": [
+        "Leistungsumfang",
+        "Nachbehandlung",
+        "Vorsorge",
+        "Beitrag"
+      ],
+      "source_fact_ids": [
+        "F1",
+        "F2",
+        "F3",
+        "F4",
+        "F5",
+        "F6",
+        "F7"
+      ]
+    },
+    "semantic_rule_results": {
+      "table.value_required_if_present": "PASS"
+    },
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
