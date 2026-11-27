@@ -1,0 +1,159 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Pferdekrankenversicherungen gibt es in der Schweiz?",
+    "target_keyword": "pferdekrankenversicherung schweiz",
+    "category": "pferdekrankenversicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "e2f63adf450dce75fbff0ea70d74a7c17857ae4f72b9d7ebb2bc3a330961e988"
+  },
+  "content_profile": {
+    "search_intent": "Welche Pferdekrankenversicherungen in der Schweiz verfügbar sind und welche landesspezifischen Bedingungen gelten"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://epona.ch/de/pferdeversicherung",
+          "source_title": "Epona Pferdeversicherung"
+        },
+        {
+          "source_url": "https://pasura.ch/services/fragen-und-antworten",
+          "source_title": "Pasura Fragen und Antworten"
+        }
+      ],
+      "claims": [
+        "Epona bewirbt eine Deckung von bis zu 90 Prozent für Unfälle, Notoperationen und akute sowie chronische Erkrankungen.",
+        "Pasura bietet die drei Deckungsvarianten ECO, STANDARD und PREMIUM an.",
+        "Pasura nennt grundsätzlich freie Tierarztwahl innerhalb der Schweiz.",
+        "Für die Aufnahme verlangt Pasura eine tierärztliche Gesundheitsuntersuchung."
+      ],
+      "fresh_research_reference_date": "2026-11-27"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung schweiz",
+      "topic": "Welche Pferdekrankenversicherungen gibt es in der Schweiz?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Pferdekrankenversicherungen gibt es in der Schweiz?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://epona.ch/de/pferdeversicherung",
+        "source_title": "Epona Pferdeversicherung",
+        "evidence_text": "bis zu 90 % der Kosten für Unfälle, Notoperationen sowie akute und chronische Erkrankungen",
+        "evidence_text_sha256": "17c09b7c1fa0af1272860e9b54db5211c22a4fbcae81ddf1506f8fa62f8e83fa",
+        "statement": "Epona bewirbt eine Deckung von bis zu 90 Prozent für Unfälle, Notoperationen und akute sowie chronische Erkrankungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://pasura.ch/services/fragen-und-antworten",
+        "source_title": "Pasura Fragen und Antworten",
+        "evidence_text": "Sie wählen zwischen ECO, STANDARD oder PREMIUM die gewünschte Deckung.",
+        "evidence_text_sha256": "76abeac64a9af27868c369277855f6e78c10dc827c2432325bd58b6aa58b4791",
+        "statement": "Pasura bietet die drei Deckungsvarianten ECO, STANDARD und PREMIUM an.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://pasura.ch/services/fragen-und-antworten",
+        "source_title": "Pasura Fragen und Antworten",
+        "evidence_text": "Grundsätzlich besteht freie Tierarztwahl innerhalb der Schweiz.",
+        "evidence_text_sha256": "ae5738b1e3a44c0766620ce4131c5a5999c567e2d07519faad30e18a19a0b40b",
+        "statement": "Pasura nennt grundsätzlich freie Tierarztwahl innerhalb der Schweiz.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://pasura.ch/services/fragen-und-antworten",
+        "source_title": "Pasura Fragen und Antworten",
+        "evidence_text": "Um ein Pferd in die Versicherung aufzunehmen, muss es von einem diplomierten Tierarzt auf den Gesundheitszustand untersucht worden sein.",
+        "evidence_text_sha256": "05656f959644cc4891ac8cc384f4d375c3cbb96ca5458702b4d786b4ac25f1b5",
+        "statement": "Für die Aufnahme verlangt Pasura eine tierärztliche Gesundheitsuntersuchung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "pferdekrankenversicherung",
+      "schweiz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die gezielte Frage lässt sich mit direkter Antwort und klaren Erläuterungen ohne eine künstliche Vergleichstabelle beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
