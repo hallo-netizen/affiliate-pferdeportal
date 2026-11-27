@@ -29,7 +29,7 @@
         }
       ],
       "claims": [
-        "Der gebundene Helvetia-Vermittler preVet stellt auf seiner PetCare-Formularseite einen Antrag für Hunde und Katzen bereit; ein Pferdeantrag ist dort nicht ausgewiesen.",
+        "Die PetCare-Formularseite des gebundenen Helvetia-Vermittlers preVet führt einen Antrag für Hunde und Katzen; ein Antrag für Pferde ist dort nicht ausgewiesen.",
         "Ein eigener Antrag ist für den Tarif für Jagd- und Arbeitshunde vorgesehen.",
         "Die Uelzener bietet dagegen ausdrücklich Pferde-Krankenschutz für medizinisch notwendige Operationen und Behandlungen an.",
         "Die Basisversicherung für Katzen wird als Absicherung bei Krankheit und Unfall beschrieben; diese Beschreibung betrifft keine Pferde."
@@ -59,7 +59,7 @@
         "source_title": "preVet Helvetia PetCare Antragsformulare",
         "evidence_text": "Der Antrag (Hunde und Katzen)",
         "evidence_text_sha256": "3775258c6118f7e35a46971c4cb4a44da4414c1754a20c7e0795f396b499131f",
-        "statement": "Der gebundene Helvetia-Vermittler preVet stellt auf seiner PetCare-Formularseite einen Antrag für Hunde und Katzen bereit; ein Pferdeantrag ist dort nicht ausgewiesen.",
+        "statement": "Die PetCare-Formularseite des gebundenen Helvetia-Vermittlers preVet führt einen Antrag für Hunde und Katzen; ein Antrag für Pferde ist dort nicht ausgewiesen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
