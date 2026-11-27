@@ -1,0 +1,160 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kostet eine Pferdekrankenversicherung mit Vollschutz?",
+    "target_keyword": "pferdekrankenversicherung vollschutz kosten",
+    "category": "pferdekrankenversicherung-kosten",
+    "article_type": "FAQ",
+    "plan_slot": "e1962b36210ee3c9865979e81dbddd0ad516b48113e1d1ff52fb9d6a7c2785ac"
+  },
+  "content_profile": {
+    "search_intent": "Kosten einer Pferdekrankenversicherung mit Vollschutz und Einfluss des konkreten Leistungsumfangs auf den Beitrag"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/versicherungen-preise/",
+          "source_title": "Uelzener Preisübersicht"
+        },
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+          "source_title": "Uelzener Pferde-Krankenversicherung"
+        }
+      ],
+      "claims": [
+        "Die Uelzener nennt einen monatlichen Einstiegspreis von 288,21 Euro für ihre Pferdekrankenversicherung.",
+        "Das Preisbeispiel basiert auf 15.000 Euro Jahreshöchstleistung und 1.000 Euro Selbstbeteiligung pro Versicherungsjahr.",
+        "Bei Vertragsabschluss kann die Höhe der Erstattung gewählt werden.",
+        "Bei der Uelzener kann eine jährliche Selbstbeteiligung vereinbart oder darauf verzichtet werden."
+      ],
+      "fresh_research_reference_date": "2026-11-27"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung vollschutz kosten",
+      "topic": "Was kostet eine Pferdekrankenversicherung mit Vollschutz?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-kosten",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kostet eine Pferdekrankenversicherung mit Vollschutz?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/versicherungen-preise/",
+        "source_title": "Uelzener Preisübersicht",
+        "evidence_text": "Pferde-Krankenversicherung ab 288,21 €/Monat",
+        "evidence_text_sha256": "917926cb63bed36341c1af36a99d40986048745b179db43c6e36b8a09cc6904d",
+        "statement": "Die Uelzener nennt einen monatlichen Einstiegspreis von 288,21 Euro für ihre Pferdekrankenversicherung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/versicherungen-preise/",
+        "source_title": "Uelzener Preisübersicht",
+        "evidence_text": "Erstattungshöhe 15.000 € pro Versicherungsjahr, 1.000 € Selbstbeteiligung pro Versicherungsjahr",
+        "evidence_text_sha256": "7fcb62b5472eaaf695c62990e1e31a3147da27b3f586000a7c963bfe328c379d",
+        "statement": "Das Preisbeispiel basiert auf 15.000 Euro Jahreshöchstleistung und 1.000 Euro Selbstbeteiligung pro Versicherungsjahr.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "Die Höhe der Erstattung kannst du bei Vertragsabschluss auswählen.",
+        "evidence_text_sha256": "797b42d0a0e222a60f6592b9c0ad15be2a251436544b8d7b570c039b09866605",
+        "statement": "Bei Vertragsabschluss kann die Höhe der Erstattung gewählt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "Ebenso kannst du entscheiden, ob du eine Selbstbeteiligung pro Versicherungsjahr in den Vertrag einschließen möchtest oder nicht.",
+        "evidence_text_sha256": "2c0658304de6350cab4ad2eb582cfecf7f5fa72514403443d67432f3e2b55a53",
+        "statement": "Bei der Uelzener kann eine jährliche Selbstbeteiligung vereinbart oder darauf verzichtet werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-kosten/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-kosten/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-kosten",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "pferdekrankenversicherung",
+      "vollschutz",
+      "kosten"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die gezielte Frage lässt sich mit direkter Antwort und klaren Erläuterungen ohne eine künstliche Vergleichstabelle beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
