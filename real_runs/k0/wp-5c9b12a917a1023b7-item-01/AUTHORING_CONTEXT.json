@@ -1,0 +1,180 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Kosten der wichtigsten Versicherungen für Pferde",
+    "target_keyword": "pferde versicherung kosten",
+    "category": "recht-finanzen-organisation",
+    "article_type": "Beratung",
+    "plan_slot": "52e5de5fa35a7d4e0ab954c8288bf1f6b5e793fdff681c907548d3014e6b269a"
+  },
+  "content_profile": {
+    "search_intent": "Versicherungsbeiträge für Pferde nach Versicherungsart, insbesondere Haftpflicht, Operationsschutz und Krankenversicherung"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/",
+          "source_title": "Allianz Pferdehalter-Haftpflichtversicherung"
+        },
+        {
+          "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+          "source_title": "Allianz Pferde-OP-Versicherung"
+        },
+        {
+          "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
+          "source_title": "Allianz Pferdekrankenversicherung"
+        },
+        {
+          "source_url": "https://uelzener.de/versicherungen-preise/",
+          "source_title": "Uelzener Preise"
+        }
+      ],
+      "claims": [
+        "Die Allianz nennt für die Pferdehalterhaftpflicht im Tarif Smart einen beispielhaften Einstiegspreis von 8,52 Euro.",
+        "Der beworbene monatliche Einstiegspreis für den Allianz-Operationsschutz beträgt 15,23 Euro.",
+        "Die Allianz bewirbt ihre Krankenvollversicherung mit einem monatlichen Ab-Preis von 57,35 Euro.",
+        "Die Uelzener nennt auf ihrer Preisübersicht 288,21 Euro monatlich als Einstiegspreis für ihre Pferde-Krankenversicherung.",
+        "Leistungsumfang und Jahreshöchstentschädigung beeinflussen die Höhe des Beitrags."
+      ],
+      "fresh_research_reference_date": "2026-11-27"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferde versicherung kosten",
+      "topic": "Kosten der wichtigsten Versicherungen für Pferde",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "recht-finanzen-organisation",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Passende Absicherung und Beitragsrahmen für ein Pferd einordnen",
+      "decision_criteria": [
+        "Haftpflichtschutz",
+        "Operationsschutz",
+        "Krankenvollschutz",
+        "Beitrag und Erstattungslimit"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.allianz.de/recht-und-eigentum/pferdehaftpflichtversicherung/",
+        "source_title": "Allianz Pferdehalter-Haftpflichtversicherung",
+        "evidence_text": "Der ursprünglich angezeigte Ab-Preis von 8,52 € bezieht sich auf den Tarif Smart",
+        "evidence_text_sha256": "1e1a3882596fd6a44c7433d94593ab157742bc8d8efc526003ffca88ae464694",
+        "statement": "Die Allianz nennt für die Pferdehalterhaftpflicht im Tarif Smart einen beispielhaften Einstiegspreis von 8,52 Euro.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.allianz.de/gesundheit/op-versicherung-pferd/",
+        "source_title": "Allianz Pferde-OP-Versicherung",
+        "evidence_text": "Bei der Allianz gibt es die OP-Versicherung für Pferde ab 15,23 Euro pro Monat.",
+        "evidence_text_sha256": "6dbd8edd3ac8abd6bb8b91be4ea639b4c71c8e44b15669e5bfdd3b84c70def21",
+        "statement": "Der beworbene monatliche Einstiegspreis für den Allianz-Operationsschutz beträgt 15,23 Euro.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
+        "source_title": "Allianz Pferdekrankenversicherung",
+        "evidence_text": "Für einen umfangreicheren Vollschutz zahlen Sie ab 57,35 Euro pro Monat.",
+        "evidence_text_sha256": "33a1af8f5df1f6761bdddb58df45e5cecf751f58c47db7140d139c195d3151b5",
+        "statement": "Die Allianz bewirbt ihre Krankenvollversicherung mit einem monatlichen Ab-Preis von 57,35 Euro.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://uelzener.de/versicherungen-preise/",
+        "source_title": "Uelzener Preise",
+        "evidence_text": "Pferde-Krankenversicherung ab 288,21 €/Monat",
+        "evidence_text_sha256": "917926cb63bed36341c1af36a99d40986048745b179db43c6e36b8a09cc6904d",
+        "statement": "Die Uelzener nennt auf ihrer Preisübersicht 288,21 Euro monatlich als Einstiegspreis für ihre Pferde-Krankenversicherung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F5": {
+        "source_url": "https://www.allianz.de/gesundheit/pferdekrankenversicherung/",
+        "source_title": "Allianz Pferdekrankenversicherung",
+        "evidence_text": "Je umfangreicher die Leistungen und je höher das jährliche Erstattungslimit ist, desto teurer ist der Krankenschutz für Pferde.",
+        "evidence_text_sha256": "d38ef9837087359dbe50c8500eab2012009860458b9bbea51c998e1710ceacd3",
+        "statement": "Leistungsumfang und Jahreshöchstentschädigung beeinflussen die Höhe des Beitrags.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4",
+      "F5"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/recht-finanzen-organisation/",
+        "anchor": "Recht, Finanzen & Organisation",
+        "block": "criteria"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/recht-finanzen-organisation/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "recht-finanzen-organisation",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Pferd",
+      "Versicherung",
+      "Kosten",
+      "Haftpflicht",
+      "Operationsschutz",
+      "Vollschutz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "INSUFFICIENT_RELATIONAL_DIMENSIONS",
+      "rationale": "Die drei unterschiedlichen Versicherungsarten und nicht vergleichbaren Beispielbeiträge lassen sich in einer klaren Kriterienliste ohne künstliche vierte Zeile sinnvoll erläutern."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
