@@ -16,19 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
-          "source_title": "Uelzener Pferde-Krankenversicherung"
-        },
-        {
           "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
           "source_title": "Agria Pferdekrankenversicherung"
         }
       ],
       "claims": [
-        "Die Uelzener beschreibt medizinisch notwendige ambulante und stationäre tierärztliche Behandlungen als versicherte Leistungen.",
-        "Zu den beschriebenen Leistungen zählen diagnostische Verfahren wie Ultraschall, Röntgen und MRT.",
-        "Agria beschreibt in beiden Tarifen die Erstattung von Tierarztkosten bei Krankheit, Unfall und Verletzung.",
-        "Selbstbeteiligung und Erstattungssatz sind dem jeweiligen Agria-Versicherungsschein zu entnehmen."
+        "Agria beschreibt die Kostenerstattung bei Krankheit, Unfall und Verletzung für beide Pferde-Krankentarife.",
+        "Der Premium-Schutz nennt zusätzlich unter anderem Medikamente, bestimmte Zahnbehandlungen und Rehabilitation.",
+        "Agria beschreibt die Einreichung von Tierarztrechnungen über mehrere digitale Wege.",
+        "Selbstbeteiligung und Erstattungssatz sind dem jeweiligen Agria-Versicherungsschein zu entnehmen.",
+        "Die Agria nennt Vorerkrankungen vor Vertragsabschluss als ausgeschlossene Erkrankungen."
       ],
       "fresh_research_reference_date": "2026-11-27"
     },
@@ -51,22 +48,22 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
-        "source_title": "Uelzener Pferde-Krankenversicherung",
-        "evidence_text": "alle medizinisch notwendigen ambulanten und/oder stationären tierärztlichen Behandlungen",
-        "evidence_text_sha256": "5666f3639017c988f4e6dd577843664cc35578b3496ce3da964d62598b4c37c6",
-        "statement": "Die Uelzener beschreibt medizinisch notwendige ambulante und stationäre tierärztliche Behandlungen als versicherte Leistungen.",
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Beide Tarife erstatten Tierarztkosten bei Krankheit, Unfall und Verletzung.",
+        "evidence_text_sha256": "6cba1b8cec000dcf1cf7bcff59f23d7097432222616f49a2ebbc181485b32bf4",
+        "statement": "Agria beschreibt die Kostenerstattung bei Krankheit, Unfall und Verletzung für beide Pferde-Krankentarife.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
-        "source_title": "Uelzener Pferde-Krankenversicherung",
-        "evidence_text": "diagnostische Verfahren, zum Beispiel Ultraschall, Röntgen und MRT",
-        "evidence_text_sha256": "ee487f4d25a0f62f7f53f9d92ac2bfa6e2755d4021a9001f0fae219904af2287",
-        "statement": "Zu den beschriebenen Leistungen zählen diagnostische Verfahren wie Ultraschall, Röntgen und MRT.",
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Im Premium-Schutz sind außerdem Hufbearbeitung, bestimmte Zahnbehandlungen, Medikamente, Rehabilitation, Notfalltransport, sowie Einschläferung und Einäscherung versichert.",
+        "evidence_text_sha256": "e53f0d21175d45e16d15f99da1d6a9d2ad4eff0196d8b41766abdc31829e3f56",
+        "statement": "Der Premium-Schutz nennt zusätzlich unter anderem Medikamente, bestimmte Zahnbehandlungen und Rehabilitation.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
@@ -75,9 +72,9 @@
       "F3": {
         "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
         "source_title": "Agria Pferdekrankenversicherung",
-        "evidence_text": "Beide Tarife erstatten Tierarztkosten bei Krankheit, Unfall und Verletzung.",
-        "evidence_text_sha256": "6cba1b8cec000dcf1cf7bcff59f23d7097432222616f49a2ebbc181485b32bf4",
-        "statement": "Agria beschreibt in beiden Tarifen die Erstattung von Tierarztkosten bei Krankheit, Unfall und Verletzung.",
+        "evidence_text": "Du reichst die Rechnung einfach online, per Mail, App oder Kundenportal ein.",
+        "evidence_text_sha256": "6deeb3910c6f5c1c20ba123db9fc6a80bae78edda18f5fef441422240a14a02f",
+        "statement": "Agria beschreibt die Einreichung von Tierarztrechnungen über mehrere digitale Wege.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
@@ -93,19 +90,32 @@
         "article_types": [
           "FAQ"
         ]
+      },
+      "F5": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Die Versicherung kommt nicht für Erkrankungen auf, die bereits vor Vertragsabschluss bestanden",
+        "evidence_text_sha256": "2acedd6b028ab5da174e9fe10173866aa6fcdf1c8e5d8a7d506641969f0e54f5",
+        "statement": "Die Agria nennt Vorerkrankungen vor Vertragsabschluss als ausgeschlossene Erkrankungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
       }
     },
     "required_fact_ids": [
       "F1",
       "F2",
       "F3",
-      "F4"
+      "F4",
+      "F5"
     ],
     "allowed_fact_ids": [
       "F1",
       "F2",
       "F3",
-      "F4"
+      "F4",
+      "F5"
     ],
     "bound_links": [
       {
