@@ -1,0 +1,159 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Leistungen umfasst der Vollschutz einer Pferdekrankenversicherung?",
+    "target_keyword": "pferdekrankenversicherung vollschutz",
+    "category": "pferdekrankenversicherung-leistungen",
+    "article_type": "FAQ",
+    "plan_slot": "d55658da66e721b626c0feeac469a8f2bcc02bd1180b628bd24429f23da99b6b"
+  },
+  "content_profile": {
+    "search_intent": "Welche Leistungen und Grenzen eine Pferdekrankenversicherung mit Vollschutz hat"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+          "source_title": "Uelzener Pferde-Krankenversicherung"
+        },
+        {
+          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+          "source_title": "Agria Pferdekrankenversicherung"
+        }
+      ],
+      "claims": [
+        "Die Uelzener beschreibt ihren Krankenschutz als Schutz für notwendige ambulante und stationäre Behandlungen einschließlich Operationen.",
+        "Die Uelzener nennt einen Vorsorgezuschuss von 500 Euro je Versicherungsjahr.",
+        "Agria nennt bei beiden Tarifen die Erstattung von Tierarztkosten bei Krankheit, Unfall und Verletzung.",
+        "Agria nennt im Premium-Schutz zusätzliche Leistungen, darunter Rehabilitation und Notfalltransport."
+      ],
+      "fresh_research_reference_date": "2026-11-27"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung vollschutz",
+      "topic": "Welche Leistungen umfasst der Vollschutz einer Pferdekrankenversicherung?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-leistungen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Leistungen umfasst der Vollschutz einer Pferdekrankenversicherung?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "sämtliche notwendigen ambulanten und stationären Behandlungen abgedeckt – Operationen inklusive",
+        "evidence_text_sha256": "0110673e6b33067d375569121a9d490d010aa2b0e81f3866c32cd1d9522f1700",
+        "statement": "Die Uelzener beschreibt ihren Krankenschutz als Schutz für notwendige ambulante und stationäre Behandlungen einschließlich Operationen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "Vorsorge bezuschussen wir mit 500 € pro Versicherungsjahr",
+        "evidence_text_sha256": "a2cafb6cf26047827c709177e16ad9be0033f780b1b3c5212f0e66988252f7c3",
+        "statement": "Die Uelzener nennt einen Vorsorgezuschuss von 500 Euro je Versicherungsjahr.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Beide Tarife erstatten Tierarztkosten bei Krankheit, Unfall und Verletzung.",
+        "evidence_text_sha256": "6cba1b8cec000dcf1cf7bcff59f23d7097432222616f49a2ebbc181485b32bf4",
+        "statement": "Agria nennt bei beiden Tarifen die Erstattung von Tierarztkosten bei Krankheit, Unfall und Verletzung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Im Premium-Schutz sind außerdem Hufbearbeitung, bestimmte Zahnbehandlungen, Medikamente, Rehabilitation, Notfalltransport, sowie Einschläferung und Einäscherung versichert.",
+        "evidence_text_sha256": "e53f0d21175d45e16d15f99da1d6a9d2ad4eff0196d8b41766abdc31829e3f56",
+        "statement": "Agria nennt im Premium-Schutz zusätzliche Leistungen, darunter Rehabilitation und Notfalltransport.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-leistungen/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-leistungen/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-leistungen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "pferdekrankenversicherung",
+      "vollschutz"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die gezielte Frage lässt sich mit direkter Antwort und klaren Erläuterungen ohne eine künstliche Vergleichstabelle beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
