@@ -78,10 +78,39 @@ function hbdp_article_layout_0193($html) {
 # The original renderer must explicitly apply the existing content filter.
 # Scope to its actual call, not another new global WordPress filter.
 ap=before[article].decode()
-matches=list(re.finditer(r"apply_filters\s*\(\s*(['\"])the_content\1\s*,\s*(?:\$[A-Za-z_]\w*(?:->\w+)?|get_the_content\(\))\s*\)",ap))
-assert len(matches)==1,("Expected one original article content call",len(matches))
-m=matches[0]
-ap=ap[:m.start()]+"hbdp_article_layout_0193("+m.group(0)+")"+ap[m.end():]
+# Read the actual original renderer, then bind the existing expression. PHP
+# permits casts/extra parentheses, so use the balanced expression rather than
+# assume the original content argument is a bare variable.
+print("ORIGINAL ARTICLE RENDERER:\n"+ap)
+matches=list(re.finditer(r"apply_filters\s*\(\s*(['\"])the_content\1\s*,",ap))
+if len(matches)==1:
+    m=matches[0]; opening=ap.index("(",m.start()); depth=0; quote=None; escape=False
+    stop=None
+    for i in range(opening,len(ap)):
+        ch=ap[i]
+        if quote:
+            if escape: escape=False
+            elif ch=="\\": escape=True
+            elif ch==quote: quote=None
+        elif ch in ("'",'"'): quote=ch
+        elif ch=="(": depth+=1
+        elif ch==")":
+            depth-=1
+            if depth==0: stop=i+1; break
+    assert stop is not None
+    ap=ap[:m.start()]+"hbdp_article_layout_0193("+ap[m.start():stop]+")"+ap[stop:]
+else:
+    # Existing renderer may already prepare the content separately. Only
+    # normalize the exact existing reading-body output, never all echo calls.
+    anchors=list(re.finditer(r'hb-article-reading',ap))
+    candidates=[]
+    for a in anchors:
+        fragment=ap[a.end():a.end()+700]
+        match=re.search(r'(?:<\?php\s+echo\s+|<\?=\s*)(\$[a-zA-Z_]\w*)\s*;?\s*\?>',fragment)
+        if match: candidates.append((a.end()+match.start(1),a.end()+match.end(1)))
+    assert len(candidates)==1,("No unique reading body output; review original renderer",len(candidates))
+    a,b=candidates[0]
+    ap=ap[:a]+"hbdp_article_layout_0193("+ap[a:b]+")"+ap[b:]
 assert not ap.rstrip().endswith("?>"),"Review source placement"
 after[article]=(ap+"\n"+php).encode()
 s=before[main].decode()
