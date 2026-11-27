@@ -1,0 +1,141 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Versichert Adcuri Operationen bei Pferden?",
+    "target_keyword": "adcuri pferde-op-versicherung",
+    "category": "pferde-op-versicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "8b4e72c9c10097064defb7ffd13629eb37c784be6821a40c27d377b4dcf0d7af"
+  },
+  "content_profile": {
+    "search_intent": "Ob Adcuri eine Operationsversicherung für Pferde anbietet und welchen Schutz sie gegebenenfalls umfasst"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+          "source_title": "HUK Pferde-OP-Versicherung"
+        }
+      ],
+      "claims": [
+        "Bei diesem Angebot trägt die Barmenia das versicherte Risiko und ist Produktgeberin.",
+        "Die ADCURI GmbH übernimmt nach der HUK-Produktinformation Rechner und Vertragsabwicklung.",
+        "Die Produktseite nennt tarifabhängig bis zu 14 Tage stationäre Nachbehandlung."
+      ],
+      "fresh_research_reference_date": "2026-11-27"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "adcuri pferde-op-versicherung",
+      "topic": "Versichert Adcuri Operationen bei Pferden?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Versichert Adcuri Operationen bei Pferden?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK Pferde-OP-Versicherung",
+        "evidence_text": "Die Barmenia ist Risikoträgerin und Produktgeberin.",
+        "evidence_text_sha256": "845b178a3e18b5b211b6c2a765309d17cb8bc078d4210ed05cc301cce201cafb",
+        "statement": "Bei diesem Angebot trägt die Barmenia das versicherte Risiko und ist Produktgeberin.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK Pferde-OP-Versicherung",
+        "evidence_text": "Der Online-Rechner und die Vertragsabwicklung werden von der ADCURI GmbH",
+        "evidence_text_sha256": "3955be54a922b61c571eb78bc5134ce3b7773caca427b5dfb9f33efd41f0e580",
+        "statement": "Die ADCURI GmbH übernimmt nach der HUK-Produktinformation Rechner und Vertragsabwicklung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.huk.de/haus-haftung-recht/tierversicherung/pferde-op-versicherung.html",
+        "source_title": "HUK Pferde-OP-Versicherung",
+        "evidence_text": "Bis zu 14 Tage stationäre Nachbehandlungszeit",
+        "evidence_text_sha256": "ba0de5fcada26e98c4a545d7d6e47c934cefc0e865230203e85b45b07d1584ad",
+        "statement": "Die Produktseite nennt tarifabhängig bis zu 14 Tage stationäre Nachbehandlung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-faq/",
+        "anchor": "Pferde-OP-Versicherung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "adcuri",
+      "pferde-op-versicherung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die gezielte Frage lässt sich mit direkter Antwort und klaren Erläuterungen ohne eine künstliche Vergleichstabelle beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
