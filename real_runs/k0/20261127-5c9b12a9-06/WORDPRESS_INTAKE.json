@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Versichert R und V Operationen bei Pferden?",
+      "target_keyword": "r und v pferde op versicherung",
+      "category": "pferde-op-versicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "815cabc283768b597af3c0c852d46ad714b81ccee839053e09b1654a6991d3a6"
+    }
+  ],
+  "batch_sha256": "936ddab0a905fd6b1b4d173da527730aa60418261c40aba048262f51178b1e8f"
+}

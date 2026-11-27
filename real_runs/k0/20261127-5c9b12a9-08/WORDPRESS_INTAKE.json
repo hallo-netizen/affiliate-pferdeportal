@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kostet eine Pferdekrankenversicherung mit Vollschutz?",
+      "target_keyword": "pferdekrankenversicherung vollschutz kosten",
+      "category": "pferdekrankenversicherung-kosten",
+      "article_type": "FAQ",
+      "plan_slot": "e1962b36210ee3c9865979e81dbddd0ad516b48113e1d1ff52fb9d6a7c2785ac"
+    }
+  ],
+  "batch_sha256": "4f8ede33ce61375267651362678c335531a3c512d70db0861893b37d8d8252dc"
+}

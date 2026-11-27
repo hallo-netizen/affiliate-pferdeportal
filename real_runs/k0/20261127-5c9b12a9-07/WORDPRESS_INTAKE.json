@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Pferdekrankenversicherungen gibt es in der Schweiz?",
+      "target_keyword": "pferdekrankenversicherung schweiz",
+      "category": "pferdekrankenversicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "e2f63adf450dce75fbff0ea70d74a7c17857ae4f72b9d7ebb2bc3a330961e988"
+    }
+  ],
+  "batch_sha256": "2b4c3785d09774ad5ab578fa6caecc267e1a2a7407fbfcecd4ce66e7f736bcf9"
+}

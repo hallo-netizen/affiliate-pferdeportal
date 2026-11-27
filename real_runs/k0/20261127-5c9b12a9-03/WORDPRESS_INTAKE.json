@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Krankenversicherung und Operationsversicherung für Pferde im Vergleich",
+      "target_keyword": "pferdekrankenversicherung op versicherung",
+      "category": "pferdekrankenversicherung-vergleich",
+      "article_type": "Vergleich",
+      "plan_slot": "5e1fdcc00d3dc18fa36376eafd6dc495af556994829506d190165ddab52fa3ae"
+    }
+  ],
+  "batch_sha256": "ecf2fb40d675909be2010a3b4373b49c67d53ea14dd79cccba16fd89a3ec9826"
+}

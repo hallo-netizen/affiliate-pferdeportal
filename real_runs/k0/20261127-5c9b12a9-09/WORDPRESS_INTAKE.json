@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Leistungen umfasst der Vollschutz einer Pferdekrankenversicherung?",
+      "target_keyword": "pferdekrankenversicherung vollschutz",
+      "category": "pferdekrankenversicherung-leistungen",
+      "article_type": "FAQ",
+      "plan_slot": "d55658da66e721b626c0feeac469a8f2bcc02bd1180b628bd24429f23da99b6b"
+    }
+  ],
+  "batch_sha256": "abea75ad6dac7683661ebc54236356382cb3b932ee16af4534168b6f495951df"
+}

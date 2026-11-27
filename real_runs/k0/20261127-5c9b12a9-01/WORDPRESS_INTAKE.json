@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Kosten der wichtigsten Versicherungen für Pferde",
+      "target_keyword": "pferde versicherung kosten",
+      "category": "recht-finanzen-organisation",
+      "article_type": "Beratung",
+      "plan_slot": "52e5de5fa35a7d4e0ab954c8288bf1f6b5e793fdff681c907548d3014e6b269a"
+    }
+  ],
+  "batch_sha256": "cb2917e19abd1c9ada825c58ac158c3fbe448d1b9d3777901c2299f521975e68"
+}
