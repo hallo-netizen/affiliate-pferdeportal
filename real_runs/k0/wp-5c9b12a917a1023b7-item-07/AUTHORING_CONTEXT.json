@@ -116,8 +116,8 @@
       },
       {
         "role": "further_information",
-        "href": "/wissen/wissen-versicherungen-und-recht/",
-        "anchor": "Versicherungen & Recht",
+        "href": "/category/pferdekrankenversicherung-leistungen/",
+        "anchor": "Leistungen Pferdekrankenversicherung",
         "block": "further_information"
       }
     ],
@@ -127,7 +127,7 @@
         "active": true
       },
       {
-        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "href": "/category/pferdekrankenversicherung-leistungen/",
         "active": true
       }
     ],
@@ -142,8 +142,14 @@
       "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
     },
     "heading_intent_terms": [
-      "pferdekrankenversicherung",
-      "schweiz"
+      "Schweiz",
+      "Pferdekrankenversicherung",
+      "Deckung",
+      "Pferdeversicherung",
+      "Versicherungsschutz",
+      "Tierarztwahl",
+      "Epona",
+      "Pasura"
     ],
     "comparison_source_bindings": [],
     "table_decision": {
