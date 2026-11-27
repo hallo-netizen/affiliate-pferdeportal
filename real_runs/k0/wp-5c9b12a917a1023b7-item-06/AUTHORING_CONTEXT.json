@@ -1,0 +1,141 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Versichert R und V Operationen bei Pferden?",
+    "target_keyword": "r und v pferde op versicherung",
+    "category": "pferde-op-versicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "815cabc283768b597af3c0c852d46ad714b81ccee839053e09b1654a6991d3a6"
+  },
+  "content_profile": {
+    "search_intent": "Ob R und V eine Operationsversicherung für Pferde anbietet und welchen Schutz sie gegebenenfalls umfasst"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.ruv.de/tierversicherung/pferdeversicherung/pferde-op-versicherung",
+          "source_title": "R+V Pferde-OP-Versicherung"
+        }
+      ],
+      "claims": [
+        "Die R+V nennt drei Pferde-OP-Versicherungstarife.",
+        "Bei versicherten Leistungen des Tarifs Exzellent besteht weder pro OP noch pro Jahr eine Höchstentschädigung.",
+        "Für Kolikoperationen nennt die R+V fünf Tage Wartezeit in allen Tarifen."
+      ],
+      "fresh_research_reference_date": "2026-11-27"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "r und v pferde op versicherung",
+      "topic": "Versichert R und V Operationen bei Pferden?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Versichert R und V Operationen bei Pferden?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.ruv.de/tierversicherung/pferdeversicherung/pferde-op-versicherung",
+        "source_title": "R+V Pferde-OP-Versicherung",
+        "evidence_text": "R+V bietet Ihnen drei verschiedene Versicherungstarife",
+        "evidence_text_sha256": "a18d994728acf21d5f247f19cf943aaf0488036a0f859e42c73feb8c13ddcef2",
+        "statement": "Die R+V nennt drei Pferde-OP-Versicherungstarife.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.ruv.de/tierversicherung/pferdeversicherung/pferde-op-versicherung",
+        "source_title": "R+V Pferde-OP-Versicherung",
+        "evidence_text": "Im Tarif Exzellent gibt es hinsichtlich der versicherten Leistungen weder eine Höchstentschädigung je OP noch je Jahr.",
+        "evidence_text_sha256": "602cb779b2186c089a1ba30d3541b4a7fc82120cb62695b59b6855e443afc814",
+        "statement": "Bei versicherten Leistungen des Tarifs Exzellent besteht weder pro OP noch pro Jahr eine Höchstentschädigung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.ruv.de/tierversicherung/pferdeversicherung/pferde-op-versicherung",
+        "source_title": "R+V Pferde-OP-Versicherung",
+        "evidence_text": "Bei Operationen im Zuge einer Kolik gilt in allen R+V-Tarifen eine Wartezeit von fünf Tagen.",
+        "evidence_text_sha256": "00da62475204b89ea42ec9fab702c91fc50cb36986d189ee53bff6df41509f6e",
+        "statement": "Für Kolikoperationen nennt die R+V fünf Tage Wartezeit in allen Tarifen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-faq/",
+        "anchor": "Pferde-OP-Versicherung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "pferde",
+      "versicherung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die gezielte Frage lässt sich mit direkter Antwort und klaren Erläuterungen ohne eine künstliche Vergleichstabelle beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
