@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche ambulanten Tierarztkosten übernimmt eine Pferdekrankenversicherung?",
+      "target_keyword": "pferdekrankenversicherung tierarzt",
+      "category": "pferdekrankenversicherung-leistungen",
+      "article_type": "FAQ",
+      "plan_slot": "3441f8b2395aa1ee521eb432cc11a0cd8cddc0139107d3a7b36060c2631ddff7"
+    }
+  ],
+  "batch_sha256": "b4da58f4d62ef7862add3620483222402f3e80fc275d760b0c00458e6975713e"
+}

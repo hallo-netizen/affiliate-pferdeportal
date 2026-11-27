@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Versichert Adcuri Operationen bei Pferden?",
+      "target_keyword": "adcuri pferde-op-versicherung",
+      "category": "pferde-op-versicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "8b4e72c9c10097064defb7ffd13629eb37c784be6821a40c27d377b4dcf0d7af"
+    }
+  ],
+  "batch_sha256": "47e7905140f9f485e027304cf9874638706411cc93e045df600a3ea2c2afb136"
+}

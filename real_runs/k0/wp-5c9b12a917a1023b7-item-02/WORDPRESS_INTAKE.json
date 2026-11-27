@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Bietet Helvetia eine Krankenversicherung für Pferde an?",
+      "target_keyword": "helvetia pferdekrankenversicherung",
+      "category": "pferdekrankenversicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "cd90d28d700ca72e88e015ed85f4256bf7c54bc71f5fa3feb28221b53ed8ccdd"
+    }
+  ],
+  "batch_sha256": "ac6c8ebce4e99ece8579f4782e281077d9abd6d28f806a38e1f330c058524cff"
+}

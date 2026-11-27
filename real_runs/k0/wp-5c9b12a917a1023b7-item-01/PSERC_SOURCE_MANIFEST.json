@@ -1,0 +1,190 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 9,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Kosten der wichtigsten Versicherungen für Pferde",
+        "target_keyword": "pferde versicherung kosten",
+        "category": "recht-finanzen-organisation",
+        "article_type": "Beratung",
+        "plan_slot": "52e5de5fa35a7d4e0ab954c8288bf1f6b5e793fdff681c907548d3014e6b269a"
+      },
+      {
+        "title": "Bietet Helvetia eine Krankenversicherung für Pferde an?",
+        "target_keyword": "helvetia pferdekrankenversicherung",
+        "category": "pferdekrankenversicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "cd90d28d700ca72e88e015ed85f4256bf7c54bc71f5fa3feb28221b53ed8ccdd"
+      },
+      {
+        "title": "Krankenversicherung und Operationsversicherung für Pferde im Vergleich",
+        "target_keyword": "pferdekrankenversicherung op versicherung",
+        "category": "pferdekrankenversicherung-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "5e1fdcc00d3dc18fa36376eafd6dc495af556994829506d190165ddab52fa3ae"
+      },
+      {
+        "title": "Versichert Adcuri Operationen bei Pferden?",
+        "target_keyword": "adcuri pferde-op-versicherung",
+        "category": "pferde-op-versicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "8b4e72c9c10097064defb7ffd13629eb37c784be6821a40c27d377b4dcf0d7af"
+      },
+      {
+        "title": "Welche ambulanten Tierarztkosten übernimmt eine Pferdekrankenversicherung?",
+        "target_keyword": "pferdekrankenversicherung tierarzt",
+        "category": "pferdekrankenversicherung-leistungen",
+        "article_type": "FAQ",
+        "plan_slot": "3441f8b2395aa1ee521eb432cc11a0cd8cddc0139107d3a7b36060c2631ddff7"
+      },
+      {
+        "title": "Versichert R und V Operationen bei Pferden?",
+        "target_keyword": "r und v pferde op versicherung",
+        "category": "pferde-op-versicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "815cabc283768b597af3c0c852d46ad714b81ccee839053e09b1654a6991d3a6"
+      },
+      {
+        "title": "Welche Pferdekrankenversicherungen gibt es in der Schweiz?",
+        "target_keyword": "pferdekrankenversicherung schweiz",
+        "category": "pferdekrankenversicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "e2f63adf450dce75fbff0ea70d74a7c17857ae4f72b9d7ebb2bc3a330961e988"
+      },
+      {
+        "title": "Was kostet eine Pferdekrankenversicherung mit Vollschutz?",
+        "target_keyword": "pferdekrankenversicherung vollschutz kosten",
+        "category": "pferdekrankenversicherung-kosten",
+        "article_type": "FAQ",
+        "plan_slot": "e1962b36210ee3c9865979e81dbddd0ad516b48113e1d1ff52fb9d6a7c2785ac"
+      },
+      {
+        "title": "Welche Leistungen umfasst der Vollschutz einer Pferdekrankenversicherung?",
+        "target_keyword": "pferdekrankenversicherung vollschutz",
+        "category": "pferdekrankenversicherung-leistungen",
+        "article_type": "FAQ",
+        "plan_slot": "d55658da66e721b626c0feeac469a8f2bcc02bd1180b628bd24429f23da99b6b"
+      }
+    ],
+    "batch_sha256": "5c9b12a917a1023b7b78b2f04bd35a63d9e5397b21b4bebed8b7f7e38654636c"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Kosten der wichtigsten Versicherungen für Pferde",
+        "target_keyword": "pferde versicherung kosten",
+        "category": "recht-finanzen-organisation",
+        "article_type": "Beratung",
+        "plan_slot": "52e5de5fa35a7d4e0ab954c8288bf1f6b5e793fdff681c907548d3014e6b269a"
+      },
+      "order_id": "TXE-b508e47bcfd9bba405c86db5dfbec83c",
+      "article_id": "article:2a8d3ecdf2290192e1dcbfae",
+      "search_intent": "Versicherungsbeiträge für Pferde nach Versicherungsart, insbesondere Haftpflicht, Operationsschutz und Krankenversicherung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Bietet Helvetia eine Krankenversicherung für Pferde an?",
+        "target_keyword": "helvetia pferdekrankenversicherung",
+        "category": "pferdekrankenversicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "cd90d28d700ca72e88e015ed85f4256bf7c54bc71f5fa3feb28221b53ed8ccdd"
+      },
+      "order_id": "TXE-a6a2cf08fceba815b0d939f2a3301b88",
+      "article_id": "article:bd83d02fe6bf38868bcb2e11",
+      "search_intent": "Ob Helvetia eine Krankenversicherung für Pferde anbietet und welche Art von Schutz gegebenenfalls erhältlich ist"
+    },
+    {
+      "metadata_binding": {
+        "title": "Krankenversicherung und Operationsversicherung für Pferde im Vergleich",
+        "target_keyword": "pferdekrankenversicherung op versicherung",
+        "category": "pferdekrankenversicherung-vergleich",
+        "article_type": "Vergleich",
+        "plan_slot": "5e1fdcc00d3dc18fa36376eafd6dc495af556994829506d190165ddab52fa3ae"
+      },
+      "order_id": "TXE-df405da05707920103c19029f568dfea",
+      "article_id": "article:5f519ffaaced5fb31f45335c",
+      "search_intent": "Unterschiede zwischen einer Pferdekrankenversicherung und einer eigenständigen Operationsversicherung"
+    },
+    {
+      "metadata_binding": {
+        "title": "Versichert Adcuri Operationen bei Pferden?",
+        "target_keyword": "adcuri pferde-op-versicherung",
+        "category": "pferde-op-versicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "8b4e72c9c10097064defb7ffd13629eb37c784be6821a40c27d377b4dcf0d7af"
+      },
+      "order_id": "TXE-f39cfde8ecb9542c39d6fa0c4359f8f8",
+      "article_id": "article:4f1912a4bc5bf5953eab0ce4",
+      "search_intent": "Ob Adcuri eine Operationsversicherung für Pferde anbietet und welchen Schutz sie gegebenenfalls umfasst"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche ambulanten Tierarztkosten übernimmt eine Pferdekrankenversicherung?",
+        "target_keyword": "pferdekrankenversicherung tierarzt",
+        "category": "pferdekrankenversicherung-leistungen",
+        "article_type": "FAQ",
+        "plan_slot": "3441f8b2395aa1ee521eb432cc11a0cd8cddc0139107d3a7b36060c2631ddff7"
+      },
+      "order_id": "TXE-b44349753b435bbdc31d7a1cb03f0287",
+      "article_id": "article:0fc20622236c1ed75cf2816b",
+      "search_intent": "Welche ambulanten Tierarztkosten eine Pferdekrankenversicherung übernimmt und welche Grenzen dabei gelten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Versichert R und V Operationen bei Pferden?",
+        "target_keyword": "r und v pferde op versicherung",
+        "category": "pferde-op-versicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "815cabc283768b597af3c0c852d46ad714b81ccee839053e09b1654a6991d3a6"
+      },
+      "order_id": "TXE-25185dcb6808b881cf74adb1b511a7af",
+      "article_id": "article:fcdabf2191488394592be2e4",
+      "search_intent": "Ob R und V eine Operationsversicherung für Pferde anbietet und welchen Schutz sie gegebenenfalls umfasst"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Pferdekrankenversicherungen gibt es in der Schweiz?",
+        "target_keyword": "pferdekrankenversicherung schweiz",
+        "category": "pferdekrankenversicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "e2f63adf450dce75fbff0ea70d74a7c17857ae4f72b9d7ebb2bc3a330961e988"
+      },
+      "order_id": "TXE-61360d9a7e4cdbe446db8bccf7015de8",
+      "article_id": "article:99e496fb63e46b3b37ef7724",
+      "search_intent": "Welche Pferdekrankenversicherungen in der Schweiz verfügbar sind und welche landesspezifischen Bedingungen gelten"
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kostet eine Pferdekrankenversicherung mit Vollschutz?",
+        "target_keyword": "pferdekrankenversicherung vollschutz kosten",
+        "category": "pferdekrankenversicherung-kosten",
+        "article_type": "FAQ",
+        "plan_slot": "e1962b36210ee3c9865979e81dbddd0ad516b48113e1d1ff52fb9d6a7c2785ac"
+      },
+      "order_id": "TXE-e56300e6a1bac6dd25c2436ba6239c69",
+      "article_id": "article:78226eb91e1875b78a7c3aaa",
+      "search_intent": "Kosten einer Pferdekrankenversicherung mit Vollschutz und Einfluss des konkreten Leistungsumfangs auf den Beitrag"
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Leistungen umfasst der Vollschutz einer Pferdekrankenversicherung?",
+        "target_keyword": "pferdekrankenversicherung vollschutz",
+        "category": "pferdekrankenversicherung-leistungen",
+        "article_type": "FAQ",
+        "plan_slot": "d55658da66e721b626c0feeac469a8f2bcc02bd1180b628bd24429f23da99b6b"
+      },
+      "order_id": "TXE-b14d2ec8d1dee7fc5702b84f2bd60994",
+      "article_id": "article:b02ec010199ccd54cd940cd0",
+      "search_intent": "Welche Leistungen und Grenzen eine Pferdekrankenversicherung mit Vollschutz hat"
+    }
+  ],
+  "manifest_sha256": "201c1d7e55a623c3579740879e40e53eafea33e80b9af039b2d2901bef8ebb69"
+}
