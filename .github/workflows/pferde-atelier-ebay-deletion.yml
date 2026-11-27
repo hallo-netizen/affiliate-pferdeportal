@@ -23,11 +23,31 @@ jobs:
           URL='https://pferde-atelier.de/wp-json/affiliate-zentrale/v1/ebay/account-deletion-tick'
           body=$(mktemp)
           trap 'rm -f "$body"' EXIT
+          total=0
+          errors=0
           for n in 1 2 3 4; do
             code=$(curl --silent --show-error --max-time 45 --request POST --header "X-PPAR-Deletion-Key: $DELETION_KEY" --header 'Cache-Control: no-store' --output "$body" --write-out '%{http_code}' "$URL")
             [[ "$code" == 200 ]] || { echo "Message request failed HTTP $code"; exit 1; }
             status=$(jq -er 'select(.contract == "ebay_deletion_tick_v1") | .status | select(. == "pending" or . == "empty" or . == "busy")' "$body")
-            jq -c '{status,attempted,processed,duration_seconds,peak_memory_bytes}' "$body"
+            processed=$(jq -er '.processed | select(type == "number" and . >= 0 and . <= 3 and . == floor)' "$body")
+            attempted=$(jq -er '.attempted | select(type == "number" and . >= 0 and . <= 3 and . == floor)' "$body")
+            [[ "$processed" -le "$attempted" ]] || { echo 'Invalid message counts'; exit 1; }
+            error=$(jq -er '(.error // "") | select(type == "string" and test("^[a-z0-9_-]{0,80}$"))' "$body")
+            total=$((total + processed))
+            jq -c '{status,attempted,processed,error,duration_seconds,peak_memory_bytes}' "$body"
+            if [[ -n "$error" ]]; then errors=$((errors + 1)); fi
             [[ "$status" == pending ]] || break
             [[ "$n" == 4 ]] || sleep 15
           done
+          echo "Processed in this run: $total; responses with errors: $errors; final status: $status"
+          if [[ "$errors" -gt 0 ]]; then
+            echo '::error::Message processing reported an error; affected messages remain pending.'
+            exit 1
+          fi
+          if [[ "$status" == pending && "$total" -eq 0 ]]; then
+            echo '::warning::Pending messages but no progress in this run; automatic retries remain enabled.'
+            exit 1
+          fi
+          if [[ "$status" == busy ]]; then
+            echo '::notice::Message worker already active; next scheduled invocation remains enabled.'
+          fi
