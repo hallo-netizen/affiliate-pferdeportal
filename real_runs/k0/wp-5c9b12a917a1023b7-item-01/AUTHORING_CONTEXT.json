@@ -21,7 +21,7 @@
         }
       ],
       "claims": [
-        "Die Uelzener nennt für ihre Pferdehalterhaftpflicht einen Einstiegspreis von 5,21 Euro monatlich.",
+        "Das veröffentlichte monatliche Preisbeispiel für die Pferdehalter-Haftpflicht der Uelzener beginnt bei 5,21 Euro.",
         "Der beworbene monatliche Einstiegspreis der Uelzener für den Operationsschutz beträgt 46,09 Euro.",
         "Die Uelzener bewirbt ihre Pferdekrankenversicherung ab 288,21 Euro je Monat.",
         "Die genannten Preisbeispiele für OP- und Krankenschutz beruhen auf 15.000 Euro jährlicher Erstattung und 1.000 Euro jährlichem Eigenanteil.",
@@ -58,7 +58,7 @@
         "source_title": "Uelzener Preisinformationen",
         "evidence_text": "Pferdehalter-Haftpflicht ab 5,21 €/Monat",
         "evidence_text_sha256": "bf6003acf68fc8bcb1e289f819a5791f867ac89fcabc57583f71a139df988116",
-        "statement": "Die Uelzener nennt für ihre Pferdehalterhaftpflicht einen Einstiegspreis von 5,21 Euro monatlich.",
+        "statement": "Das veröffentlichte monatliche Preisbeispiel für die Pferdehalter-Haftpflicht der Uelzener beginnt bei 5,21 Euro.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
