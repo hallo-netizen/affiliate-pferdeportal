@@ -129,16 +129,27 @@
         "href": "/category/recht-finanzen-organisation/",
         "anchor": "Recht, Finanzen & Organisation",
         "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
       }
     ],
     "link_registry": [
       {
         "href": "/category/recht-finanzen-organisation/",
         "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
       }
     ],
     "runtime_link_roles": [
-      "parent_category"
+      "parent_category",
+      "further_information"
     ],
     "wordpress_category": {
       "id": 0,
