@@ -62,6 +62,7 @@ K0_OWN_PORTAL_SOURCE_HOSTS = frozenset({
 # cloud bucket; never allow the whole shared hosting provider.
 K0_OFFICIAL_HOSTED_PATHS = {
     'storage.googleapis.com': ('/worldhorsewelfare-cloud/',),
+    'www.prevet.de': ('/info/formulare/', '/hunde/tarif-basis/', '/katzen/tarif-basis', '/wp-content/uploads/TK-AVB-2103.pdf'),  # Official bound Helvetia representative preVet OHG, IHK register D-ZMBR-EGHZJ-49; only original product/form documents
 }
 K0_GOVERNMENT_HOST_SUFFIXES = (
     '.gov', '.gov.uk', '.bund.de', '.europa.eu', '.gouv.fr',
