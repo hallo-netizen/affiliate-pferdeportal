@@ -16,8 +16,8 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.helvetia.de/de/privatkunden/tierkrankenversicherung.html",
-          "source_title": "Helvetia Tierkrankenversicherung"
+          "source_url": "https://www.helvetia.com/de/web/de/privatkunden/versicherungen/tiere/faq-tierkrankenversicherung.c-tierkrankenversicherung.html",
+          "source_title": "Helvetia FAQ Tierkrankenversicherung"
         },
         {
           "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
@@ -25,9 +25,10 @@
         }
       ],
       "claims": [
-        "Die veröffentlichte Tierkranken- und OP-Versicherung der Helvetia Deutschland richtet sich an Hunde und Katzen; Pferde sind dort nicht genannt.",
-        "Die veröffentlichte Produktübersicht unterscheidet Krankenschutz als Schutz bei Erkrankungen.",
-        "Die Uelzener bietet dagegen ausdrücklich Pferde-Krankenschutz für medizinisch notwendige Operationen und Behandlungen an."
+        "Die öffentlich zugänglichen deutschen Helvetia-Fragen zur Tierkrankenversicherung behandeln Hunde- und Katzenkrankenversicherungen; eine Pferdekrankenversicherung ist dort nicht genannt.",
+        "Die auf dieser Seite beschriebene Krankenversicherung ist ausdrücklich auf Hunde bezogen.",
+        "Die Uelzener bietet dagegen ausdrücklich Pferde-Krankenschutz für medizinisch notwendige Operationen und Behandlungen an.",
+        "Auch die Katzenkrankenversicherung ist ein ausdrücklich tierartspezifisches Angebot."
       ],
       "fresh_research_reference_date": "2026-11-27"
     },
@@ -50,22 +51,22 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.helvetia.de/de/privatkunden/tierkrankenversicherung.html",
-        "source_title": "Helvetia Tierkrankenversicherung",
-        "evidence_text": "Unsere Tierkranken- und OP-Versicherung für Hunde und Katzen",
-        "evidence_text_sha256": "90e9fedfc33a397bc654a6359fc85560382ca42c8581b7fc9dfbc98d2d2ff5be",
-        "statement": "Die veröffentlichte Tierkranken- und OP-Versicherung der Helvetia Deutschland richtet sich an Hunde und Katzen; Pferde sind dort nicht genannt.",
+        "source_url": "https://www.helvetia.com/de/web/de/privatkunden/versicherungen/tiere/faq-tierkrankenversicherung.c-tierkrankenversicherung.html",
+        "source_title": "Helvetia FAQ Tierkrankenversicherung",
+        "evidence_text": "zum Thema Hundekrankenversicherung und Katzenkrankenversicherung",
+        "evidence_text_sha256": "fc1252a312060f10e0f1b6c4939990749954dea524c0ff802c8ba28d0c78cfe7",
+        "statement": "Die öffentlich zugänglichen deutschen Helvetia-Fragen zur Tierkrankenversicherung behandeln Hunde- und Katzenkrankenversicherungen; eine Pferdekrankenversicherung ist dort nicht genannt.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.helvetia.de/de/privatkunden/tierkrankenversicherung.html",
-        "source_title": "Helvetia Tierkrankenversicherung",
-        "evidence_text": "Kostenschutz für Behandlungen Ihres Haustiers bei Erkrankung.",
-        "evidence_text_sha256": "a3981e525789aabfc08721ee3a96bd40e4a8ac77dcbf6769ef1643704a8f6084",
-        "statement": "Die veröffentlichte Produktübersicht unterscheidet Krankenschutz als Schutz bei Erkrankungen.",
+        "source_url": "https://www.helvetia.com/de/web/de/privatkunden/versicherungen/tiere/faq-tierkrankenversicherung.c-tierkrankenversicherung.html",
+        "source_title": "Helvetia FAQ Tierkrankenversicherung",
+        "evidence_text": "Die Krankenversicherung für Ihren Hund deckt mit ihren Leistungen anfallende Kosten",
+        "evidence_text_sha256": "cd032ac78cbd5bac7ea85d5b4d2e6a908f2a3e28d4a8815f74547804cf2485a8",
+        "statement": "Die auf dieser Seite beschriebene Krankenversicherung ist ausdrücklich auf Hunde bezogen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
@@ -81,17 +82,30 @@
         "article_types": [
           "FAQ"
         ]
+      },
+      "F4": {
+        "source_url": "https://www.helvetia.com/de/web/de/privatkunden/versicherungen/tiere/faq-tierkrankenversicherung.c-tierkrankenversicherung.html",
+        "source_title": "Helvetia FAQ Tierkrankenversicherung",
+        "evidence_text": "Die Helvetia PetCare Katzenkrankenversicherung übernimmt die Kosten für die Kastration einer Katze",
+        "evidence_text_sha256": "4ea156eb09104978ea1c32513964e0ac9a56f4fa09f097aea203a74fe65e413e",
+        "statement": "Auch die Katzenkrankenversicherung ist ein ausdrücklich tierartspezifisches Angebot.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
       }
     },
     "required_fact_ids": [
       "F1",
       "F2",
-      "F3"
+      "F3",
+      "F4"
     ],
     "allowed_fact_ids": [
       "F1",
       "F2",
-      "F3"
+      "F3",
+      "F4"
     ],
     "bound_links": [
       {
