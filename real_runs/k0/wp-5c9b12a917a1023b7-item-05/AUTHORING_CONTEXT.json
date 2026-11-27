@@ -1,0 +1,159 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche ambulanten Tierarztkosten übernimmt eine Pferdekrankenversicherung?",
+    "target_keyword": "pferdekrankenversicherung tierarzt",
+    "category": "pferdekrankenversicherung-leistungen",
+    "article_type": "FAQ",
+    "plan_slot": "3441f8b2395aa1ee521eb432cc11a0cd8cddc0139107d3a7b36060c2631ddff7"
+  },
+  "content_profile": {
+    "search_intent": "Welche ambulanten Tierarztkosten eine Pferdekrankenversicherung übernimmt und welche Grenzen dabei gelten"
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+          "source_title": "Uelzener Pferde-Krankenversicherung"
+        },
+        {
+          "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+          "source_title": "Agria Pferdekrankenversicherung"
+        }
+      ],
+      "claims": [
+        "Die Uelzener beschreibt medizinisch notwendige ambulante und stationäre tierärztliche Behandlungen als versicherte Leistungen.",
+        "Zu den beschriebenen Leistungen zählen diagnostische Verfahren wie Ultraschall, Röntgen und MRT.",
+        "Agria beschreibt in beiden Tarifen die Erstattung von Tierarztkosten bei Krankheit, Unfall und Verletzung.",
+        "Selbstbeteiligung und Erstattungssatz sind dem jeweiligen Agria-Versicherungsschein zu entnehmen."
+      ],
+      "fresh_research_reference_date": "2026-11-27"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "pferdekrankenversicherung tierarzt",
+      "topic": "Welche ambulanten Tierarztkosten übernimmt eine Pferdekrankenversicherung?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdekrankenversicherung-leistungen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche ambulanten Tierarztkosten übernimmt eine Pferdekrankenversicherung?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "alle medizinisch notwendigen ambulanten und/oder stationären tierärztlichen Behandlungen",
+        "evidence_text_sha256": "5666f3639017c988f4e6dd577843664cc35578b3496ce3da964d62598b4c37c6",
+        "statement": "Die Uelzener beschreibt medizinisch notwendige ambulante und stationäre tierärztliche Behandlungen als versicherte Leistungen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://uelzener.de/pferd/pferde-krankenversicherung/",
+        "source_title": "Uelzener Pferde-Krankenversicherung",
+        "evidence_text": "diagnostische Verfahren, zum Beispiel Ultraschall, Röntgen und MRT",
+        "evidence_text_sha256": "ee487f4d25a0f62f7f53f9d92ac2bfa6e2755d4021a9001f0fae219904af2287",
+        "statement": "Zu den beschriebenen Leistungen zählen diagnostische Verfahren wie Ultraschall, Röntgen und MRT.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Beide Tarife erstatten Tierarztkosten bei Krankheit, Unfall und Verletzung.",
+        "evidence_text_sha256": "6cba1b8cec000dcf1cf7bcff59f23d7097432222616f49a2ebbc181485b32bf4",
+        "statement": "Agria beschreibt in beiden Tarifen die Erstattung von Tierarztkosten bei Krankheit, Unfall und Verletzung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.agriatierversicherung.de/pferdeversicherung/krankenversicherung/",
+        "source_title": "Agria Pferdekrankenversicherung",
+        "evidence_text": "Die Höhe der Selbstbeteiligung und der Erstattungssatz stehen im Versicherungsschein.",
+        "evidence_text_sha256": "39182fe8ed5565d84a3c143b8de92bdcaac0f240f2749bb644692a5115f65198",
+        "statement": "Selbstbeteiligung und Erstattungssatz sind dem jeweiligen Agria-Versicherungsschein zu entnehmen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdekrankenversicherung-leistungen/",
+        "anchor": "Pferdekrankenversicherung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "anchor": "Versicherungen & Recht",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdekrankenversicherung-leistungen/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdekrankenversicherung-leistungen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "pferdekrankenversicherung",
+      "tierarzt"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die gezielte Frage lässt sich mit direkter Antwort und klaren Erläuterungen ohne eine künstliche Vergleichstabelle beantworten."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
