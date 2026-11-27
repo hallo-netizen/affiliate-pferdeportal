@@ -48,6 +48,10 @@ K0_OFFICIAL_SOURCE_HOSTS = frozenset({
     'agriatierversicherung.de',# Verified Agria official equine insurance producer (2026-11-26)
     'hagel.at',                # Verified Österreichische Hagelversicherung official original equine insurer (2026-11-26)
     'test.de',                 # Verified official Stiftung Warentest original publisher (2026-11-26)
+    'helvetia.de',            # Official Helvetia Germany, legal notice verified 2026-11-27
+    'ruv.de',                 # Official R+V insurer, legal notice verified 2026-11-27
+    'epona.ch',               # Official Epona Swiss insurer, corporate publisher verified 2026-11-27
+    'pasura.ch',              # Official Pasura Buendner Pferdeversicherung, legal notice verified 2026-11-27
     'check24.de',              # Verified first-party CHECK24 horse-OP comparison and animal insurance 2026-11-26
 })
 K0_OWN_PORTAL_SOURCE_HOSTS = frozenset({
