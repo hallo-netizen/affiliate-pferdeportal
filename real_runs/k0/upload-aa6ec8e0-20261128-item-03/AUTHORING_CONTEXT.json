@@ -1,0 +1,144 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Welche Hindernisse gehören zum Extreme Trail für Pferde?",
+    "target_keyword": "extreme trail pferd hindernisse",
+    "category": "trail-hindernisse-faq",
+    "article_type": "FAQ",
+    "plan_slot": "e8b1c1f75c10dd82f11b1304197270a70bd610177ef1ab527111bfc162588f20"
+  },
+  "content_profile": {
+    "search_intent": "Welche typischen Hindernisse speziell zum Extreme Trail für Pferde gehören."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.eeta.ch/about-extreme-trail/",
+          "source_title": "EETA Sektion Schweiz"
+        }
+      ],
+      "claims": [
+        "Extreme-Trail-Anlagen bilden natürliche Geländeaufgaben wie Stämme, Felsen und Stufen nach.",
+        "Zu den künstlichen Hindernissen gehören unter anderem Wippen und Dachkonstruktionen.",
+        "Die Disziplin legt Wert auf ruhiges, kontrolliertes und sicheres Überwinden der Hindernisse."
+      ],
+      "fresh_research_reference_date": "2026-11-28"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "extreme trail pferd hindernisse",
+      "topic": "Welche Hindernisse gehören zum Extreme Trail für Pferde?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trail-hindernisse-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Welche Hindernisse gehören zum Extreme Trail für Pferde?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.eeta.ch/about-extreme-trail/",
+        "source_title": "EETA Sektion Schweiz",
+        "evidence_text": "Massive Baumstämme, Felsen, steile Stein- und Holzstufen",
+        "evidence_text_sha256": "4e7408215d3f319ee94c667218d56c0a9028765853cee31c561801ea4763a010",
+        "statement": "Extreme-Trail-Anlagen bilden natürliche Geländeaufgaben wie Stämme, Felsen und Stufen nach.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.eeta.ch/about-extreme-trail/",
+        "source_title": "EETA Sektion Schweiz",
+        "evidence_text": "Wippe oder Dach",
+        "evidence_text_sha256": "6675c19430216fc0cf6a110df59792a04dd9a2c83c90276de7ab5b9fc9b8a2c0",
+        "statement": "Zu den künstlichen Hindernissen gehören unter anderem Wippen und Dachkonstruktionen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.eeta.ch/about-extreme-trail/",
+        "source_title": "EETA Sektion Schweiz",
+        "evidence_text": "sicher, ruhig, entspannt",
+        "evidence_text_sha256": "f86cf356525e098bff59f0a90e2271f68cf2b2ae82ba0001e8f1f0a8582cf8c6",
+        "statement": "Die Disziplin legt Wert auf ruhiges, kontrolliertes und sicheres Überwinden der Hindernisse.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trail-hindernisse-faq/",
+        "anchor": "FAQ Trail-Hindernisse",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-bodenhindernisse/trail-hindernisse/",
+        "anchor": "Trail-Hindernisse",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trail-hindernisse-faq/",
+        "active": true
+      },
+      {
+        "href": "/training/training-bodenhindernisse/trail-hindernisse/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trail-hindernisse-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Extreme Trail",
+      "Hindernisse",
+      "Gelände",
+      "Brücke",
+      "Wippe"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die typischen natürlichen und gebauten Hindernisse können in einer kompakten Liste unmittelbar benannt und erläutert werden."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
