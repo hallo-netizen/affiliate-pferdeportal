@@ -20,10 +20,6 @@
           "source_title": "Waldhausen Stangenauflagen"
         },
         {
-          "source_url": "https://de.wikipedia.org/wiki/Hindernis_(Pferdesport)",
-          "source_title": "Wikipedia Hindernis im Pferdesport"
-        },
-        {
           "source_url": "https://www.waldhausen.com/xl-pylone-8er-set-inkl.-tragetasche-hoehe-50-cm/15051/",
           "source_title": "Waldhausen XL-Pylonen"
         },
@@ -34,7 +30,7 @@
       ],
       "claims": [
         "Passende Auflagen erlauben die Kombination von dafür vorgesehenen Pylonen mit Trainingsstangen.",
-        "Standfeste, solide Hindernisse sind im Pferdesport ein wichtiges Auswahlmerkmal.",
+        "Kunststoffhindernisse können bei starkem Wind verweht werden; der Einsatzort muss berücksichtigt werden.",
         "Sets mit mehreren stabilen Pylonen erlauben den Aufbau verschiedener markierter Trainingswege.",
         "Ein Aufbau sollte ruhige, kontrollierte und mittige Passage ermöglichen."
       ],
@@ -76,11 +72,11 @@
         ]
       },
       "F2": {
-        "source_url": "https://de.wikipedia.org/wiki/Hindernis_(Pferdesport)",
-        "source_title": "Wikipedia Hindernis im Pferdesport",
-        "evidence_text": "Meistens werden schwere, standfest und solide Hindernisse bevorzugt.",
-        "evidence_text_sha256": "2b22e0d12ee89e7bbd1c0464ef734a0c5fa44e72b1a887d96a1a08c09c1a5dfe",
-        "statement": "Standfeste, solide Hindernisse sind im Pferdesport ein wichtiges Auswahlmerkmal.",
+        "source_url": "https://www.waldhausen.com/xl-pylone-8er-set-inkl.-tragetasche-hoehe-50-cm/15051/",
+        "source_title": "Waldhausen XL-Pylonen",
+        "evidence_text": "Kunststoffprodukte können bei starkem Wind verweht werden.",
+        "evidence_text_sha256": "c24f16c59a8f38401117d5597e01701e4e56e6b907047c71dc1e3245a67df377",
+        "statement": "Kunststoffhindernisse können bei starkem Wind verweht werden; der Einsatzort muss berücksichtigt werden.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
