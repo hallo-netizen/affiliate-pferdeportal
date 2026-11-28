@@ -82,7 +82,8 @@ class MiniOneFileGate(unittest.TestCase):
             ('WORDPRESS_REGAL:missing', False),
             ('WORDPRESS:post:123456', False),
             ('WORDPRESS: 123456', False),
-            ('WORDPRESS:123456 ', False),
+            ('WORDPRESS:123456 ', True),
+            (' WORDPRESS:123456', True),
         ]
         for ref, accepted in samples:
             with self.subTest(reference=ref):
