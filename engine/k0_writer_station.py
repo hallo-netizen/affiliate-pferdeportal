@@ -18,6 +18,10 @@ AUTHORING_CONTEXT_CONTRACT='K0_AUTHORING_CONTEXT_V1'
 # Official institutions/providers are intentionally curated, never inferred
 # from arbitrary self-declared source labels, domains ending in .org, or blogs.
 K0_OFFICIAL_SOURCE_HOSTS = frozenset({
+    'ghv-versicherung.de',    # Official GHV insurer, legal notice verified 2026-11-28
+    'eeta.ch',                # Official Swiss section of European Extreme Trail Association, legal notice verified 2026-11-28
+    'uzh.ch',                 # Official University of Zurich and university veterinary hospital, verified 2026-11-28
+    'marstall.de',            # Official feed manufacturer, legal notice verified 2026-11-28
     'horseware.com',             # official manufacturer
     'equiva.com',               # verified official equestrian retailer and own-brand source
     'simprax.com',              # verified official manufacturer of blanket impregnation
