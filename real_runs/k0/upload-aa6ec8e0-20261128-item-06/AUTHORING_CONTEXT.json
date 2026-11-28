@@ -1,0 +1,168 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Getreidefreies Seniorenfutter für Pferde",
+    "target_keyword": "senior futter pferd getreidefrei",
+    "category": "gesundheit-senioren-seniorenfutter-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "1b1b37fba0a4c93727a725a9d171ff3eee08c3e76b4c156d3425a3ae88709c85"
+  },
+  "content_profile": {
+    "search_intent": "Getreidefreies Seniorenfutter für Pferde nach Zusammensetzung, Bedarf und altersgerechter Fütterung auswählen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.marstall.de/senior-aktiv",
+          "source_title": "marstall Senior-Aktiv"
+        },
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+          "source_title": "University of Minnesota Extension"
+        }
+      ],
+      "claims": [
+        "Getreidefreie Aufbaumüslis für ältere Pferde sind erhältlich.",
+        "Einige Seniorenergänzungsfutter lassen sich bei Zahnproblemen eingeweicht anbieten.",
+        "Auch ein getreidefreies Futter kann messbare Mengen an Stärke und Zucker enthalten.",
+        "Die Gesamtration älterer Pferde muss eine ausreichende Versorgung mit Vitaminen und Mineralstoffen sicherstellen."
+      ],
+      "fresh_research_reference_date": "2026-11-28"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "senior futter pferd getreidefrei",
+      "topic": "Getreidefreies Seniorenfutter für Pferde",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "gesundheit-senioren-seniorenfutter-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Getreidefreies Ergänzungsfutter nach individuellem Bedarf auswählen",
+      "decision_criteria": [
+        "Körperzustand",
+        "Zusammensetzung",
+        "Kautauglichkeit",
+        "Gesamtration"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.marstall.de/senior-aktiv",
+        "source_title": "marstall Senior-Aktiv",
+        "evidence_text": "getreidefreies Aufbau-Müsli",
+        "evidence_text_sha256": "ba69cb80faecad90e2c024945d99638264431629ccb8486e489c553af4c211d6",
+        "statement": "Getreidefreie Aufbaumüslis für ältere Pferde sind erhältlich.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.marstall.de/senior-aktiv",
+        "source_title": "marstall Senior-Aktiv",
+        "evidence_text": "auch eingeweicht verfüttert werden",
+        "evidence_text_sha256": "94feec879932dd4fc01d51de872362fdd4ba35b2909b03f05027002a3f01b7cf",
+        "statement": "Einige Seniorenergänzungsfutter lassen sich bei Zahnproblemen eingeweicht anbieten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.marstall.de/senior-aktiv",
+        "source_title": "marstall Senior-Aktiv",
+        "evidence_text": "Stärke 4,20 % Zucker 6,80 %",
+        "evidence_text_sha256": "bfd1aecd9057ef49110885227dcc8c58b56937cbf37585ae69dbceefe3c4bece",
+        "statement": "Auch ein getreidefreies Futter kann messbare Mengen an Stärke und Zucker enthalten.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "source_title": "University of Minnesota Extension",
+        "evidence_text": "enough vitamins and minerals",
+        "evidence_text_sha256": "df51fe4bbe95d8f356a31b041e961cfb74161787f5fd123edf2431f9a18a7bca",
+        "statement": "Die Gesamtration älterer Pferde muss eine ausreichende Versorgung mit Vitaminen und Mineralstoffen sicherstellen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/gesundheit-senioren-seniorenfutter-beratung/",
+        "anchor": "Beratung Seniorenfutter",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/fuetterung/fuetterung-spezialfutter/gesundheit-senioren-seniorenfutter/",
+        "anchor": "Seniorenfutter",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/gesundheit-senioren-seniorenfutter-beratung/",
+        "active": true
+      },
+      {
+        "href": "/fuetterung/fuetterung-spezialfutter/gesundheit-senioren-seniorenfutter/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "gesundheit-senioren-seniorenfutter-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Seniorenfutter",
+      "getreidefrei",
+      "Pferd",
+      "Zähne",
+      "Fütterung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die individuelle Ration hängt von Körperzustand und Kauvermögen ab; ein tabellarischer Produktvergleich ist nicht nötig."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
