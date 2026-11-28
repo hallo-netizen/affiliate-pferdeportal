@@ -1,0 +1,22 @@
+{
+  "contract": "K0_RESEARCH_RETURN_V1",
+  "status": "REPAIR_REQUIRED",
+  "owner": "SAME_RESEARCH_OWNER",
+  "identity": {
+    "title": "Trailhindernisse für Pferde und ihre Einsatzmöglichkeiten",
+    "target_keyword": "pferde trail hindernisse",
+    "category": "trail-hindernisse-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "4a62acd0575a70e7bb564819a5d0142b6c40e2595559da0693746a1715ab6d07"
+  },
+  "run_instance_id": "run:7902dc55b5ec980a74be2b9b",
+  "return_to": "AUTHORING_CONTEXT.json",
+  "issues": [
+    {
+      "fact_id": "F3",
+      "reason": "ORIGINAL_SOURCE_NOT_RETRIEVABLE"
+    }
+  ],
+  "next_action": "RESEARCH_AGAIN_OR_PROVE_ORIGINAL_SOURCE_AND_RESUBMIT_SAME_RUN",
+  "publish_allowed": false
+}
