@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Was kann man bei einem Pferd mit EOTRH tun?",
+      "target_keyword": "Was kann man bei einem Pferd mit EOTRH tun?",
+      "category": "pferdegesundheit-verstehen",
+      "article_type": "FAQ",
+      "plan_slot": "99f7297bb6a4dbf8ef884a69c522b37e03364296938110938916cbdbde466928"
+    }
+  ],
+  "batch_sha256": "276ffd0ca7ab9fc0b05dad3dd50633fb6c577531115678244c690d75f63ff386"
+}

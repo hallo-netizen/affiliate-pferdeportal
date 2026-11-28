@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Welche Hindernisse gehören zum Extreme Trail für Pferde?",
+      "target_keyword": "extreme trail pferd hindernisse",
+      "category": "trail-hindernisse-faq",
+      "article_type": "FAQ",
+      "plan_slot": "e8b1c1f75c10dd82f11b1304197270a70bd610177ef1ab527111bfc162588f20"
+    }
+  ],
+  "batch_sha256": "eb88581481d83cba00bccb062375f6dff545d96b8f76261a7ffa9a4f637ac442"
+}

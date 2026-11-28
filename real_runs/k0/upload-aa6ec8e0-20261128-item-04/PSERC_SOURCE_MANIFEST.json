@@ -1,0 +1,133 @@
+{
+  "contract": "WP_K0_SOURCE_RECEIPT_V1",
+  "source": "CENTRAL_WORDPRESS_ORDER_REGISTRY",
+  "site_host": "pferde-atelier.de",
+  "publish_allowed": false,
+  "next_textmachine_metadata_batch": {
+    "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+    "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+    "item_count": 6,
+    "publish_allowed": false,
+    "content_or_format_payload_present": false,
+    "items": [
+      {
+        "title": "Bietet die GHV eine Pferde OP Versicherung an?",
+        "target_keyword": "ghv pferde op-versicherung",
+        "category": "pferde-op-versicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "9b34e23041be10e398fafbf9af918acc229ab2bb8df079a9399fb563414d3df5"
+      },
+      {
+        "title": "Trailhindernisse für Pferde und ihre Einsatzmöglichkeiten",
+        "target_keyword": "pferde trail hindernisse",
+        "category": "trail-hindernisse-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "4a62acd0575a70e7bb564819a5d0142b6c40e2595559da0693746a1715ab6d07"
+      },
+      {
+        "title": "Welche Hindernisse gehören zum Extreme Trail für Pferde?",
+        "target_keyword": "extreme trail pferd hindernisse",
+        "category": "trail-hindernisse-faq",
+        "article_type": "FAQ",
+        "plan_slot": "e8b1c1f75c10dd82f11b1304197270a70bd610177ef1ab527111bfc162588f20"
+      },
+      {
+        "title": "Trailhindernisse für Pferde kaufen und auf Sicherheit achten",
+        "target_keyword": "trail hindernisse für pferde kaufen",
+        "category": "trail-hindernisse-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8ce01c3f607357501f87584e487cacdf28299ae2f0020fe46d8c0b8fe544f456"
+      },
+      {
+        "title": "Was kann man bei einem Pferd mit EOTRH tun?",
+        "target_keyword": "Was kann man bei einem Pferd mit EOTRH tun?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "99f7297bb6a4dbf8ef884a69c522b37e03364296938110938916cbdbde466928"
+      },
+      {
+        "title": "Getreidefreies Seniorenfutter für Pferde",
+        "target_keyword": "senior futter pferd getreidefrei",
+        "category": "gesundheit-senioren-seniorenfutter-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1b1b37fba0a4c93727a725a9d171ff3eee08c3e76b4c156d3425a3ae88709c85"
+      }
+    ],
+    "batch_sha256": "3fbc274403aaa151491bea8aa02d4d337d4e2485c9b6a8669adc78edb0144a28"
+  },
+  "items": [
+    {
+      "metadata_binding": {
+        "title": "Bietet die GHV eine Pferde OP Versicherung an?",
+        "target_keyword": "ghv pferde op-versicherung",
+        "category": "pferde-op-versicherung-faq",
+        "article_type": "FAQ",
+        "plan_slot": "9b34e23041be10e398fafbf9af918acc229ab2bb8df079a9399fb563414d3df5"
+      },
+      "order_id": "TXE-8b41e88fac4b709981dcdce58096fe8e",
+      "article_id": "article:e730c7b82fa4593885a9fc48",
+      "search_intent": "Ob die GHV eine Pferdeoperationsversicherung anbietet und welcher Schutz gegebenenfalls besteht."
+    },
+    {
+      "metadata_binding": {
+        "title": "Trailhindernisse für Pferde und ihre Einsatzmöglichkeiten",
+        "target_keyword": "pferde trail hindernisse",
+        "category": "trail-hindernisse-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "4a62acd0575a70e7bb564819a5d0142b6c40e2595559da0693746a1715ab6d07"
+      },
+      "order_id": "TXE-8c539a74fd03e17ce3c73ee12f24549a",
+      "article_id": "article:e4d852a75b271c1eea1f31e9",
+      "search_intent": "Arten von Trailhindernissen für Pferde und ihre jeweiligen Einsatzmöglichkeiten im Training erläutern."
+    },
+    {
+      "metadata_binding": {
+        "title": "Welche Hindernisse gehören zum Extreme Trail für Pferde?",
+        "target_keyword": "extreme trail pferd hindernisse",
+        "category": "trail-hindernisse-faq",
+        "article_type": "FAQ",
+        "plan_slot": "e8b1c1f75c10dd82f11b1304197270a70bd610177ef1ab527111bfc162588f20"
+      },
+      "order_id": "TXE-2d76a64bc32e5292ef00878f80108063",
+      "article_id": "article:58fb4d9a26f6626a03fe9639",
+      "search_intent": "Welche typischen Hindernisse speziell zum Extreme Trail für Pferde gehören."
+    },
+    {
+      "metadata_binding": {
+        "title": "Trailhindernisse für Pferde kaufen und auf Sicherheit achten",
+        "target_keyword": "trail hindernisse für pferde kaufen",
+        "category": "trail-hindernisse-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "8ce01c3f607357501f87584e487cacdf28299ae2f0020fe46d8c0b8fe544f456"
+      },
+      "order_id": "TXE-8f7c060927981f0645faddd3ec7cdb2b",
+      "article_id": "article:839dc20d51f41bea13e7ad29",
+      "search_intent": "Kaufberatung für Trailhindernisse für Pferde mit Auswahlkriterien für geeignete, sichere und haltbare Produkte."
+    },
+    {
+      "metadata_binding": {
+        "title": "Was kann man bei einem Pferd mit EOTRH tun?",
+        "target_keyword": "Was kann man bei einem Pferd mit EOTRH tun?",
+        "category": "pferdegesundheit-verstehen",
+        "article_type": "FAQ",
+        "plan_slot": "99f7297bb6a4dbf8ef884a69c522b37e03364296938110938916cbdbde466928"
+      },
+      "order_id": "TXE-2cbfacf0e8fc93b2c5f85ca4531690a2",
+      "article_id": "article:ba39d1b0021d13681134e0d7",
+      "search_intent": "Welche tierärztlich abzuklärenden Behandlungsmöglichkeiten und unterstützenden Maßnahmen bei einem Pferd mit EOTRH bestehen."
+    },
+    {
+      "metadata_binding": {
+        "title": "Getreidefreies Seniorenfutter für Pferde",
+        "target_keyword": "senior futter pferd getreidefrei",
+        "category": "gesundheit-senioren-seniorenfutter-beratung",
+        "article_type": "Beratung",
+        "plan_slot": "1b1b37fba0a4c93727a725a9d171ff3eee08c3e76b4c156d3425a3ae88709c85"
+      },
+      "order_id": "TXE-87a2cbe51b544fc5ce4bbbae1b16b854",
+      "article_id": "article:9e3de94bd5fbbb0b7d3f95ec",
+      "search_intent": "Getreidefreies Seniorenfutter für Pferde nach Zusammensetzung, Bedarf und altersgerechter Fütterung auswählen."
+    }
+  ],
+  "manifest_sha256": "a6e07e4a7c7c8bb9fae7eb36ae9fd2303146cf421598863d291f6dd2f95502c9"
+}

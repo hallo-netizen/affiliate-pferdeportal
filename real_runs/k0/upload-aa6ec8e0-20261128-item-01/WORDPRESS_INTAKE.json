@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Bietet die GHV eine Pferde OP Versicherung an?",
+      "target_keyword": "ghv pferde op-versicherung",
+      "category": "pferde-op-versicherung-faq",
+      "article_type": "FAQ",
+      "plan_slot": "9b34e23041be10e398fafbf9af918acc229ab2bb8df079a9399fb563414d3df5"
+    }
+  ],
+  "batch_sha256": "5b275425fa850a609f9e7cdf5825537b3536553e36e970ca642d3773e46671af"
+}

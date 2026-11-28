@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Trailhindernisse für Pferde kaufen und auf Sicherheit achten",
+      "target_keyword": "trail hindernisse für pferde kaufen",
+      "category": "trail-hindernisse-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "8ce01c3f607357501f87584e487cacdf28299ae2f0020fe46d8c0b8fe544f456"
+    }
+  ],
+  "batch_sha256": "33dc49e81d22fa2d1fb8c000c70530f64c4e9c28b5a31a2bb765057dc14aa8dd"
+}

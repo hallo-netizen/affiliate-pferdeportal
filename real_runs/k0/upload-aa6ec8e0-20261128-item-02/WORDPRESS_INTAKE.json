@@ -1,0 +1,17 @@
+{
+  "contract": "PSERC_TEXTMACHINE_METADATA_BATCH_V2",
+  "status": "READY_FOR_TEXTMACHINE_METADATA_INTAKE",
+  "item_count": 1,
+  "publish_allowed": false,
+  "content_or_format_payload_present": false,
+  "items": [
+    {
+      "title": "Trailhindernisse für Pferde und ihre Einsatzmöglichkeiten",
+      "target_keyword": "pferde trail hindernisse",
+      "category": "trail-hindernisse-beratung",
+      "article_type": "Beratung",
+      "plan_slot": "4a62acd0575a70e7bb564819a5d0142b6c40e2595559da0693746a1715ab6d07"
+    }
+  ],
+  "batch_sha256": "954c04d67ee14479da180c2a38399b7ee56b95fc6d3ed29e1ba14bf48bd2c7a7"
+}
