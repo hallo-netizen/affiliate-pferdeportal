@@ -20,14 +20,14 @@
           "source_title": "EETA Sektion Schweiz"
         },
         {
-          "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
-          "source_title": "EQUIVA XL-Pylonen"
+          "source_url": "https://www.waldhausen.com/xl-pylone-8er-set-inkl.-tragetasche-hoehe-50-cm/15051/",
+          "source_title": "Waldhausen XL-Pylonen"
         }
       ],
       "claims": [
         "Stege und Hängebrücken gehören zu den gebauten Hindernissen im Extreme Trail.",
         "Die Arbeit vom Boden bildet eine wesentliche Grundlage für das Erlernen der Hindernisse.",
-        "Pylonen können zur Wegmarkierung, für Slalom und zur Gestaltung von Cavaletti-Aufgaben eingesetzt werden."
+        "Pylonen eignen sich als Markierungen für Slalom, Abgrenzungen und niedrige Sprungaufgaben."
       ],
       "fresh_research_reference_date": "2026-11-28"
     },
@@ -78,11 +78,11 @@
         ]
       },
       "F3": {
-        "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
-        "source_title": "EQUIVA XL-Pylonen",
-        "evidence_text": "Ideal für Slalom, Cavaletti, Abgrenzungen und Trail",
-        "evidence_text_sha256": "e330cee50f49b050b684565b6b289acfd56ce9e834c7eb63f4915c04926023a7",
-        "statement": "Pylonen können zur Wegmarkierung, für Slalom und zur Gestaltung von Cavaletti-Aufgaben eingesetzt werden.",
+        "source_url": "https://www.waldhausen.com/xl-pylone-8er-set-inkl.-tragetasche-hoehe-50-cm/15051/",
+        "source_title": "Waldhausen XL-Pylonen",
+        "evidence_text": "für Slalom, Abgrenzung oder kleine Sprünge",
+        "evidence_text_sha256": "b95e532850db1765d5eca58ee2861747783832a7f76c77ce23aa432bb887f03e",
+        "statement": "Pylonen eignen sich als Markierungen für Slalom, Abgrenzungen und niedrige Sprungaufgaben.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
