@@ -48,6 +48,40 @@ def val(v):
     return isinstance(v, str) and bool(v.strip())
 
 
+def frozen_existing_reference(source, ref):
+    """Mirror TXE_Workshop::frozenExistingReference from original WordPress MINI.
+
+    This is a mechanical membership check of the immutable source inventory.
+    It makes no new editorial decision, does not query WordPress, and permits
+    both original inventory sources plus their four original reference keys.
+    A missing inventory is never treated as a successful match.
+    """
+    if not val(ref):
+        return False
+    inventory = source.get('existing_wordpress_and_plan_inventory')
+    if not isinstance(inventory, list):
+        return False
+    for existing in inventory:
+        if not isinstance(existing, dict):
+            continue
+        owner = existing.get('source')
+        if not isinstance(owner, str) or owner.strip() not in ('WORDPRESS', 'WORDPRESS_REGAL'):
+            continue
+        owner = owner.strip()
+        for key in ('id', 'pool_key', 'canonical_article_id', 'plan_slot'):
+            value = existing.get(key)
+            if isinstance(value, str):
+                value = value.strip()
+            elif isinstance(value, int) and not isinstance(value, bool):
+                value = str(value)
+            else:
+                continue
+            if value and ref == owner + ':' + value:
+                return True
+    return False
+
+
+
 def new_title_rule_error(title, article_type=''):
     """Objective TITLE checks for new titles; language belongs to TITLE worker."""
     if not val(title):
@@ -216,19 +250,14 @@ def gate(workspace):
                 if not val(matched):
                     issue('EDITORIAL', i, 'matched_ref', 'BESTANDSREFERENZ_FEHLT')
                     continue
-                # Accept only the exact WordPress ID format recognized by
-                # the existing import. The current article must also be in
-                # the immutable WordPress snapshot when present.
-                if not re.fullmatch(r'WORDPRESS:[1-9][0-9]*', matched):
+                # Same original WordPress membership rule, not a second domain check.
+                # WordPress also accepts WORDPRESS_REGAL and non-ID frozen keys.
+                prefix, separator, value = matched.partition(':')
+                if (not separator or prefix not in ('WORDPRESS', 'WORDPRESS_REGAL')
+                        or not value or matched != matched.strip()):
                     issue('EDITORIAL', i, 'matched_ref', 'BESTANDSREFERENZ_FORMAT_UNGUELTIG')
                     continue
-                inventory = source.get('existing_wordpress_and_plan_inventory')
-                if isinstance(inventory, list) and not any(
-                    entry.get('source') == 'WORDPRESS'
-                    and entry.get('type') == 'post'
-                    and str(entry.get('id')) == matched.split(':', 1)[1]
-                    for entry in inventory if isinstance(entry, dict)
-                ):
+                if not frozen_existing_reference(source, matched):
                     issue('EDITORIAL', i, 'matched_ref', 'BESTANDSREFERENZ_NICHT_IM_ORIGINALEXPORT')
                     continue
             if box == 'KLAERUNG' and not val(editorial['reason']):
