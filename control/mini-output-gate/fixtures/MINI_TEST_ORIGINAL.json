@@ -176,5 +176,13 @@
       "worker_errors": [],
       "final_receipt": []
     }
+  ],
+  "existing_wordpress_and_plan_inventory": [
+    {
+      "source": "WORDPRESS",
+      "id": 123456,
+      "type": "post",
+      "title": "QA: original frozen WordPress article"
+    }
   ]
 }
