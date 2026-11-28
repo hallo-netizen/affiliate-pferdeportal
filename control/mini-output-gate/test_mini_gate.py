@@ -68,7 +68,7 @@ class TestMiniGate(unittest.TestCase):
         bad = gate(self.ws)
         self.assertEqual(bad['next_worker'], 'EDITORIAL')
         self.assertEqual([(x['item_index'], x['code']) for x in bad['fix_only']],
-                         [(8, 'BESTANDSREFERENZ_FORMAT_UNGUELTIG')])
+                         [(8, 'BESTANDSREFERENZ_NICHT_IM_ORIGINALEXPORT')])
         self.assertFalse((self.ws/RELEASE).exists())
         editorial['items'][8]['matched_ref'] = 'WORDPRESS:123456'
         write(self.ws/'EDITORIAL.json', editorial)
