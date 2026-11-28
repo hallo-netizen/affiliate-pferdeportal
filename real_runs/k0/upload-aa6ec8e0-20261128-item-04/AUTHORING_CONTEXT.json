@@ -1,0 +1,168 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Trailhindernisse für Pferde kaufen und auf Sicherheit achten",
+    "target_keyword": "trail hindernisse für pferde kaufen",
+    "category": "trail-hindernisse-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "8ce01c3f607357501f87584e487cacdf28299ae2f0020fe46d8c0b8fe544f456"
+  },
+  "content_profile": {
+    "search_intent": "Kaufberatung für Trailhindernisse für Pferde mit Auswahlkriterien für geeignete, sichere und haltbare Produkte."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
+          "source_title": "EQUIVA XL-Pylonen"
+        },
+        {
+          "source_url": "https://www.eeta.ch/about-extreme-trail/",
+          "source_title": "EETA Sektion Schweiz"
+        }
+      ],
+      "claims": [
+        "Bei modularen Pylonen können geeignete Stangenauflagen die Einsatzmöglichkeiten erweitern.",
+        "Leichte Pylonen benötigen bei Wind eine geeignete Sicherung.",
+        "Transport und Lagerung sind bei mobilen Hindernissen praktische Auswahlkriterien.",
+        "Ein Aufbau sollte ruhige, kontrollierte und mittige Passage ermöglichen."
+      ],
+      "fresh_research_reference_date": "2026-11-28"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "trail hindernisse für pferde kaufen",
+      "topic": "Trailhindernisse für Pferde kaufen und auf Sicherheit achten",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trail-hindernisse-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Sichere und geeignete Hindernisse für den vorhandenen Trainingsplatz auswählen",
+      "decision_criteria": [
+        "Standfestigkeit",
+        "Trainingsaufgabe",
+        "Kombinierbarkeit",
+        "Lagerung"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
+        "source_title": "EQUIVA XL-Pylonen",
+        "evidence_text": "Obere Öffnung für Kombination mit Stangenauflagen",
+        "evidence_text_sha256": "2985bbb040e253dfe6bbccdddc871b5ea2c23367cb78d58c83e19d2c25c0abb8",
+        "statement": "Bei modularen Pylonen können geeignete Stangenauflagen die Einsatzmöglichkeiten erweitern.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
+        "source_title": "EQUIVA XL-Pylonen",
+        "evidence_text": "Bei starkem Wind solltest du die Pylonen sichern",
+        "evidence_text_sha256": "f3d440c4b88549977758d41ba096e30a2be344e249c955312122ca219788a751",
+        "statement": "Leichte Pylonen benötigen bei Wind eine geeignete Sicherung.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
+        "source_title": "EQUIVA XL-Pylonen",
+        "evidence_text": "Inklusive Tragetasche für Transport und Lagerung",
+        "evidence_text_sha256": "9f9c5a1f5e860a9ebe531fb0a2dab23f7bf144b93cc7fac1eb6935ab44c9e4fe",
+        "statement": "Transport und Lagerung sind bei mobilen Hindernissen praktische Auswahlkriterien.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.eeta.ch/about-extreme-trail/",
+        "source_title": "EETA Sektion Schweiz",
+        "evidence_text": "bei gleichmäßiger Geschwindigkeit mittig",
+        "evidence_text_sha256": "bc46f0892ee2d376b28e3003ded2c973dbe7e17a3b6be4b10f9ff8c09c9bcc28",
+        "statement": "Ein Aufbau sollte ruhige, kontrollierte und mittige Passage ermöglichen.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trail-hindernisse-beratung/",
+        "anchor": "Beratung Trail-Hindernisse",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-bodenhindernisse/trail-hindernisse/",
+        "anchor": "Trail-Hindernisse",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trail-hindernisse-beratung/",
+        "active": true
+      },
+      {
+        "href": "/training/training-bodenhindernisse/trail-hindernisse/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trail-hindernisse-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trail",
+      "Hindernisse",
+      "Kauf",
+      "Sicherheit",
+      "Stabilität"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Kriterien für den Kauf hängen vom Einsatzort ab; eine Liste ermöglicht eine anwendungsbezogene Prüfung statt eines unbelegten Produktvergleichs."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
