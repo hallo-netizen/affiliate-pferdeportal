@@ -1,4 +1,4 @@
-# Draft only: do not deploy until the whole acceptance is complete.
+# Isolated message workflow; live acceptance requires automatic successor evidence.
 name: Pferde Atelier eBay Nachrichten
 on:
   schedule:
@@ -12,7 +12,13 @@ jobs:
   inbox:
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    outputs:
+      started: ${{ steps.start.outputs.started }}
     steps:
+      - name: Record run start
+        id: start
+        shell: bash
+        run: echo "started=$(date +%s)" >> "$GITHUB_OUTPUT"
       - name: Run existing message worker only
         env:
           DELETION_KEY: ${{ secrets.PFERDEATELIER_EBAY_DELETION_KEY }}
@@ -51,3 +57,44 @@ jobs:
           if [[ "$status" == busy ]]; then
             echo '::notice::Message worker already active; next scheduled invocation remains enabled.'
           fi
+
+  successor:
+    needs: inbox
+    if: ${{ !cancelled() && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      actions: write
+    steps:
+      - name: Dispatch only the next message run
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STARTED: ${{ needs.inbox.outputs.started }}
+        run: |
+          set -euo pipefail
+          now=$(date +%s)
+          if [[ "$STARTED" =~ ^[0-9]{1,10}$ ]] && (( STARTED <= now )); then
+            delay=$((300 - (now - STARTED)))
+            if (( delay > 0 )); then sleep "$delay"; fi
+          else
+            sleep 300
+          fi
+          dispatch_url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/workflows/pferde-atelier-ebay-deletion.yml/dispatches"
+          body=$(mktemp)
+          trap 'rm -f "$body"' EXIT
+          for attempt in 1 2 3; do
+            code=$(curl --silent --show-error --output "$body" --write-out '%{http_code}' --request POST --max-time 30 \
+              --header 'Accept: application/vnd.github+json' \
+              --header "Authorization: Bearer ${GH_TOKEN}" \
+              --header 'X-GitHub-Api-Version: 2022-11-28' \
+              --data '{"ref":"main"}' "$dispatch_url" || true)
+            if [[ "$code" == 204 ]]; then
+              echo 'Next message run dispatched.'
+              exit 0
+            fi
+            echo "Successor dispatch attempt $attempt failed HTTP ${code:-none}"
+            [[ "$attempt" == 3 ]] || sleep 10
+          done
+          echo '::error::Message successor dispatch failed; fallback schedule remains configured.'
+          exit 1
