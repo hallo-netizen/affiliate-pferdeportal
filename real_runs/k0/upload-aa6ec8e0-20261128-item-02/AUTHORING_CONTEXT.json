@@ -1,0 +1,154 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Trailhindernisse für Pferde und ihre Einsatzmöglichkeiten",
+    "target_keyword": "pferde trail hindernisse",
+    "category": "trail-hindernisse-beratung",
+    "article_type": "Beratung",
+    "plan_slot": "4a62acd0575a70e7bb564819a5d0142b6c40e2595559da0693746a1715ab6d07"
+  },
+  "content_profile": {
+    "search_intent": "Arten von Trailhindernissen für Pferde und ihre jeweiligen Einsatzmöglichkeiten im Training erläutern."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.eeta.ch/about-extreme-trail/",
+          "source_title": "EETA Sektion Schweiz"
+        },
+        {
+          "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
+          "source_title": "EQUIVA XL-Pylonen"
+        }
+      ],
+      "claims": [
+        "Stege und Hängebrücken gehören zu den gebauten Hindernissen im Extreme Trail.",
+        "Die Arbeit vom Boden bildet eine wesentliche Grundlage für das Erlernen der Hindernisse.",
+        "Pylonen können zur Wegmarkierung, für Slalom und zur Gestaltung von Cavaletti-Aufgaben eingesetzt werden."
+      ],
+      "fresh_research_reference_date": "2026-11-28"
+    },
+    "production_plan_item": {
+      "article_type": "Beratung",
+      "target_keyword": "pferde trail hindernisse",
+      "topic": "Trailhindernisse für Pferde und ihre Einsatzmöglichkeiten",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "trail-hindernisse-beratung",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "decision_goal": "Hindernistypen passend zur Trainingsaufgabe auswählen",
+      "decision_criteria": [
+        "Linienführung",
+        "Bodenbeschaffenheit",
+        "Bewegliche Hindernisse",
+        "Trainingsstand"
+      ]
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.eeta.ch/about-extreme-trail/",
+        "source_title": "EETA Sektion Schweiz",
+        "evidence_text": "Stegen, Hängebrücke",
+        "evidence_text_sha256": "201c96e79536d1105242c6167f0951cd93226438b8d6859cf6a3512778a251ee",
+        "statement": "Stege und Hängebrücken gehören zu den gebauten Hindernissen im Extreme Trail.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.eeta.ch/about-extreme-trail/",
+        "source_title": "EETA Sektion Schweiz",
+        "evidence_text": "die Bodenarbeit das essentielle Trainingselement",
+        "evidence_text_sha256": "417a6100bff6d68a46d2c77ecff6d18d908f1cf293ddcb582fdf00c931938172",
+        "statement": "Die Arbeit vom Boden bildet eine wesentliche Grundlage für das Erlernen der Hindernisse.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
+        "source_title": "EQUIVA XL-Pylonen",
+        "evidence_text": "Ideal für Slalom, Cavaletti, Abgrenzungen und Trail",
+        "evidence_text_sha256": "e330cee50f49b050b684565b6b289acfd56ce9e834c7eb63f4915c04926023a7",
+        "statement": "Pylonen können zur Wegmarkierung, für Slalom und zur Gestaltung von Cavaletti-Aufgaben eingesetzt werden.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "Beratung"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/trail-hindernisse-beratung/",
+        "anchor": "Beratung Trail-Hindernisse",
+        "block": "criteria"
+      },
+      {
+        "role": "further_information",
+        "href": "/training/training-bodenhindernisse/trail-hindernisse/",
+        "anchor": "Trail-Hindernisse",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/trail-hindernisse-beratung/",
+        "active": true
+      },
+      {
+        "href": "/training/training-bodenhindernisse/trail-hindernisse/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "trail-hindernisse-beratung",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "Trail",
+      "Hindernisse",
+      "Training",
+      "Bodenarbeit",
+      "Stangen"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die Einsatzmöglichkeiten werden nach Hindernisart und Lernziel erläutert; eine Tabelle würde diese praktische Einordnung nur wiederholen."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
