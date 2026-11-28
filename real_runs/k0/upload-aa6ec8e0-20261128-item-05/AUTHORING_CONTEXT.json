@@ -16,15 +16,19 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
-          "source_title": "Universitäres Tierspital Zürich EOTRH"
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horses-teeth",
+          "source_title": "University of Minnesota Extension: Caring for your horse's teeth"
+        },
+        {
+          "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+          "source_title": "University of Minnesota Extension: Caring for your senior horse"
         }
       ],
       "claims": [
-        "EOTRH betrifft häufig die Schneidezähne des Pferdes.",
-        "Für die Diagnose werden klinische Untersuchung und Röntgenbefunde zusammen beurteilt.",
-        "Im Krankheitsverlauf kann die Entfernung sämtlicher Schneidezähne zur Schmerzlinderung erforderlich sein.",
-        "Nach Entfernung der Schneidezähne muss die Fütterung individuell angepasst werden; ausschließliche Weideversorgung reicht laut Klinik nicht."
+        "EOTRH betrifft vor allem die Schneide- oder Hengstzähne des Pferdes.",
+        "Röntgenaufnahmen können Veränderungen unter dem Zahnfleisch sichtbar machen.",
+        "Zur Behandlung gehört die Entfernung erkrankter Schneidezähne.",
+        "Ältere Pferde mit erheblichen Kauproblemen können ein geeignetes leicht kaubares Seniorenfutter benötigen."
       ],
       "fresh_research_reference_date": "2026-11-28"
     },
@@ -47,44 +51,44 @@
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
-        "source_title": "Universitäres Tierspital Zürich EOTRH",
-        "evidence_text": "meistens im Bereich der Schneidezähne",
-        "evidence_text_sha256": "022215b404347155b5e8bb62a6f5d936320b0489e2bedcd0ef5fdc02d80ee952",
-        "statement": "EOTRH betrifft häufig die Schneidezähne des Pferdes.",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horses-teeth",
+        "source_title": "University of Minnesota Extension: Caring for your horse's teeth",
+        "evidence_text": "a horse's incisors or canine teeth",
+        "evidence_text_sha256": "c7a9f47f1dee3c8d4723931bf37b8c1a6db5557f2764befe21ebe3989ead8be4",
+        "statement": "EOTRH betrifft vor allem die Schneide- oder Hengstzähne des Pferdes.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F2": {
-        "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
-        "source_title": "Universitäres Tierspital Zürich EOTRH",
-        "evidence_text": "Kombination der klinischen und radiologischen Befunde",
-        "evidence_text_sha256": "b9fd647fa5bd9c08b73ad9f16c67216930b3f25b5a13a3b1d2c2e8c495feb0a6",
-        "statement": "Für die Diagnose werden klinische Untersuchung und Röntgenbefunde zusammen beurteilt.",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horses-teeth",
+        "source_title": "University of Minnesota Extension: Caring for your horse's teeth",
+        "evidence_text": "Radiographs can help determine if there is a problem with a tooth below the gum line.",
+        "evidence_text_sha256": "19c67012bf29bf9c7c8f219927449ed5022c9d05aa0d1ed47ba4a588611e0e0e",
+        "statement": "Röntgenaufnahmen können Veränderungen unter dem Zahnfleisch sichtbar machen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F3": {
-        "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
-        "source_title": "Universitäres Tierspital Zürich EOTRH",
-        "evidence_text": "alle Schneidezähne extrahiert werden",
-        "evidence_text_sha256": "ced7095572b8a0562dca9c726f2405592c6c717c39ef480f58db5bb1c357390f",
-        "statement": "Im Krankheitsverlauf kann die Entfernung sämtlicher Schneidezähne zur Schmerzlinderung erforderlich sein.",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-horses-teeth",
+        "source_title": "University of Minnesota Extension: Caring for your horse's teeth",
+        "evidence_text": "removal of the affected incisors",
+        "evidence_text_sha256": "58fe4b712ae8b88d232a5c5da2b6021926fcfbffd3dd30fce9302b14b9d98016",
+        "statement": "Zur Behandlung gehört die Entfernung erkrankter Schneidezähne.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
         ]
       },
       "F4": {
-        "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
-        "source_title": "Universitäres Tierspital Zürich EOTRH",
-        "evidence_text": "Eine alleine Weide Ernährung ist nicht mehr möglich",
-        "evidence_text_sha256": "dd6123693888b83e52078bd8ef5c212ea00d9f3c92e53df79ca83959ec23bba6",
-        "statement": "Nach Entfernung der Schneidezähne muss die Fütterung individuell angepasst werden; ausschließliche Weideversorgung reicht laut Klinik nicht.",
+        "source_url": "https://extension.umn.edu/agriculture/animals-and-livestock/horse/caring-for-your-senior-horse",
+        "source_title": "University of Minnesota Extension: Caring for your senior horse",
+        "evidence_text": "particularly if its teeth are too worn to effectively chew hay.",
+        "evidence_text_sha256": "0bb6df096223ac6f2431efc68ba66e190f71ebb465c3e4a5aebc6d9013c0eff0",
+        "statement": "Ältere Pferde mit erheblichen Kauproblemen können ein geeignetes leicht kaubares Seniorenfutter benötigen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "FAQ"
