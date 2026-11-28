@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Bietet die GHV eine Pferde OP Versicherung an?",
+    "target_keyword": "ghv pferde op-versicherung",
+    "category": "pferde-op-versicherung-faq",
+    "article_type": "FAQ",
+    "plan_slot": "9b34e23041be10e398fafbf9af918acc229ab2bb8df079a9399fb563414d3df5"
+  },
+  "content_profile": {
+    "search_intent": "Ob die GHV eine Pferdeoperationsversicherung anbietet und welcher Schutz gegebenenfalls besteht."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.ghv-versicherung.de/pferd/pferde-op-versicherung",
+          "source_title": "GHV Pferde-OP-Versicherung"
+        }
+      ],
+      "claims": [
+        "Die GHV bietet eine eigenständige Pferdeoperationsversicherung an.",
+        "Die Jahreshöchstleistung unterscheidet sich zwischen den drei Tarifen Basis, Komfort und Premium.",
+        "Der Versicherer nennt einen Aufnahmezeitraum von der neunten Lebenswoche bis zum 16. Lebensjahr.",
+        "Bei krankheitsbedingten Operationen nennt die GHV eine dreimonatige Wartezeit."
+      ],
+      "fresh_research_reference_date": "2026-11-28"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "ghv pferde op-versicherung",
+      "topic": "Bietet die GHV eine Pferde OP Versicherung an?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferde-op-versicherung-faq",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Bietet die GHV eine Pferde OP Versicherung an?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.ghv-versicherung.de/pferd/pferde-op-versicherung",
+        "source_title": "GHV Pferde-OP-Versicherung",
+        "evidence_text": "Mit der Pferde-OP-Versicherung der GHV",
+        "evidence_text_sha256": "f48cf6df61f8d5723d659dca4dd75ba61e8179ee5ed1246f7216f77b509353fb",
+        "statement": "Die GHV bietet eine eigenständige Pferdeoperationsversicherung an.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.ghv-versicherung.de/pferd/pferde-op-versicherung",
+        "source_title": "GHV Pferde-OP-Versicherung",
+        "evidence_text": "7.500 € 15.000 € 50.000 €",
+        "evidence_text_sha256": "86875c73bba73cd3340e92ee659d936f98c1243a447b14def7e1acdde408c9ed",
+        "statement": "Die Jahreshöchstleistung unterscheidet sich zwischen den drei Tarifen Basis, Komfort und Premium.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.ghv-versicherung.de/pferd/pferde-op-versicherung",
+        "source_title": "GHV Pferde-OP-Versicherung",
+        "evidence_text": "Ab der 9. Lebenswoche bis zum 16. Lebensjahr",
+        "evidence_text_sha256": "fa1c1b94a6c171e24bebcff2c8d011e4494828094779183a9dffff578e839813",
+        "statement": "Der Versicherer nennt einen Aufnahmezeitraum von der neunten Lebenswoche bis zum 16. Lebensjahr.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.ghv-versicherung.de/pferd/pferde-op-versicherung",
+        "source_title": "GHV Pferde-OP-Versicherung",
+        "evidence_text": "Wartezeit von 3 Monaten",
+        "evidence_text_sha256": "38be858bd406e2074cd63d20f9649638a19ed761efff38a5a98e0ccf1fe362aa",
+        "statement": "Bei krankheitsbedingten Operationen nennt die GHV eine dreimonatige Wartezeit.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferde-op-versicherung-faq/",
+        "anchor": "FAQ Pferde-OP-Versicherung",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/wissen/wissen-versicherungen-und-recht/pferde-op-versicherung/",
+        "anchor": "Pferde-OP-Versicherung",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferde-op-versicherung-faq/",
+        "active": true
+      },
+      {
+        "href": "/wissen/wissen-versicherungen-und-recht/pferde-op-versicherung/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferde-op-versicherung-faq",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "GHV",
+      "Operation",
+      "Versicherung",
+      "Tarif",
+      "Wartezeit"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Eine direkte Antwort zur Verfügbarkeit sowie die Einordnung der Leistungen und Wartezeiten stehen im Vordergrund."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
