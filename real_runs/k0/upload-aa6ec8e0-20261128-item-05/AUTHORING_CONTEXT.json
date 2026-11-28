@@ -1,0 +1,158 @@
+{
+  "contract": "K0_AUTHORING_CONTEXT_V1",
+  "identity": {
+    "title": "Was kann man bei einem Pferd mit EOTRH tun?",
+    "target_keyword": "Was kann man bei einem Pferd mit EOTRH tun?",
+    "category": "pferdegesundheit-verstehen",
+    "article_type": "FAQ",
+    "plan_slot": "99f7297bb6a4dbf8ef884a69c522b37e03364296938110938916cbdbde466928"
+  },
+  "content_profile": {
+    "search_intent": "Welche tierärztlich abzuklärenden Behandlungsmöglichkeiten und unterstützenden Maßnahmen bei einem Pferd mit EOTRH bestehen."
+  },
+  "production_context": {
+    "fact_pack": {
+      "contract": "canonical_fact_pack_v1",
+      "status": "SOURCE_VERIFIED_PRODUCTION_READY",
+      "sources": [
+        {
+          "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
+          "source_title": "Universitäres Tierspital Zürich EOTRH"
+        }
+      ],
+      "claims": [
+        "EOTRH betrifft häufig die Schneidezähne des Pferdes.",
+        "Für die Diagnose werden klinische Untersuchung und Röntgenbefunde zusammen beurteilt.",
+        "Im Krankheitsverlauf kann die Entfernung sämtlicher Schneidezähne zur Schmerzlinderung erforderlich sein.",
+        "Nach Entfernung der Schneidezähne muss die Fütterung individuell angepasst werden; ausschließliche Weideversorgung reicht laut Klinik nicht."
+      ],
+      "fresh_research_reference_date": "2026-11-28"
+    },
+    "production_plan_item": {
+      "article_type": "FAQ",
+      "target_keyword": "Was kann man bei einem Pferd mit EOTRH tun?",
+      "topic": "Was kann man bei einem Pferd mit EOTRH tun?",
+      "quality_binding": {
+        "wordpress_category": {
+          "slug": "pferdegesundheit-verstehen",
+          "taxonomy": "category"
+        }
+      }
+    }
+  },
+  "rule_context": {
+    "contract": "K0_AUTHORING_RULE_CONTEXT_V1",
+    "type_meta": {
+      "primary_question": "Was kann man bei einem Pferd mit EOTRH tun?"
+    },
+    "research_claims": {
+      "F1": {
+        "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
+        "source_title": "Universitäres Tierspital Zürich EOTRH",
+        "evidence_text": "meistens im Bereich der Schneidezähne",
+        "evidence_text_sha256": "022215b404347155b5e8bb62a6f5d936320b0489e2bedcd0ef5fdc02d80ee952",
+        "statement": "EOTRH betrifft häufig die Schneidezähne des Pferdes.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F2": {
+        "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
+        "source_title": "Universitäres Tierspital Zürich EOTRH",
+        "evidence_text": "Kombination der klinischen und radiologischen Befunde",
+        "evidence_text_sha256": "b9fd647fa5bd9c08b73ad9f16c67216930b3f25b5a13a3b1d2c2e8c495feb0a6",
+        "statement": "Für die Diagnose werden klinische Untersuchung und Röntgenbefunde zusammen beurteilt.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F3": {
+        "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
+        "source_title": "Universitäres Tierspital Zürich EOTRH",
+        "evidence_text": "alle Schneidezähne extrahiert werden",
+        "evidence_text_sha256": "ced7095572b8a0562dca9c726f2405592c6c717c39ef480f58db5bb1c357390f",
+        "statement": "Im Krankheitsverlauf kann die Entfernung sämtlicher Schneidezähne zur Schmerzlinderung erforderlich sein.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      },
+      "F4": {
+        "source_url": "https://www.tierspital.uzh.ch/pferdekliniken/krankheiten-behandlungen/eotrh-pferd/",
+        "source_title": "Universitäres Tierspital Zürich EOTRH",
+        "evidence_text": "Eine alleine Weide Ernährung ist nicht mehr möglich",
+        "evidence_text_sha256": "dd6123693888b83e52078bd8ef5c212ea00d9f3c92e53df79ca83959ec23bba6",
+        "statement": "Nach Entfernung der Schneidezähne muss die Fütterung individuell angepasst werden; ausschließliche Weideversorgung reicht laut Klinik nicht.",
+        "claim_status": "FULLY_SUPPORTED",
+        "article_types": [
+          "FAQ"
+        ]
+      }
+    },
+    "required_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "allowed_fact_ids": [
+      "F1",
+      "F2",
+      "F3",
+      "F4"
+    ],
+    "bound_links": [
+      {
+        "role": "parent_category",
+        "href": "/category/pferdegesundheit-verstehen/",
+        "anchor": "Pferdegesundheit verstehen",
+        "block": "answer"
+      },
+      {
+        "role": "further_information",
+        "href": "/category/gesundheitsvorsorge-grundlagen-faq/",
+        "anchor": "FAQ Gesundheitsvorsorge Grundlagen",
+        "block": "further_information"
+      }
+    ],
+    "link_registry": [
+      {
+        "href": "/category/pferdegesundheit-verstehen/",
+        "active": true
+      },
+      {
+        "href": "/category/gesundheitsvorsorge-grundlagen-faq/",
+        "active": true
+      }
+    ],
+    "runtime_link_roles": [
+      "parent_category",
+      "further_information"
+    ],
+    "wordpress_category": {
+      "id": 0,
+      "slug": "pferdegesundheit-verstehen",
+      "taxonomy": "category",
+      "id_source": "WORDPRESS_REST_RESOLVE_AT_RUNTIME"
+    },
+    "heading_intent_terms": [
+      "EOTRH",
+      "Zähne",
+      "Behandlung",
+      "Röntgen",
+      "Fütterung"
+    ],
+    "comparison_source_bindings": [],
+    "table_decision": {
+      "k0_policy": "K0_TABLE_MEANINGFUL_ONLY_V1",
+      "decision": "OMIT_NO_ADDED_VALUE",
+      "exception_code": "",
+      "rationale": "Die tierärztliche Abklärung und die Behandlungsschritte müssen verständlich erklärt werden, nicht schematisch gegenübergestellt."
+    },
+    "semantic_rule_results": {},
+    "table_multiword_exceptions": []
+  },
+  "publish_allowed": false
+}
