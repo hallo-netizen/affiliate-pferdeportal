@@ -112,8 +112,8 @@
       },
       {
         "role": "further_information",
-        "href": "/category/gesundheitsvorsorge-grundlagen-faq/",
-        "anchor": "FAQ Gesundheitsvorsorge Grundlagen",
+        "href": "/gesundheit/gesundheit-senioren/seniorenfutter/",
+        "anchor": "Fütterung im Alter",
         "block": "further_information"
       }
     ],
@@ -123,7 +123,7 @@
         "active": true
       },
       {
-        "href": "/category/gesundheitsvorsorge-grundlagen-faq/",
+        "href": "/gesundheit/gesundheit-senioren/seniorenfutter/",
         "active": true
       }
     ],
