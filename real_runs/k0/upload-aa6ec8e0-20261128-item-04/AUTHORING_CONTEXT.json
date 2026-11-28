@@ -16,8 +16,16 @@
       "status": "SOURCE_VERIFIED_PRODUCTION_READY",
       "sources": [
         {
-          "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
-          "source_title": "EQUIVA XL-Pylonen"
+          "source_url": "https://www.waldhausen.com/stangenauflagen-fuer-pylonen-4er-set/1505202/",
+          "source_title": "Waldhausen Stangenauflagen"
+        },
+        {
+          "source_url": "https://de.wikipedia.org/wiki/Hindernis_(Pferdesport)",
+          "source_title": "Wikipedia Hindernis im Pferdesport"
+        },
+        {
+          "source_url": "https://www.waldhausen.com/xl-pylone-8er-set-inkl.-tragetasche-hoehe-50-cm/15051/",
+          "source_title": "Waldhausen XL-Pylonen"
         },
         {
           "source_url": "https://www.eeta.ch/about-extreme-trail/",
@@ -25,9 +33,9 @@
         }
       ],
       "claims": [
-        "Bei modularen Pylonen können geeignete Stangenauflagen die Einsatzmöglichkeiten erweitern.",
-        "Leichte Pylonen benötigen bei Wind eine geeignete Sicherung.",
-        "Transport und Lagerung sind bei mobilen Hindernissen praktische Auswahlkriterien.",
+        "Passende Auflagen erlauben die Kombination von dafür vorgesehenen Pylonen mit Trainingsstangen.",
+        "Standfeste, solide Hindernisse sind im Pferdesport ein wichtiges Auswahlmerkmal.",
+        "Sets mit mehreren stabilen Pylonen erlauben den Aufbau verschiedener markierter Trainingswege.",
         "Ein Aufbau sollte ruhige, kontrollierte und mittige Passage ermöglichen."
       ],
       "fresh_research_reference_date": "2026-11-28"
@@ -52,38 +60,38 @@
         "Standfestigkeit",
         "Trainingsaufgabe",
         "Kombinierbarkeit",
-        "Lagerung"
+        "Platzbedarf"
       ]
     },
     "research_claims": {
       "F1": {
-        "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
-        "source_title": "EQUIVA XL-Pylonen",
-        "evidence_text": "Obere Öffnung für Kombination mit Stangenauflagen",
-        "evidence_text_sha256": "2985bbb040e253dfe6bbccdddc871b5ea2c23367cb78d58c83e19d2c25c0abb8",
-        "statement": "Bei modularen Pylonen können geeignete Stangenauflagen die Einsatzmöglichkeiten erweitern.",
+        "source_url": "https://www.waldhausen.com/stangenauflagen-fuer-pylonen-4er-set/1505202/",
+        "source_title": "Waldhausen Stangenauflagen",
+        "evidence_text": "Stangenauflagen für Pylonen ermöglichen die einfache Ablage von Trainingsstangen",
+        "evidence_text_sha256": "5548b2a672d4f3fed6b7d3f47c6f0a862a5127603d7d144c5aa1f62158c2ab05",
+        "statement": "Passende Auflagen erlauben die Kombination von dafür vorgesehenen Pylonen mit Trainingsstangen.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F2": {
-        "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
-        "source_title": "EQUIVA XL-Pylonen",
-        "evidence_text": "Bei starkem Wind solltest du die Pylonen sichern",
-        "evidence_text_sha256": "f3d440c4b88549977758d41ba096e30a2be344e249c955312122ca219788a751",
-        "statement": "Leichte Pylonen benötigen bei Wind eine geeignete Sicherung.",
+        "source_url": "https://de.wikipedia.org/wiki/Hindernis_(Pferdesport)",
+        "source_title": "Wikipedia Hindernis im Pferdesport",
+        "evidence_text": "Meistens werden schwere, standfest und solide Hindernisse bevorzugt.",
+        "evidence_text_sha256": "2b22e0d12ee89e7bbd1c0464ef734a0c5fa44e72b1a887d96a1a08c09c1a5dfe",
+        "statement": "Standfeste, solide Hindernisse sind im Pferdesport ein wichtiges Auswahlmerkmal.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
         ]
       },
       "F3": {
-        "source_url": "https://www.equiva.com/waldhausen-xl-pylone-8-stueck-inkl.-tragetasche-1226399-57425412",
-        "source_title": "EQUIVA XL-Pylonen",
-        "evidence_text": "Inklusive Tragetasche für Transport und Lagerung",
-        "evidence_text_sha256": "9f9c5a1f5e860a9ebe531fb0a2dab23f7bf144b93cc7fac1eb6935ab44c9e4fe",
-        "statement": "Transport und Lagerung sind bei mobilen Hindernissen praktische Auswahlkriterien.",
+        "source_url": "https://www.waldhausen.com/xl-pylone-8er-set-inkl.-tragetasche-hoehe-50-cm/15051/",
+        "source_title": "Waldhausen XL-Pylonen",
+        "evidence_text": "acht stabile Pylonen",
+        "evidence_text_sha256": "35ecc273a81da044ab9564ded2bf0a2e80279e6322120173da9295c74a9b7309",
+        "statement": "Sets mit mehreren stabilen Pylonen erlauben den Aufbau verschiedener markierter Trainingswege.",
         "claim_status": "FULLY_SUPPORTED",
         "article_types": [
           "Beratung"
