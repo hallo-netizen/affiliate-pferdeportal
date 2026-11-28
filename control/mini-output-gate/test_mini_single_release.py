@@ -19,7 +19,15 @@ def base_source(already_category=False):
     return {'contract': 'TEXTERSTELLUNG_SINGLE_EDITOR_BATCH_V1',
             'checkpoint_contract': 'TEXTERSTELLUNG_MINI_CHECKPOINT_V1',
             'batch_id': 'TEST-MINI-ONE-RELEASE', 'source_sha256':'TEST-SOURCE-SHA',
-            'items': items, 'resume_checkpoints': resume}
+            'items': items, 'resume_checkpoints': resume,
+            'existing_wordpress_and_plan_inventory': [
+                {'source': 'WORDPRESS', 'id': 123456, 'type': 'post',
+                 'canonical_article_id': 'article:qa-existing',
+                 'plan_slot': 'qa-wordpress-slot'},
+                {'source': 'WORDPRESS_REGAL', 'id': 'TXE-ORIGINAL-QA',
+                 'pool_key': 'qa-regal-pool', 'plan_slot': 'qa-regal-slot',
+                 'canonical_article_id': 'article:qa-regal'}
+            ]}
 
 
 def stage(source, which, fields):
@@ -55,6 +63,70 @@ class MiniOneFileGate(unittest.TestCase):
             {'approved_title':'Was brauchen Pferde im Winter?'},
             {'approved_title':''},
             {'approved_title':''}]))
+
+
+    def test_wordpress_exact_frozen_reference_parity_on_every_delivery(self):
+        """Original WordPress checks source + all 4 keys, not just numeric post IDs."""
+        self._complete()
+        output = Path(self.tmp.name) / 'DELIVER.json'
+        samples = [
+            ('WORDPRESS:123456', True),
+            ('WORDPRESS:article:qa-existing', True),
+            ('WORDPRESS:qa-wordpress-slot', True),
+            ('WORDPRESS_REGAL:TXE-ORIGINAL-QA', True),
+            ('WORDPRESS_REGAL:qa-regal-pool', True),
+            ('WORDPRESS_REGAL:qa-regal-slot', True),
+            ('WORDPRESS_REGAL:article:qa-regal', True),
+            ('WP:123456', False),
+            ('WORDPRESS:999999', False),
+            ('WORDPRESS_REGAL:missing', False),
+            ('WORDPRESS:post:123456', False),
+            ('WORDPRESS: 123456', False),
+            ('WORDPRESS:123456 ', False),
+        ]
+        for ref, accepted in samples:
+            with self.subTest(reference=ref):
+                editorial = read_json(self.ws / 'EDITORIAL.json')
+                editorial['items'][1]['matched_ref'] = ref
+                write(self.ws / 'EDITORIAL.json', editorial)
+                result = deliver(self.ws, output)
+                if accepted:
+                    self.assertEqual(result['status'], 'FREIGEGEBEN', result)
+                    self.assertTrue(output.is_file())
+                    payload = read_json(output)
+                    self.assertEqual(payload['decisions'][1]['editorial']['matched_ref'], ref)
+                else:
+                    self.assertEqual(result['status'], 'GESPERRT', result)
+                    self.assertEqual(result['next_worker'], 'EDITORIAL')
+                    self.assertFalse(output.exists())
+                    self.assertFalse((self.ws / RELEASE_DIR).exists())
+                    self.assertEqual(
+                        [p['item_index'] for p in read_json(self.ws / 'REPARATUR.json')['fix_only']],
+                        [1])
+
+    def test_missing_frozen_inventory_never_approves_belegt(self):
+        """Past bug: an absent snapshot silently skipped the pre-WordPress check."""
+        with tempfile.TemporaryDirectory() as temp:
+            ws = Path(temp) / 'run'
+            source_file = Path(temp) / 'source.json'
+            src = base_source()
+            del src['existing_wordpress_and_plan_inventory']
+            write(source_file, src)
+            init(source_file, ws)
+            write(ws / 'CATEGORY.json', stage(src, 'CATEGORY', [
+                {'route': 'FACH', 'category_slug': 'test-cat', 'article_type': 'FAQ'}] * 3))
+            write(ws / 'EDITORIAL.json', stage(src, 'EDITORIAL', [
+                {'box': 'FREI', 'intent_summary': 'QA', 'matched_ref': '', 'reason': ''},
+                {'box': 'BELEGT', 'intent_summary': '', 'matched_ref': 'WORDPRESS:123456', 'reason': ''},
+                {'box': 'KLAERUNG', 'intent_summary': '', 'matched_ref': '', 'reason': 'QA'}]))
+            write(ws / 'TITLE.json', stage(src, 'TITLE', [
+                {'approved_title': 'Was brauchen Pferde im Winter?'},
+                {'approved_title': ''}, {'approved_title': ''}]))
+            output = Path(temp) / 'OUTPUT.json'
+            result = deliver(ws, output)
+            self.assertEqual(result['status'], 'GESPERRT')
+            self.assertEqual(result['next_worker'], 'EDITORIAL')
+            self.assertFalse(output.exists())
 
     def test_no_early_release_and_repair(self):
         r=run(self.ws)
