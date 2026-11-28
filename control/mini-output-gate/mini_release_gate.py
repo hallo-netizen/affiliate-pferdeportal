@@ -58,6 +58,7 @@ def frozen_existing_reference(source, ref):
     """
     if not val(ref):
         return False
+    ref = ref.strip()  # WordPress self::text() trims the received reference.
     inventory = source.get('existing_wordpress_and_plan_inventory')
     if not isinstance(inventory, list):
         return False
@@ -252,9 +253,9 @@ def gate(workspace):
                     continue
                 # Same original WordPress membership rule, not a second domain check.
                 # WordPress also accepts WORDPRESS_REGAL and non-ID frozen keys.
-                prefix, separator, value = matched.partition(':')
+                prefix, separator, value = matched.strip().partition(':')
                 if (not separator or prefix not in ('WORDPRESS', 'WORDPRESS_REGAL')
-                        or not value or matched != matched.strip()):
+                        or not value):
                     issue('EDITORIAL', i, 'matched_ref', 'BESTANDSREFERENZ_FORMAT_UNGUELTIG')
                     continue
                 if not frozen_existing_reference(source, matched):
